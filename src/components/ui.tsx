@@ -79,10 +79,13 @@ export function Badge({
   children,
   tone = 'moss',
   className = '',
+  title,
 }: {
   children: ReactNode
   tone?: 'moss' | 'sunset' | 'feather' | 'blossom' | 'wood'
   className?: string
+  /** 悬浮提示，用于展示更详细的状态说明 */
+  title?: string
 }) {
   const tones: Record<string, string> = {
     moss: 'bg-moss/18 text-leaf',
@@ -93,6 +96,7 @@ export function Badge({
   }
   return (
     <span
+      title={title}
       className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold ${tones[tone]} ${className}`}
     >
       {children}

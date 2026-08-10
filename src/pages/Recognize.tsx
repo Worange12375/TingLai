@@ -13,23 +13,49 @@ import {
   validateAudioFile,
   type RecorderHandle,
 } from '../lib/audio'
-import { hasRemoteApi, recognizeAudio } from '../lib/recognize'
+import {
+  probeService,
+  recognizeWithDiagnostics,
+  type RecognitionResult,
+  type ServiceHealth,
+} from '../lib/recognize'
 import { useCallPlayer } from '../lib/useCallPlayer'
 import { addHistory } from '../lib/storage'
-import type { RecognitionItem } from '../types/species'
 
 type Phase = 'idle' | 'recording' | 'ready' | 'analyzing' | 'result' | 'error'
 
 const MAX_SECONDS = 30
 
+/** 浏览器定位（可选）：拿到经纬度能让 BirdNET 按地理位置收窄候选物种，明显提升准确率 */
+function getPosition(): Promise<{ lat: number; lon: number } | null> {
+  return new Promise((resolve) => {
+    if (!navigator.geolocation) return resolve(null)
+    const timer = window.setTimeout(() => resolve(null), 6000)
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        window.clearTimeout(timer)
+        resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude })
+      },
+      () => {
+        window.clearTimeout(timer)
+        resolve(null)
+      },
+      { timeout: 6000, maximumAge: 600000 },
+    )
+  })
+}
+
 export default function Recognize() {
   const [phase, setPhase] = useState<Phase>('idle')
   const [clip, setClip] = useState<{ blob: Blob; name: string; seconds: number } | null>(null)
-  const [items, setItems] = useState<RecognitionItem[]>([])
+  const [items, setItems] = useState<RecognitionResult[]>([])
   const [fallbackReason, setFallbackReason] = useState('')
+  const [uncataloged, setUncataloged] = useState<string[]>([])
   const [errorMsg, setErrorMsg] = useState('')
   const [seconds, setSeconds] = useState(0)
   const [level, setLevel] = useState(0)
+  const [useGeo, setUseGeo] = useState(false)
+  const [health, setHealth] = useState<ServiceHealth>({ state: 'checking' })
 
   const recorderRef = useRef<RecorderHandle | null>(null)
   const tickRef = useRef<number | null>(null)
@@ -54,6 +80,17 @@ export default function Recognize() {
       if (clipUrlRef.current) URL.revokeObjectURL(clipUrlRef.current)
     }
   }, [clearTick])
+
+  // 进页面探一次识别服务，徽章展示真实状态而不是只看有没有配地址
+  useEffect(() => {
+    let alive = true
+    void probeService().then((h) => {
+      if (alive) setHealth(h)
+    })
+    return () => {
+      alive = false
+    }
+  }, [])
 
   const setClipSafe = useCallback(async (blob: Blob, name: string) => {
     if (clipUrlRef.current) URL.revokeObjectURL(clipUrlRef.current)
@@ -137,8 +174,16 @@ export default function Recognize() {
     if (!clip) return
     setPhase('analyzing')
     setFallbackReason('')
+    setUncataloged([])
     try {
-      const outcome = await recognizeAudio(clip.blob)
+      // 用户勾选后才请求定位，不主动弹权限框
+      const geo = useGeo ? await getPosition() : null
+      const outcome = await recognizeWithDiagnostics(clip.blob, {
+        lat: geo?.lat,
+        lon: geo?.lon,
+        date: new Date().toISOString().slice(0, 10),
+        topK: 3,
+      })
       if (outcome.items.length === 0) {
         setErrorMsg('没有得到识别结果，可能是物种库为空或音频过短，请换一段再试')
         setPhase('error')
@@ -146,15 +191,20 @@ export default function Recognize() {
       }
       setItems(outcome.items)
       setFallbackReason(outcome.fallback ? outcome.reason ?? '' : '')
+      setUncataloged(outcome.uncataloged)
       setPhase('result')
-      const top = outcome.items[0]
-      addHistory({
-        speciesId: top.species.id,
-        speciesName: top.species.name,
-        confidence: top.confidence,
-        at: Date.now(),
-        source: top.source,
-      })
+
+      // 只把收录在库里的结果记进历史，避免占位卡污染「我的记录」
+      const top = outcome.items.find((it) => it.inLibrary)
+      if (top) {
+        addHistory({
+          speciesId: top.species.id,
+          speciesName: top.species.name,
+          confidence: top.confidence,
+          at: Date.now(),
+          source: top.source,
+        })
+      }
     } catch {
       setErrorMsg('识别过程出错了，请稍后重试')
       setPhase('error')
@@ -170,9 +220,18 @@ export default function Recognize() {
     setItems([])
     setErrorMsg('')
     setFallbackReason('')
+    setUncataloged([])
     setPhase('idle')
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
+
+  /** 识别服务状态徽章文案 */
+  const healthBadge = {
+    checking: { tone: 'wood' as const, text: '识别服务：探测中…' },
+    online: { tone: 'moss' as const, text: '识别服务：已连接' },
+    offline: { tone: 'sunset' as const, text: '识别服务：离线（走本地示例）' },
+    unconfigured: { tone: 'wood' as const, text: '识别服务：本地示例模式' },
+  }[health.state]
 
   /* ------------------------------ 渲染 ------------------------------ */
 
@@ -186,8 +245,8 @@ export default function Recognize() {
           sub="录一段现场声音，或上传一个音频文件，AI 会给出最可能的 3 个物种"
         />
         <div className="flex flex-wrap gap-2">
-          <Badge tone={hasRemoteApi() ? 'moss' : 'wood'}>
-            {hasRemoteApi() ? '识别服务：已配置' : '识别服务：本地示例模式'}
+          <Badge tone={healthBadge.tone} title={health.detail}>
+            {healthBadge.text}
           </Badge>
           <Badge tone="feather">支持 wav / mp3 / m4a / ogg / webm</Badge>
           <Badge tone="blossom">单段建议 5–30 秒</Badge>
@@ -333,6 +392,21 @@ export default function Recognize() {
               <audio src={clipUrlRef.current} controls className="w-full rounded-full" preload="metadata" />
             )}
 
+            {/* 可选：带上定位。BirdNET 会按地理位置收窄候选物种，准确率明显提升 */}
+            <label className="flex items-start gap-2.5 cursor-pointer select-none rounded-2xl bg-wood-light/15 px-4 py-3 sketch-border">
+              <input
+                type="checkbox"
+                checked={useGeo}
+                onChange={(e) => setUseGeo(e.target.checked)}
+                className="mt-0.5 w-4 h-4 accent-moss shrink-0"
+              />
+              <span className="text-sm text-ink-soft leading-relaxed">
+                <span className="font-semibold text-ink">带上我的位置，提升准确率</span>
+                <br />
+                识别模型会按经纬度和日期筛掉本地不可能出现的物种。位置只随这次识别发送，我们不保存。
+              </span>
+            </label>
+
             <div className="flex flex-wrap gap-3">
               <Button size="lg" onClick={() => void analyze()}>
                 开始识别
@@ -384,6 +458,19 @@ export default function Recognize() {
               </div>
             )}
 
+            {/* 高置信但不在我们库里的物种：明确告诉用户，不硬套成别的物种 */}
+            {uncataloged.length > 0 && (
+              <div className="rounded-2xl bg-blossom/20 sketch-border px-5 py-3.5 flex items-start gap-3" role="status">
+                <span aria-hidden="true">🔍</span>
+                <p className="text-sm text-ink-soft leading-relaxed flex-1">
+                  识别到：
+                  <span className="font-bold text-ink">{uncataloged.join('、')}</span>
+                  （暂未收录）。听籁目前收录了 22 个常见物种的科普卡，这几位还在补录中，
+                  我们已经记下它们了。
+                </p>
+              </div>
+            )}
+
             {notice && <NoticeBar text={notice} />}
 
             <div className="space-y-4">
@@ -410,8 +497,9 @@ export default function Recognize() {
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="font-bold text-ink text-lg leading-tight">{it.species.name}</h3>
-                        <GroupBadge group={it.species.group} />
+                        {it.inLibrary && <GroupBadge group={it.species.group} />}
                         {i === 0 && <Badge tone="sunset">最可能</Badge>}
+                        {!it.inLibrary && <Badge tone="wood">暂未收录</Badge>}
                       </div>
                       <p className="text-xs italic text-ink-faint mt-0.5">{it.species.scientific}</p>
 
@@ -423,20 +511,33 @@ export default function Recognize() {
                         {it.species.callFeature}
                       </p>
 
-                      <div className="flex items-center gap-2 mt-4 flex-wrap">
-                        <PlayCallButton
-                          playing={playingId === it.species.id}
-                          onClick={() => play(it.species)}
-                          size="sm"
-                          label="听叫声"
-                        />
-                        <Link
-                          to={`/learn/${it.species.id}`}
-                          className="rounded-full px-3.5 py-1.5 text-sm font-semibold text-ink-soft hover:text-ink hover:bg-wood-light/50 transition sketch-border"
-                        >
-                          查看详情
-                        </Link>
-                      </div>
+                      {/* 命中窗口数：BirdNET 按 3 秒窗口滑动，命中越多说明叫得越持续 */}
+                      {typeof it.hitCount === 'number' && it.hitCount > 1 && (
+                        <p className="text-xs text-ink-faint mt-1.5">
+                          这段音频里有 {it.hitCount} 个片段听起来像它
+                        </p>
+                      )}
+
+                      {it.inLibrary ? (
+                        <div className="flex items-center gap-2 mt-4 flex-wrap">
+                          <PlayCallButton
+                            playing={playingId === it.species.id}
+                            onClick={() => play(it.species)}
+                            size="sm"
+                            label="听叫声"
+                          />
+                          <Link
+                            to={`/learn/${it.species.id}`}
+                            className="rounded-full px-3.5 py-1.5 text-sm font-semibold text-ink-soft hover:text-ink hover:bg-wood-light/50 transition sketch-border"
+                          >
+                            查看详情
+                          </Link>
+                        </div>
+                      ) : (
+                        <p className="text-xs text-ink-faint mt-4">
+                          听籁科普库还没有它的档案，所以暂时没有叫声和详情页
+                        </p>
+                      )}
                     </div>
                   </div>
                 </Card>

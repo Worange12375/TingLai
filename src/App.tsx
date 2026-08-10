@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { Routes, Route, useLocation, Link } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
@@ -11,6 +11,16 @@ import Compose from './pages/Compose'
 import Hall from './pages/Hall'
 import Account from './pages/Account'
 import { Button } from './components/ui'
+
+/**
+ * 本地物种数据管理员工具（/dev）。
+ *
+ * ⚠️ 生产构建时 Vite 会把 import.meta.env.DEV 静态替换为 false，
+ *    Rollup 随即把整个三元分支连同这个 dynamic import 一起 DCE 掉，
+ *    ——AdminTool 的代码和它的 chunk 都不会出现在 dist 里，公开站点访问 /dev 会落到 404 页。
+ *    改这行前请先 `npm run build` 后 grep 一遍产物确认。
+ */
+const AdminTool = import.meta.env.DEV ? lazy(() => import('./dev/AdminTool')) : null
 
 /** 路由切换后回到顶部 */
 function ScrollToTop() {
@@ -37,8 +47,8 @@ function NotFound() {
 
 export default function App() {
   const { pathname } = useLocation()
-  // 自然大厅是沉浸式场景页，取消主内容区的宽度限制与内边距
-  const immersive = pathname === '/hall'
+  // 自然大厅是沉浸式场景页，管理员工具是宽屏双栏；都要取消主内容区的宽度限制
+  const immersive = pathname === '/hall' || pathname === '/dev'
 
   return (
     <div className="min-h-screen flex flex-col content-layer">
@@ -55,6 +65,16 @@ export default function App() {
           <Route path="/compose" element={<Compose />} />
           <Route path="/hall" element={<Hall />} />
           <Route path="/account" element={<Account />} />
+          {AdminTool && (
+            <Route
+              path="/dev"
+              element={
+                <Suspense fallback={<div className="py-24 text-center text-ink-soft">正在载入管理员工具…</div>}>
+                  <AdminTool />
+                </Suspense>
+              }
+            />
+          )}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

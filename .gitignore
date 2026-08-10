@@ -15,3 +15,11 @@ dist-ssr
 _*
 commit_message.txt
 probe.txt
+# Vite 以 SSR 模式加载配置时产生的临时文件
+vite.config.ts.timestamp-*
+
+# 管理员工具（/dev）的本地产物：
+#   每次保存自动生成的数据备份，属本机快照，不入库
+*.bak.*
+#   音频原始外链存档，供「按源重抓」用，机器相关
+.audio-origins.json
