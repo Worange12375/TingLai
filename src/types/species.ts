@@ -24,7 +24,7 @@ export interface Species {
   funFact: string
   /** 叫声音频地址（可能为空或失效，播放需兜底） */
   audioUrl: string
-  /** 插画地址 /assets/npc-<id>.png（可能尚未生成，渲染需 onError 兜底） */
+  /** 插画地址 /assets/npc-<id>.webp（优先 WebP；可能尚未生成，渲染需 onError 兜底） */
   image: string
 }
 

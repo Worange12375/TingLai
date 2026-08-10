@@ -37,7 +37,7 @@ export function normalizeSpecies(raw: RawSpecies, index: number): Species {
     protectLevel: pick(raw.protectLevel, raw.protection_level, '暂无级别信息'),
     funFact: pick(raw.funFact, raw.fun_fact, ''),
     audioUrl: pick(raw.audioUrl, raw.audio_ref),
-    image: pick(raw.image, raw.image_ref, `/assets/npc-${id}.png`),
+    image: pick(raw.image, raw.image_ref, `/assets/npc-${id}.webp`),
   }
 }
 
@@ -71,7 +71,7 @@ export function filterSpecies(keyword: string, group: SpeciesGroup | '全部'): 
 }
 
 /**
- * 已配手绘插画（public/assets/npc-<id>.png）的物种 id，按展示优先级排列。
+ * 已配手绘插画（public/assets/npc-<id>.webp）的物种 id，按展示优先级排列。
  * —— 美术补图后只需在这里追加 id，自然大厅与首页会自动同步，无需改页面代码。——
  */
 export const ILLUSTRATED_IDS: string[] = [

@@ -1,6 +1,6 @@
 // 手绘绘本风占位美术系统（纯 CSS + 内联 SVG，零图片依赖）
 // —— 后续替换成真实插画时，只需改动本文件 ——
-// 真图命名规范见 README：public/assets/npc-<物种id>.png、hall-bg.png、icon-<功能>.png
+// 真图命名规范见 README：public/assets/npc-<物种id>.webp、hall-bg.webp、icon-<功能>.webp（原始 .png 仍保留于 assets 目录）
 import { useState } from 'react'
 import type { SpeciesGroup } from '../types/species'
 
@@ -98,11 +98,18 @@ interface AvatarProps {
 /**
  * 物种头像：多级兜底，绝不白屏。
  * 1) 数据里给的 image 路径
- * 2) 约定路径 /assets/npc-<id>.png（真图上线后自动生效，无需改数据）
+ * 2) 约定路径 /assets/npc-<id>.webp（优先 WebP；原始 .png 仍保留，自动回退）
  * 3) 彩色圆形 + 手绘剪影 + 物种名首字
  */
 export function SpeciesAvatar({ id, name, group, src, size = 96, className = '' }: AvatarProps) {
-  const candidates = Array.from(new Set([src, `/assets/npc-${id}.png`].filter(Boolean) as string[]))
+  // 优先尝试 WebP（体积更小、加载更快）；若数据里仍是 .png 也自动转试 .webp；最后回退到 .png 与 SVG 剪影
+  const toCandidates = (s?: string): string[] => {
+    if (!s) return []
+    return /\.png$/i.test(s) ? [s.replace(/\.png$/i, '.webp'), s] : [s]
+  }
+  const candidates = Array.from(
+    new Set([...toCandidates(src), `/assets/npc-${id}.webp`, `/assets/npc-${id}.png`].filter(Boolean) as string[]),
+  )
   const [attempt, setAttempt] = useState(0)
   const color = colorOf(id)
   const currentSrc = candidates[attempt]
@@ -140,9 +147,9 @@ export function SpeciesAvatar({ id, name, group, src, size = 96, className = '' 
 
 /**
  * 林地场景：CSS/SVG 绘制的手绘林地（天空 → 远山 → 林线 → 草地）。
- * 若 public/assets/hall-bg.png 存在，会自动叠加真实插画；加载失败则保留 CSS 场景。
+ * 若 public/assets/hall-bg.webp 存在，会自动叠加真实插画；加载失败则保留 CSS 场景。
  */
-export function HallScene({ className = '', bgSrc = '/assets/hall-bg.png' }: { className?: string; bgSrc?: string }) {
+export function HallScene({ className = '', bgSrc = '/assets/hall-bg.webp' }: { className?: string; bgSrc?: string }) {
   const [bgOk, setBgOk] = useState(true)
   return (
     <div className={`absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
