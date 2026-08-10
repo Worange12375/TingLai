@@ -19,8 +19,6 @@ npm run build    # 产出 dist/ 静态文件
 npm run preview  # 本地预览构建产物
 ```
 
-Node 使用托管版本：`C:\Users\worange\.workbuddy\binaries\node\versions\22.22.2\node.exe`
-
 ## 目录结构
 
 ```
@@ -30,7 +28,7 @@ src/
 ├── index.css                   # Tailwind 基础 + 纸纹肌理 utility
 ├── types/species.ts            # 【数据契约】Species / RecognitionItem 类型定义
 ├── data/
-│   ├── species.sample.json     # 物种科普库（核心资产，由物种知识官维护）
+│   ├── species.sample.json     # 物种科普库（核心资产，由团队维护）
 │   └── species.ts              # 数据访问层：归一化 / 筛选 / 取样
 ├── components/
 │   ├── PlaceholderArt.tsx      # 手绘风美术层（SVG 剪影 / 场景 / 头图 / 图标）
@@ -140,11 +138,11 @@ VITE_RECOGNIZE_KEY=your-key
 npm run build     # 产出 dist/
 ```
 
-将 `dist/` 部署到 **CloudStudio（腾讯云 · 国内）**，产出国内可直接访问的链接填入初赛材料。
-⚠️ 不使用 Vercel / Netlify（服务器在境外，国内访问不稳定）。
+将 `dist/` 部署到自有服务器（Nginx 等静态服务器托管），通过子域名 `tinglai.dushiofcourses.cn` 提供访问。
+静态资源需以 HTTPS 提供，录音识别功能依赖浏览器的安全上下文。
 
-> 构建说明：`vite.config.ts` 中设置了 `build.emptyOutDir = false`，
-> 因为部分受控环境禁止删除目录会导致构建中断；产物文件名带 hash，不清空亦不会互相覆盖。
+> 构建说明：`vite.config.ts` 中设置了 `build.emptyOutDir = false`；
+> 产物文件名带 hash，不清空输出目录亦不会互相覆盖。
 
 ## 合规说明
 
