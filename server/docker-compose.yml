@@ -1,0 +1,35 @@
+# 听籁 SoundVerse · 识别服务编排
+# 用法（在 server/ 目录下）：
+#   docker compose up -d --build      启动
+#   docker compose logs -f            看日志（首次会打印模型下载进度）
+#   docker compose down               停止
+services:
+  recognize:
+    build: .
+    image: tinglai-recognize:latest
+    container_name: tinglai-recognize
+    restart: unless-stopped
+    # 只绑本机回环：外部流量一律走宿主机 nginx 反代 + HTTPS，容器不直接暴露公网
+    # 如果需要临时从外网直连调试，改成 "8000:8000"
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      # 上传大小上限（MB），与前端 audio.ts 的 20MB 保持一致
+      MAX_UPLOAD_MB: "20"
+      # 启动时预热模型：首个真实请求就不用等下载了
+      WARMUP_ON_START: "1"
+      LOG_LEVEL: "INFO"
+      # 需要额外放行的前端来源（逗号分隔），默认已含生产站与本地 5173
+      # EXTRA_ORIGINS: "https://example.com"
+    volumes:
+      # 持久化 BirdNET 模型缓存：容器重建后不用重新下载 50MB
+      - birdnet-cache:/root/.cache
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/healthz"]
+      interval: 30s
+      timeout: 10s
+      start_period: 180s
+      retries: 3
+
+volumes:
+  birdnet-cache:

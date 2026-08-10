@@ -1,0 +1,23 @@
+# 听籁 SoundVerse · 识别服务依赖
+# ------------------------------------------------------------------
+# 安装：pip install -r requirements.txt
+#
+# ⚠️ 系统级依赖（pip 装不了，必须由系统包管理器提供）：
+#      ffmpeg   —— birdnetlib 用它解码 mp3/m4a/ogg/webm，没有它只能读 wav
+#      Debian/Ubuntu:  apt-get install -y ffmpeg
+#      Dockerfile 里已经装好，裸机部署请手动装。
+#
+# ⚠️ birdnetlib 会自动拉 tflite-runtime / librosa / numpy / resampy 等；
+#      首次运行还会下载 BirdNET 模型（约 50MB）到 ~/.cache 或 site-packages 目录，
+#      所以容器首次启动需要能访问外网，且要给足磁盘空间。
+
+# —— HTTP 服务 ——
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.27,<1.0
+python-multipart>=0.0.9          # FastAPI 解析 multipart 上传必需
+
+# —— 识别引擎 ——
+birdnetlib>=0.17.0               # BirdNET-Analyzer 的 Python 封装（开源库，我们只做编排）
+
+# —— MCP 包装（加分项，不装也不影响 HTTP 主流程）——
+mcp>=1.2.0
