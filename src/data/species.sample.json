@@ -1,0 +1,41 @@
+[
+  {
+    "id": "eurasian-tree-sparrow",
+    "name_zh": "麻雀",
+    "name_en": "Eurasian Tree Sparrow",
+    "taxonomy": "雀形目 / 雀科",
+    "call_desc": "短促 '啾啾' 声，连续而细碎",
+    "habitat": "村落、农田、城市绿化带",
+    "distribution": "中国广布",
+    "protection_level": "三有保护动物",
+    "fun_fact": "常与人类伴生，适应力极强",
+    "audio_ref": "/assets/audio/sparrow.mp3",
+    "image_ref": "/assets/img/sparrow.png"
+  },
+  {
+    "id": "common-frog",
+    "name_zh": "黑斑侧褶蛙（青蛙）",
+    "name_en": "Eastern Banjo Frog",
+    "taxonomy": "无尾目 / 蛙科",
+    "call_desc": "低沉的 '呱呱' 声，常见于春夏水边",
+    "habitat": "池塘、水田、湿地",
+    "distribution": "中国东部广布",
+    "protection_level": "三有保护动物",
+    "fun_fact": "鸣叫是繁殖期求偶与领地宣示",
+    "audio_ref": "/assets/audio/frog.mp3",
+    "image_ref": "/assets/img/frog.png"
+  },
+  {
+    "id": "cicada",
+    "name_zh": "蝉",
+    "name_en": "Cicada",
+    "taxonomy": "半翅目 / 蝉科",
+    "call_desc": "持续高亢 '吱——' 振翅声",
+    "habitat": "乔木林、公园、校园",
+    "distribution": "全国广布（夏秋季）",
+    "protection_level": "无特殊级别",
+    "fun_fact": "雄蝉用腹基鼓膜发声，夏日声景代表",
+    "audio_ref": "/assets/audio/cicada.mp3",
+    "image_ref": "/assets/img/cicada.png"
+  }
+]
