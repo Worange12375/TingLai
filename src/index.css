@@ -6,6 +6,109 @@
   color-scheme: light;
 }
 
-body {
-  @apply bg-cream text-leaf-900 font-rounded antialiased;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink font-rounded antialiased;
+    /* 纸纹肌理：两层柔和径向晕染 + 细密噪点，模拟水彩纸 */
+    background-image:
+      radial-gradient(1100px 620px at 12% -8%, rgba(233, 196, 106, 0.16), transparent 62%),
+      radial-gradient(900px 560px at 92% 4%, rgba(108, 160, 193, 0.14), transparent 60%),
+      radial-gradient(800px 520px at 50% 112%, rgba(124, 148, 115, 0.16), transparent 62%);
+    background-attachment: fixed;
+  }
+
+  /* 全局噪点层（不拦截鼠标事件） */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.32;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+  }
+
+  h1, h2, h3 {
+    @apply text-ink font-bold tracking-tight;
+  }
+
+  ::selection {
+    background: rgba(232, 168, 124, 0.4);
+  }
+
+  /* 柔和滚动条 */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(200, 168, 124, 0.55);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(169, 138, 97, 0.75); background-clip: content-box; }
+}
+
+@layer utilities {
+  /* 纸纹肌理 utility：给任意卡片叠一层细腻噪点 */
+  .paper-texture {
+    position: relative;
+    isolation: isolate;
+  }
+  .paper-texture::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23p)' opacity='0.3'/%3E%3C/svg%3E");
+  }
+
+  /* 水彩晕染边缘：柔和径向高光 */
+  .watercolor {
+    background-image:
+      radial-gradient(120% 90% at 18% 12%, rgba(255, 255, 255, 0.55), transparent 55%),
+      radial-gradient(90% 80% at 88% 92%, rgba(62, 52, 43, 0.06), transparent 60%);
+  }
+
+  /* 手绘感描边（略带暖色，非纯黑） */
+  .sketch-border {
+    border: 1.5px solid rgba(200, 168, 124, 0.55);
+  }
+
+  .content-layer {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* 文本截断 */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* 尊重用户的减弱动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

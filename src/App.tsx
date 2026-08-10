@@ -1,60 +1,65 @@
-import { Routes, Route, Link, NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation, Link } from 'react-router-dom'
+import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Recognize from './pages/Recognize'
 import Learn from './pages/Learn'
+import LearnDetail from './pages/LearnDetail'
 import Quiz from './pages/Quiz'
 import Compose from './pages/Compose'
 import Hall from './pages/Hall'
 import Account from './pages/Account'
+import { Button } from './components/ui'
 
-const navItems = [
-  { to: '/', label: '首页' },
-  { to: '/recognize', label: '识籁' },
-  { to: '/learn', label: '听籁' },
-  { to: '/quiz', label: '识声游戏' },
-  { to: '/compose', label: '自然作曲' },
-  { to: '/hall', label: '自然大厅' },
-  { to: '/account', label: '账号' },
-]
+/** 路由切换后回到顶部 */
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+  }, [pathname])
+  return null
+}
+
+function NotFound() {
+  return (
+    <div className="text-center py-24">
+      <p className="text-6xl mb-4">🍂</p>
+      <h2 className="text-2xl font-bold text-ink">这片林子里没有这个页面</h2>
+      <p className="text-ink-soft mt-3">也许它飞去了别处，我们回大厅看看吧。</p>
+      <div className="mt-7 flex justify-center gap-3">
+        <Link to="/"><Button variant="soft">回首页</Button></Link>
+        <Link to="/hall"><Button>去自然大厅</Button></Link>
+      </div>
+    </div>
+  )
+}
 
 export default function App() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <header className="sticky top-0 z-10 bg-leaf-600 text-white shadow">
-        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-3">
-          <Link to="/" className="font-bold text-lg whitespace-nowrap">🐦 听籁 SoundVerse</Link>
-          <nav className="flex gap-3 text-sm flex-wrap justify-end">
-            {navItems.map((i) => (
-              <NavLink
-                key={i.to}
-                to={i.to}
-                end={i.to === '/'}
-                className={({ isActive }) =>
-                  isActive ? 'underline font-semibold' : 'opacity-80 hover:opacity-100'
-                }
-              >
-                {i.label}
-              </NavLink>
-            ))}
-          </nav>
-        </div>
-      </header>
+  const { pathname } = useLocation()
+  // 自然大厅是沉浸式场景页，取消主内容区的宽度限制与内边距
+  const immersive = pathname === '/hall'
 
-      <main className="flex-1 max-w-5xl mx-auto w-full px-4 py-6">
+  return (
+    <div className="min-h-screen flex flex-col content-layer">
+      <ScrollToTop />
+      <NavBar />
+
+      <main className={immersive ? 'flex-1 w-full' : 'flex-1 w-full max-w-6xl mx-auto px-4 py-8 sm:py-10'}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/recognize" element={<Recognize />} />
           <Route path="/learn" element={<Learn />} />
+          <Route path="/learn/:id" element={<LearnDetail />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/compose" element={<Compose />} />
           <Route path="/hall" element={<Hall />} />
           <Route path="/account" element={<Account />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
-      <footer className="text-center text-xs text-leaf-700 py-4">
-        智更鸟队 · 小有可为 2026 · 绿色发展・自然之声 AI 识别
-      </footer>
+      <Footer />
     </div>
   )
 }
