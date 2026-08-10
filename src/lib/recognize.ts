@@ -260,7 +260,9 @@ function parseDetections(data: unknown): RemoteHit[] {
   return arr
     .map((raw): RemoteHit | null => {
       const o = raw as Record<string, unknown>
-      const sci = String(o.scientificName ?? o.scientific_name ?? o.sci_name ?? '').trim()
+      // 兼容后端返回「学名_英文名」合并串（如 BirdNET-Analyzer HTTP server）：
+      // 仅对含下划线的做 split('_')[0]，空格分隔的二名法（Passer montanus）不受影响。
+      const sci = String(o.scientificName ?? o.scientific_name ?? o.sci_name ?? '').trim().split('_')[0]
       const com = String(o.commonName ?? o.common_name ?? o.label ?? o.species ?? o.name ?? '').trim()
       if (!sci && !com) return null
       return {
