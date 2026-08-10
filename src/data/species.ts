@@ -70,6 +70,23 @@ export function filterSpecies(keyword: string, group: SpeciesGroup | '全部'): 
   })
 }
 
+/**
+ * 已配手绘插画（public/assets/npc-<id>.png）的物种 id，按展示优先级排列。
+ * —— 美术补图后只需在这里追加 id，自然大厅与首页会自动同步，无需改页面代码。——
+ */
+export const ILLUSTRATED_IDS: string[] = [
+  'hoopoe',                // 戴胜 · 折扇羽冠，最上镜
+  'oriole',                // 黑枕黄鹂 · 「两个黄鹂鸣翠柳」古诗梗
+  'eurasian-tree-sparrow', // 麻雀 · 国民度最高
+  'common-frog',           // 黑斑侧褶蛙 · 夏夜蛙声代表
+  'weaver-katydid',        // 纺织娘 · 平衡昆虫类群
+]
+
+/** 已配插画的物种实体；数据中查不到的 id 自动跳过，不会留空位 */
+export const illustratedSpecies: Species[] = ILLUSTRATED_IDS.map((id) =>
+  speciesList.find((s) => s.id === id),
+).filter((s): s is Species => !!s)
+
 /** 稳定伪随机取样（用于大厅 NPC / Quiz 出题，避免每次渲染跳动） */
 export function pickSpecies(count: number, offset = 0): Species[] {
   if (speciesList.length === 0) return []

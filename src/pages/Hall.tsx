@@ -5,19 +5,30 @@ import { Link } from 'react-router-dom'
 import { HallScene, SpeciesAvatar } from '../components/PlaceholderArt'
 import { Modal, EmptyState, Button, Badge } from '../components/ui'
 import { NoticeBar, SpeciesPopupCard } from '../components/SpeciesCard'
-import { speciesList } from '../data/species'
+import { ILLUSTRATED_IDS, speciesList } from '../data/species'
 import { useCallPlayer } from '../lib/useCallPlayer'
 import type { Species } from '../types/species'
 
-/** NPC 在场景中的锚点（百分比定位，随容器缩放） */
+/**
+ * 主推 NPC = 已配手绘插画的物种，占据场景中最显眼、尺寸最大的锚点位。
+ * 名单维护在 src/data/species.ts 的 ILLUSTRATED_IDS（首页 C 位卡片共用同一份），
+ * 美术补图后在那里追加 id 即可，本文件无需改动。
+ */
+const HALL_NPCS = ILLUSTRATED_IDS
+
+/**
+ * NPC 在场景中的锚点（百分比定位，随容器缩放）。
+ * 前 5 个是主推位（大尺寸 + 视觉焦点区），后 2 个为补位（小尺寸、靠边靠后），
+ * 由未配插画的物种按类群轮转填充，用 SVG 手绘占位呈现。
+ */
 const ANCHORS = [
-  { left: '14%', top: '62%', size: 92, delay: 0 },
-  { left: '35%', top: '76%', size: 78, delay: 0.5 },
-  { left: '56%', top: '58%', size: 86, delay: 1.0 },
-  { left: '76%', top: '73%', size: 82, delay: 1.5 },
-  { left: '88%', top: '52%', size: 66, delay: 2.0 },
-  { left: '25%', top: '44%', size: 62, delay: 2.5 },
-  { left: '66%', top: '40%', size: 58, delay: 3.0 },
+  { left: '20%', top: '64%', size: 104, delay: 0 },   // 戴胜：前景左，地面觅食
+  { left: '48%', top: '51%', size: 92, delay: 0.6 },  // 黄鹂：树冠中部
+  { left: '73%', top: '61%', size: 88, delay: 1.2 },  // 麻雀：中景右
+  { left: '35%', top: '80%', size: 84, delay: 1.8 },  // 青蛙：低位近水
+  { left: '87%', top: '44%', size: 72, delay: 2.4 },  // 纺织娘：右侧枝叶间
+  { left: '60%', top: '79%', size: 62, delay: 3.0 },  // 补位
+  { left: '11%', top: '43%', size: 56, delay: 3.6 },  // 补位
 ] as const
 
 export default function Hall() {
@@ -25,18 +36,29 @@ export default function Hall() {
   const [active, setActive] = useState<Species | null>(null)
   const [hovered, setHovered] = useState<string | null>(null)
 
-  // 场景中最多摆放 7 只，优先保证类群多样性
+  // 主推物种优先上场，剩余锚点用其它物种按类群轮转补齐
   const npcs = useMemo(() => {
     if (speciesList.length === 0) return []
+
+    // 1) 主推：按 HALL_NPCS 顺序取，数据里查不到的 id 直接跳过（不报错、不留空位）
+    const featured = HALL_NPCS.map((id) => speciesList.find((s) => s.id === id)).filter(
+      (s): s is Species => !!s,
+    )
+
+    const out: Species[] = [...featured]
+    const used = new Set(out.map((s) => s.id))
+
+    // 2) 补位：剩余物种按类群轮转，保证鸟/蛙/虫都在场景里露面
     const byGroup = new Map<string, Species[]>()
-    speciesList.forEach((s) => {
-      const arr = byGroup.get(s.group) ?? []
-      arr.push(s)
-      byGroup.set(s.group, arr)
-    })
-    const out: Species[] = []
+    speciesList
+      .filter((s) => !used.has(s.id))
+      .forEach((s) => {
+        const arr = byGroup.get(s.group) ?? []
+        arr.push(s)
+        byGroup.set(s.group, arr)
+      })
+
     let round = 0
-    // 轮转各类群，保证鸟/蛙/虫都出现在场景里
     while (out.length < Math.min(ANCHORS.length, speciesList.length) && round < 12) {
       for (const arr of byGroup.values()) {
         if (arr[round] && out.length < ANCHORS.length) out.push(arr[round])
@@ -45,6 +67,12 @@ export default function Hall() {
     }
     return out
   }, [])
+
+  // 有真实插画的数量，用于场景图例
+  const illustratedCount = useMemo(
+    () => npcs.filter((s) => (HALL_NPCS as readonly string[]).includes(s.id)).length,
+    [npcs],
+  )
 
   const openNpc = (s: Species) => {
     setActive(s)
@@ -148,7 +176,10 @@ export default function Hall() {
         {/* 底部图例 */}
         <div className="absolute bottom-5 right-5 z-20 hidden sm:flex flex-col items-end gap-2">
           <div className="rounded-2xl bg-paper-light/80 backdrop-blur-sm sketch-border px-4 py-2.5 shadow-soft">
-            <p className="text-xs text-ink-faint mb-1.5">场景住客 {npcs.length} 位</p>
+            <p className="text-xs text-ink-faint mb-1.5">
+              场景住客 {npcs.length} 位
+              {illustratedCount > 0 && ` · ${illustratedCount} 位已有手绘插画`}
+            </p>
             <div className="flex gap-1.5">
               {['鸟类', '蛙类', '昆虫'].map((g) => (
                 <Badge key={g} tone={g === '鸟类' ? 'feather' : g === '蛙类' ? 'moss' : 'blossom'}>
