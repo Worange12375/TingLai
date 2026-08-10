@@ -1,5 +1,5 @@
 // 通用 UI 原子组件：Card / Button / Badge / SectionTitle / Modal / EmptyState
-import { useEffect, type ButtonHTMLAttributes, type ReactNode } from 'react'
+import { useEffect, type ButtonHTMLAttributes, type CSSProperties, type ReactNode } from 'react'
 
 /* ---------------------------------- Card ---------------------------------- */
 
@@ -8,14 +8,17 @@ export function Card({
   className = '',
   hoverable = false,
   as: As = 'div',
+  style,
 }: {
   children: ReactNode
   className?: string
   hoverable?: boolean
   as?: 'div' | 'section' | 'article'
+  style?: CSSProperties
 }) {
   return (
     <As
+      style={style}
       className={[
         'rounded-3xl bg-paper-light/85 backdrop-blur-[2px] sketch-border shadow-card paper-texture watercolor',
         hoverable ? 'transition duration-300 hover:-translate-y-1 hover:shadow-lift' : '',

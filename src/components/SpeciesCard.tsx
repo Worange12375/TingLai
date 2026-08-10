@@ -81,8 +81,9 @@ export function SpeciesCard({
       hoverable
       className="p-5 flex flex-col gap-3.5 animate-fadeUp"
       as="article"
+      style={{ animationDelay: `${Math.min(index, 12) * 45}ms` }}
     >
-      <div style={{ animationDelay: `${Math.min(index, 12) * 45}ms` }} className="flex items-start gap-4">
+      <div className="flex items-start gap-4">
         <SpeciesAvatar id={species.id} name={species.name} group={species.group} src={species.image} size={72} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">

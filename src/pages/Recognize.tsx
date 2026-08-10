@@ -388,8 +388,12 @@ export default function Recognize() {
 
             <div className="space-y-4">
               {items.map((it, i) => (
-                <Card key={`${it.species.id}-${i}`} className="p-5 animate-fadeUp" >
-                  <div style={{ animationDelay: `${i * 100}ms` }} className="flex items-start gap-4">
+                <Card
+                  key={`${it.species.id}-${i}`}
+                  className="p-5 animate-fadeUp"
+                  style={{ animationDelay: `${i * 100}ms` }}
+                >
+                  <div className="flex items-start gap-4">
                     <div className="relative shrink-0">
                       <SpeciesAvatar
                         id={it.species.id}
