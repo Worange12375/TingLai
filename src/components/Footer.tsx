@@ -37,7 +37,7 @@ export default function Footer() {
 
         <div className="mt-8 pt-5 border-t border-wood/25 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-ink-faint">
           <p>© 2026 智更鸟队 · 听籁 SoundVerse · 自然之声 AI 识别</p>
-          <p>物种科普内容由团队原创整理，叫声素材来源于公开自然声音库</p>
+          <p>叫声音频来源：iNaturalist（21 条）、xeno-canto（1 条），遵循 CC 系列授权（CC0 / CC BY / CC BY-NC / CC BY-NC-SA），仅用于非商业科普演示</p>
         </div>
       </div>
     </footer>
