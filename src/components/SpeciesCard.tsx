@@ -131,6 +131,45 @@ function InfoRow({ icon, label, value }: { icon: string; label: string; value: s
   )
 }
 
+/* --------------------------- 音频来源与授权 --------------------------- */
+
+const LICENSE_MAP: Record<string, { label: string; tone: string }> = {
+  CC0: { label: 'CC0 · 公共领域', tone: 'bg-leaf/15 text-leaf' },
+  'CC BY': { label: 'CC BY · 署名', tone: 'bg-feather/20 text-feather' },
+  'CC BY-NC': { label: 'CC BY-NC · 非商业署名', tone: 'bg-blossom/25 text-ink-soft' },
+  'CC BY-NC-SA': { label: 'CC BY-NC-SA · 非商业署名-相同方式共享', tone: 'bg-blossom/25 text-ink-soft' },
+  'CC BY-NC-SA 4.0': { label: 'CC BY-NC-SA 4.0 · 非商业署名-相同方式共享', tone: 'bg-blossom/25 text-ink-soft' },
+}
+
+function LicenseBadge({ license }: { license: string }) {
+  if (!license) return null
+  const hit = LICENSE_MAP[license.trim()]
+  return (
+    <span
+      className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ${hit ? hit.tone : 'bg-wood-light/60 text-ink-soft'}`}
+    >
+      {hit ? hit.label : license}
+    </span>
+  )
+}
+
+export function AudioAttribution({ species }: { species: Species }) {
+  const { audioSource, audioLicense } = species
+  // 兜底：两字段皆空则不渲染，避免空白区块（当前 JSON 未填时静默跳过）
+  if (!audioSource && !audioLicense) return null
+  return (
+    <div className="pt-3 mt-1">
+      <p className="text-xs font-semibold text-ink-faint mb-1.5">音频来源与授权</p>
+      {audioSource && <p className="text-[15px] text-ink leading-relaxed">{audioSource}</p>}
+      {audioLicense && (
+        <div className="mt-2">
+          <LicenseBadge license={audioLicense} />
+        </div>
+      )}
+    </div>
+  )
+}
+
 export function SpeciesInfoPanel({ species }: { species: Species }) {
   return (
     <div>
@@ -139,6 +178,7 @@ export function SpeciesInfoPanel({ species }: { species: Species }) {
       <InfoRow icon="🗺️" label="分布" value={species.distribution} />
       <InfoRow icon="🛡️" label="保护级别" value={species.protectLevel} />
       <InfoRow icon="✨" label="趣味知识" value={species.funFact} />
+      <AudioAttribution species={species} />
     </div>
   )
 }

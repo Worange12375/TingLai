@@ -38,6 +38,9 @@ export function normalizeSpecies(raw: RawSpecies, index: number): Species {
     funFact: pick(raw.funFact, raw.fun_fact, ''),
     audioUrl: pick(raw.audioUrl, raw.audio_ref),
     image: pick(raw.image, raw.image_ref, `/assets/npc-${id}.webp`),
+    // 逐条署名：透传，缺省为空串（Species 要求 string，渲染层已做空值兜底）
+    audioSource: pick(raw.audioSource),
+    audioLicense: pick(raw.audioLicense),
   }
 }
 

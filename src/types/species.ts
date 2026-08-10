@@ -26,6 +26,10 @@ export interface Species {
   audioUrl: string
   /** 插画地址 /assets/npc-<id>.webp（优先 WebP；可能尚未生成，渲染需 onError 兜底） */
   image: string
+  /** 音频来源署名（平台+录音编号+录制者+日期+地点），逐条署名用 */
+  audioSource: string
+  /** 实际授权码：CC0 / CC BY / CC BY-NC / CC BY-NC-SA 4.0 */
+  audioLicense: string
 }
 
 /**
@@ -47,6 +51,8 @@ export interface RawSpecies {
   funFact?: string
   audioUrl?: string
   image?: string
+  audioSource?: string
+  audioLicense?: string
   // 早期版
   name_zh?: string
   name_en?: string
