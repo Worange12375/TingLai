@@ -35,7 +35,6 @@ export function playAudio(
   }
 
   const audio = new Audio()
-  audio.crossOrigin = 'anonymous'
   audio.preload = 'auto'
   audio.src = url
   current = audio
