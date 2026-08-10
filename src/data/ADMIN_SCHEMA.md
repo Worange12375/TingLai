@@ -1,8 +1,8 @@
 # 听籁 SoundVerse · 物种科普卡数据契约（管理员工具 Schema）
 
 > 维护人：林知声（物种知识工程师） · 消费方：`/dev` 本地管理员工具（郝栈桥）、`src/data/species.ts`、`src/lib/recognize.ts`
-> 适用文件：`src/data/species.sample.json`（22 条）、`src/data/recognition-map.json`
-> 本文档中的每一条规则均已用现有 22 条数据反向校验通过（0 违规），可直接实现为校验器。
+> 适用文件：`src/data/species.sample.json`（30 条）、`src/data/recognition-map.json`
+> 本文档中的每一条规则均已用现有 30 条数据反向校验通过（0 违规），可直接实现为校验器。
 
 ---
 
@@ -75,14 +75,14 @@
 | 取值 | 条数 | 出现物种 |
 |------|:----:|----------|
 | `国家一级重点保护野生动物` | 2 | 朱鹮、丹顶鹤 |
-| `国家二级重点保护野生动物` | 1 | 画眉 |
+| `国家二级重点保护野生动物` | 2 | 画眉、红角鸮 |
 | `国家二级重点保护野生动物（仅限野外种群）` | 1 | 虎纹蛙 |
-| `国家三有保护动物` | **13** | 麻雀、黑枕黄鹂、珠颈斑鸠、乌鸫、白头鹎、大山雀、灰喜鹊、戴胜、大杜鹃、四声杜鹃、白胸苦恶鸟（以上 11 种鸟）+ 中华蟾蜍、中国雨蛙（2 种蛙） |
+| `国家三有保护动物` | **20** | 麻雀、黑枕黄鹂、珠颈斑鸠、乌鸫、白头鹎、大山雀、灰喜鹊、戴胜、大杜鹃、四声杜鹃、白胸苦恶鸟（以上 11 种鸟）+ 中华蟾蜍、中国雨蛙（2 种蛙）+ 喜鹊、家燕、普通翠鸟、白鹡鸰、八哥、红嘴蓝鹊、松鸦（本次 +7 种鸟） |
 | `国家三有保护动物（IUCN 近危 NT）` | 1 | 黑斑侧褶蛙 |
 | `未列入国家保护名录（常见广布种）` | 4 | 黑蚱蝉、蟪蛄、迷卡斗蟋、纺织娘 |
-| **合计** | **22** | — |
+| **合计** | **30** | — |
 
-> 按**基础级别**归并（忽略括号补充说明）则为：三有 14 / 未列入 4 / 一级 2 / 二级 2。
+> 按**基础级别**归并（忽略括号补充说明）则为：三有 21 / 未列入 4 / 一级 2 / 二级 3。
 > 上表按**完整字符串精确计数**，两种口径都对，实现校验器时注意区分。
 
 **建议**：管理员工具把「基础级别」做成下拉、「补充说明」做成独立输入框，保存时拼接，从根上杜绝手抖写错。
@@ -147,7 +147,7 @@
 
 ### 4.4 `image` 字段与插画文件的关系（重要，勿误判为数据缺陷）
 
-**`image` 字段对全部 22 条恒有值**（派生自 `id`），但 **`public/assets/` 下的 webp 文件只对部分物种存在**。二者不是一回事：
+**`image` 字段对全部 30 条恒有值**（派生自 `id`），但 **`public/assets/` 下的 webp 文件只对部分物种存在**。二者不是一回事：
 
 - `image` = 「**约定的**图片路径」，由 `id` 推导，永远不为空
 - `src/data/species.ts` 的 **`ILLUSTRATED_IDS`** = 「**实际已配插画**的白名单」，是前端决定 NPC/首页展示哪些物种的**唯一依据**
@@ -162,7 +162,7 @@
 | `common-frog` | 黑斑侧褶蛙 | `npc-common-frog.webp` ✅ |
 | `weaver-katydid` | 纺织娘 | `npc-weaver-katydid.webp` ✅ |
 
-**其余 17 条无插画是当前的既定状态，不是数据缺陷。** 前端不会引用它们的 `image`（因为不在 `ILLUSTRATED_IDS` 里），因此**不会产生 404**。
+**其余 25 条无插画是当前的既定状态，不是数据缺陷。** 前端不会引用它们的 `image`（因为不在 `ILLUSTRATED_IDS` 里），因此**不会产生 404**。
 
 校验器请按**三态**判断，不要一律报警告：
 
@@ -223,7 +223,7 @@ import recognitionMap from '../data/recognition-map.json'
 const speciesId: string | undefined = (recognitionMap as Record<string, string>)[sciName]
 ```
 
-- 共 **35 个键 → 22 个 speciesId**，22 条物种卡 **100% 覆盖**，无悬空映射。
+- 共 **44 个键 → 30 个 speciesId**，30 条物种卡 **100% 覆盖**，无悬空映射。
 - 一个 speciesId 允许被多个键指向（正名 + 同物异名 + 拼写变体）。
 - 文件中把**别名紧挨着正名**排列（用空行分组），便于人工审阅。
 
@@ -241,6 +241,7 @@ BirdNET V2.4（2023-06，eBird/Clements taxonomy）与本项目采用的中文�
 | `Spilopelia chinensis`（珠颈斑鸠） | **`Streptopelia chinensis`** | 两个键都 → `spotted-dove` | BirdNET 沿用旧属 *Streptopelia*，`Spilopelia` 在标签表中**不存在**。不加此别名则珠颈斑鸠**永远匹配不上** |
 | `Parus cinereus`（大山雀） | **`Parus minor`**（远东山雀，中国东部实际种群）<br>亦可能 `Parus major` / `Parus cinereus` | 三个键都 → `cinereous-tit` | BirdNET V2.4 把山雀拆为 3 种，其中文名对应关系与我们相反：BirdNET 里 `Parus major`=大山雀、`Parus minor`=远东山雀、`Parus cinereus`=**苍背山雀**。我们的卡片跟随 AviList 2025 的并合处理（*minor* 并入 *cinereus*，中文名恢复「大山雀」）。**中国境内录音最可能返回 `Parus minor`** |
 | `Turdus mandarinus`（乌鸫） | `Turdus mandarinus` ✅ 一致 | 另加 `Turdus merula` → `chinese-blackbird` | *Turdus merula*（欧乌鸫）同在标签表中，声音高度相似易误判，作为容错别名 |
+| `Pica serica`（喜鹊） | **`Pica pica`**（欧亚喜鹊，BirdNET V2.4 常用名）亦可能 `Pica serica` | 两个键都 → `eurasian-magpie` | BirdNET 常用 *pica* 合并东西方喜鹊；本卡片用 *serica*（东方喜鹊）。为兼容两种返回名，两键并列（自愈合，冗余无害） |
 
 ⚠️ **`Parus monticolus`（绿背山雀）、`Cyanopica cooki`（伊比利亚灰喜鹊）、`Pycnonotus taivanus`（台湾鹎）、`Streptopelia orientalis`（山斑鸠）** 是**不同物种**，已刻意**不**加入映射，避免错标。
 
@@ -248,8 +249,8 @@ BirdNET V2.4（2023-06，eBird/Clements taxonomy）与本项目采用的中文�
 
 对 6522 类标签逐条比对结果：
 
-- ✅ **13 / 22 可被 BirdNET 识别**（除朱鹮外的全部 13 种鸟）
-- ❌ **9 / 22 BirdNET 完全无法识别**：
+- ✅ **21 / 30 可被 BirdNET 识别**（除朱鹮外的全部 21 种鸟；本次扩展 +8 鸟，均 BirdNET 覆盖）
+- ❌ **9 / 30 BirdNET 完全无法识别**：
   - `crested-ibis` 朱鹮 *Nipponia nippon* —— **不在** 6522 类中（极危物种，训练数据不足）
   - 蛙类 4 种：黑斑侧褶蛙、中华蟾蜍、中国雨蛙、虎纹蛙
   - 昆虫 4 种：黑蚱蝉、蟪蛄、迷卡斗蟋、纺织娘
@@ -285,7 +286,7 @@ BirdNET V2.4（2023-06，eBird/Clements taxonomy）与本项目采用的中文�
 
 | 数据 | 来源 | 许可 |
 |---|---|---|
-| 物种叫声音频 | [iNaturalist](https://www.inaturalist.org/)（20 条）、[xeno-canto](https://xeno-canto.org/)（1 条） | 逐条记录于 `audioLicense`，均为 CC0 / CC BY / CC BY-NC / CC BY-NC-SA 4.0 |
+| 物种叫声音频 | [iNaturalist](https://www.inaturalist.org/)（29 条）、[xeno-canto](https://xeno-canto.org/)（1 条） | 逐条记录于 `audioLicense`，均为 CC0 / CC BY / CC BY-NC / CC BY-NC-SA 4.0 |
 | 识别模型与标签表 | [BirdNET-Analyzer V2.4](https://github.com/birdnet-team/BirdNET-Analyzer)，Cornell Lab of Ornithology & Chemnitz University of Technology | CC BY-NC-SA 4.0 |
 | BirdNET 标签中文名参照 | BirdNET-Pi `model/l18n/labels_zh_CN.json` | 随 BirdNET 发布 |
 | 保护级别 | 《国家重点保护野生动物名录》（2021 年 2 月）、国家「三有」名录、IUCN 红色名录 | 公开发布 |
