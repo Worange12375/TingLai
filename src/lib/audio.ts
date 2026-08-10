@@ -34,6 +34,11 @@ export function playAudio(
     return { stop: () => {} }
   }
 
+  // 【重要】切勿为 audio 设置 crossOrigin！
+  // iNaturalist / xeno-canto 外链音频均不返回 Access-Control-Allow-Origin（ACAO: null）；
+  // 一旦设置 crossOrigin='anonymous'，浏览器强制走 CORS 模式，因源站无 ACAO 头而整条拦截，22 条叫声会全部哑掉。
+  // 当前 22 条能响，完全靠「不设 crossOrigin」。若将来做波形/频谱可视化（createMediaElementSource），
+  // Web Audio 会强制要求 CORS，届时不能把 crossOrigin 简单加回来，必须改走本地代理或自有 CDN，否则依旧全哑。
   const audio = new Audio()
   audio.preload = 'auto'
   audio.src = url

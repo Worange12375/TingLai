@@ -8,8 +8,10 @@ dist-ssr
 .env.*
 !.env.example
 
-# 本地临时校验/日志产物（构建与类型检查时生成，不入库）
+# 本地临时校验/日志产物（构建与类型检查/验证时生成，不入库）
+# 统一忽略所有下划线前缀的临时文件（_*.txt / _*.cjs / _*.html / _*.js / _*.json 等），
+# 避免 `git add .` 一把梭把验证脚本与中间产物带进仓库。
 *.log
-_*.txt
+_*
 commit_message.txt
 probe.txt
