@@ -46,14 +46,14 @@ export function playAudio(
 
   let settled = false
 
-  // 8 秒仍未可播放 → 判定为加载失败（外链音频常见）
+  // 15 秒仍未可播放 → 判定为加载失败（外链音频 / 慢速静态托管 / AAC 转码前均常见）
   const timer = window.setTimeout(() => {
     if (!settled && audio.readyState < 2) {
       settled = true
       stopAudio()
       opts.onError?.('叫声加载超时，可能是网络或音频源不可用')
     }
-  }, 8000)
+  }, 15000)
 
   const clear = () => {
     settled = true

@@ -125,6 +125,9 @@ VITE_RECOGNIZE_API=https://tinglai.dushiofcourses.cn
 >
 > 如果接口路径不是 `/api/recognize`（比如反代时改成了 `/recognize`），改用 `VITE_BIRDNET_ENDPOINT`——
 > 这个变量填**完整接口地址**，前端原样使用不再拼接，且优先级高于 `VITE_RECOGNIZE_API`。
+>
+> 前端也接受 `VITE_API_BASE_URL`（对齐部署文档里 `VITE_API_BASE_URL = https://tinglai.dushiofcourses.cn/api` 的写法）：
+> 它等价于 `VITE_RECOGNIZE_API`，但优先级更低；无论填 `https://host` 还是 `https://host/api`，前端都会自动去掉末尾 `/api` 再拼 `/api/recognize`，不会重复。生产留空走同源相对路径也能通。
 
 面向「照着做」的完整手动部署步骤（含 nginx 配置样例、离线塞模型、排障表），见 [`容器部署指导方案.md`](./容器部署指导方案.md)。
 

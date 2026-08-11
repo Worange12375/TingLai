@@ -23,19 +23,35 @@ const env = import.meta.env
 const IS_DEV = Boolean(env.DEV)
 
 /**
- * 识别服务地址。
- * - 生产：留空 → 走同源相对路径 /api/recognize（由 nginx 反代到容器 8000）
- * - 开发：默认 http://localhost:8000
- * - 也兼容老变量 VITE_BIRDNET_ENDPOINT（直接写完整 endpoint）
+ * 识别服务地址。支持以下环境变量（优先级从高到低）：
+ *   1. VITE_BIRDNET_ENDPOINT —— 直接写完整 endpoint（含 /api/recognize），原样使用，最高优先级
+ *   2. VITE_RECOGNIZE_API    —— 只写 base（如 https://host 或 https://host/api），代码自动补 /api/recognize
+ *   3. VITE_API_BASE_URL     —— 对齐部署文档（用户填的是 https://tinglai.dushiofcourses.cn/api），
+ *                               同样自动补 /api/recognize，纯 fallback，优先级最低
+ * 无论取到哪种 base，都会：
+ *   · 去掉末尾多余的 /api/recognize 或 /api（避免最终出现双重 /api/api/recognize）
+ *   · 由代码统一拼接 /api/recognize
+ * 例如用户填 VITE_API_BASE_URL=https://tinglai.dushiofcourses.cn/api
+ *   → 归一化为 https://tinglai.dushiofcourses.cn
+ *   → 最终请求 https://tinglai.dushiofcourses.cn/api/recognize
+ * - 生产：VITE_RECOGNIZE_API / VITE_API_BASE_URL 都留空 → 走同源相对路径 /api/recognize（nginx 反代到容器 8000）
+ * - 开发：上面都没配 → 默认 http://localhost:8000
  */
 function resolveEndpoint(): string {
+  // 1) 老变量：直接写完整 endpoint（含 /api/recognize），原样使用，最高优先级
   const legacy = (env.VITE_BIRDNET_ENDPOINT ?? '').trim()
   if (legacy) return legacy.replace(/\/+$/, '')
 
-  const raw = env.VITE_RECOGNIZE_API
+  // 2) / 3) base 类变量：优先 VITE_RECOGNIZE_API，其次 VITE_API_BASE_URL（对齐用户部署文档）
+  const raw = env.VITE_RECOGNIZE_API ?? env.VITE_API_BASE_URL
   // 显式设成空串 = 强制同源相对路径
   const base = (raw === undefined ? (IS_DEV ? 'http://localhost:8000' : '') : raw).trim()
-  return `${base.replace(/\/+$/, '')}/api/recognize`
+  // 去掉末尾多余的 /api/recognize 或 /api 以及其它多余斜杠，避免重复拼接出现双 /api
+  const clean = base
+    .replace(/\/api\/recognize\/?$/, '')
+    .replace(/\/api\/?$/, '')
+    .replace(/\/+$/, '')
+  return `${clean}/api/recognize`
 }
 
 const ENDPOINT = resolveEndpoint()
