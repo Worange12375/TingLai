@@ -107,17 +107,26 @@ EXTRA_ORIGINS: "https://example.com,https://foo.bar"
 - **开发环境（本地 `npm run dev`，`import.meta.env.DEV === true`）**：默认指向 `http://localhost:8000`，即直接打本地刚起的服务，无需任何配置。
 - **生产环境**：把 `VITE_RECOGNIZE_API` 指到识别服务地址即可（可配成 `/api/recognize` 这种同源反代路径，也可配成完整的 `https://<你的反代域名>/api/recognize`）。
 
+> ⚠️ **`VITE_RECOGNIZE_API` 填的是「服务基址」，不是完整接口地址。**
+> 代码里是 `` `${base}/api/recognize` ``——`/api/recognize` 由前端自动拼接，你不要自己再写一遍，
+> 否则会得到 `/api/recognize/api/recognize` 这种双重路径导致 404。
+
 构建时注入（二选一，写在 `.env` 或构建命令里）：
 
 ```bash
-# 方式 A：同源反代（推荐，CORS 最省心）
-VITE_RECOGNIZE_API=/api/recognize
+# 方式 A：同源反代（推荐，CORS 最省心）—— 留空即可，前端自动用相对路径 /api/recognize
+VITE_RECOGNIZE_API=
 
-# 方式 B：直接指向带域名的反代地址
-VITE_RECOGNIZE_API=https://tinglai.dushiofcourses.cn/api/recognize
+# 方式 B：识别服务在别的域名/端口上，只填到域名为止
+VITE_RECOGNIZE_API=https://tinglai.dushiofcourses.cn
 ```
 
 > 如果 `VITE_RECOGNIZE_API` 没配，生产构建里前端会自动回退到 `/api/recognize`，由你的 nginx 把 `/api/` 反代到本机 8000 即可。
+>
+> 如果接口路径不是 `/api/recognize`（比如反代时改成了 `/recognize`），改用 `VITE_BIRDNET_ENDPOINT`——
+> 这个变量填**完整接口地址**，前端原样使用不再拼接，且优先级高于 `VITE_RECOGNIZE_API`。
+
+面向「照着做」的完整手动部署步骤（含 nginx 配置样例、离线塞模型、排障表），见 [`容器部署指导方案.md`](./容器部署指导方案.md)。
 
 ---
 
