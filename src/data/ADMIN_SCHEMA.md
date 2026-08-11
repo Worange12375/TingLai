@@ -1,8 +1,8 @@
 # 听籁 SoundVerse · 物种科普卡数据契约（管理员工具 Schema）
 
 > 维护人：林知声（物种知识工程师） · 消费方：`/dev` 本地管理员工具（郝栈桥）、`src/data/species.ts`、`src/lib/recognize.ts`
-> 适用文件：`src/data/species.sample.json`（30 条）、`src/data/recognition-map.json`
-> 本文档中的每一条规则均已用现有 30 条数据反向校验通过（0 违规），可直接实现为校验器。
+> 适用文件：`src/data/species.sample.json`（42 条）、`src/data/recognition-map.json`
+> 本文档中的每一条规则均已用现有 42 条数据反向校验通过（0 违规），可直接实现为校验器。
 
 ---
 
@@ -33,7 +33,7 @@
 | 7 | `distribution` | string | ✅ | ✅ | 地理分布，10–80 字（现有 16–35） |
 | 8 | `protectLevel` | string(受限) | ✅ | ✅ | 见 §2 保护级别规则 |
 | 9 | `funFact` | string | ✅ | ✅ | 趣味知识点，20–140 字（现有 34–54） |
-| 10 | `audioUrl` | string(URL) | ✅ | ✅ | 必须 `https://` 开头；扩展名 ∈ `.mp3` \| `.m4a` \| `.wav` \| `.ogg`；允许 URL 编码字符 |
+| 10 | `audioUrl` | string(URL) | ✅ | ✅ | 比赛演示版统一为**本地相对路径** `/audio/<id>.<ext>`（文件存于 `public/audio/`，由 `scripts/localize-audio.mjs` 从 iNaturalist/xeno-canto 下载落地）；扩展名 ∈ `.mp3` \| `.m4a` \| `.wav` \| `.ogg`。原始外链存档于 `.audio-origins.json`（gitignore）供「按源重抓」，不在本文件内保留远程 URL。 |
 | 11 | `audioSource` | string | ✅ | ✅ | 署名文本，≥20 字，须含「平台 + 编号 + 录制者 + 日期 + 地点」四要素，见 §3 |
 | 12 | `audioLicense` | enum | ✅ | ✅ | **必须**∈ `CC0` \| `CC BY` \| `CC BY-NC` \| `CC BY-NC-SA 4.0`（下拉选择，禁止自由输入） |
 | 13 | `image` | string | ✅ | ❌ 派生 | 固定为 `/assets/npc-<id>.webp`，由 `id` 派生，不允许手填 |
@@ -70,20 +70,23 @@
 ^(国家一级重点保护野生动物|国家二级重点保护野生动物|国家三有保护动物|未列入国家保护名录)(（[^（）]{1,20}）)?$
 ```
 
-现有数据中实际出现的 6 种取值（全部合规，可作为下拉预设 + 允许自定义补充）：
+现有数据中实际出现的 7 种取值（全部合规，可作为下拉预设 + 允许自定义补充）：
 
 | 取值 | 条数 | 出现物种 |
 |------|:----:|----------|
 | `国家一级重点保护野生动物` | 2 | 朱鹮、丹顶鹤 |
 | `国家二级重点保护野生动物` | 2 | 画眉、红角鸮 |
 | `国家二级重点保护野生动物（仅限野外种群）` | 1 | 虎纹蛙 |
-| `国家三有保护动物` | **20** | 麻雀、黑枕黄鹂、珠颈斑鸠、乌鸫、白头鹎、大山雀、灰喜鹊、戴胜、大杜鹃、四声杜鹃、白胸苦恶鸟（以上 11 种鸟）+ 中华蟾蜍、中国雨蛙（2 种蛙）+ 喜鹊、家燕、普通翠鸟、白鹡鸰、八哥、红嘴蓝鹊、松鸦（本次 +7 种鸟） |
+| `国家三有保护动物` | **31** | 麻雀、黑枕黄鹂、珠颈斑鸠、乌鸫、白头鹎、大山雀、灰喜鹊、戴胜、大杜鹃、四声杜鹃、白胸苦恶鸟（11 鸟）+ 中华蟾蜍、中国雨蛙（2 蛙）+ 喜鹊、家燕、普通翠鸟、白鹡鸰、八哥、红嘴蓝鹊、松鸦（批 1 +7 鸟）+ 棕背伯劳、北红尾鸲、暗绿绣眼鸟、黑卷尾、山斑鸠、大嘴乌鸦、灰头鹀、红头长尾山雀、鹊鸲、黑水鸡、红耳鹎（批 2 +11 鸟） |
 | `国家三有保护动物（IUCN 近危 NT）` | 1 | 黑斑侧褶蛙 |
+| `国家三有保护动物（中国特有种）` | 1 | 黄腹山雀（批 2 新增） |
 | `未列入国家保护名录（常见广布种）` | 4 | 黑蚱蝉、蟪蛄、迷卡斗蟋、纺织娘 |
-| **合计** | **30** | — |
+| **合计** | **42** | — |
 
-> 按**基础级别**归并（忽略括号补充说明）则为：三有 21 / 未列入 4 / 一级 2 / 二级 3。
+> 按**基础级别**归并（忽略括号补充说明）则为：三有 33 / 未列入 4 / 一级 2 / 二级 3。
 > 上表按**完整字符串精确计数**，两种口径都对，实现校验器时注意区分。
+
+**类群构成（42 条）**：鸟类 **34** / 蛙类 **4** / 昆虫 **4**。
 
 **建议**：管理员工具把「基础级别」做成下拉、「补充说明」做成独立输入框，保存时拼接，从根上杜绝手抖写错。
 
@@ -106,13 +109,18 @@
 
 校验（宽松，只保证四要素在场）：编号部分匹配 `#\d+|XC\d+`，且包含 `录制者：`，且包含 `\d{4}-\d{2}-\d{2}`。
 
+> ⚠️ **iNaturalist `#` 后编号存在两种历史口径，均可溯源，勿当作脏数据修掉**：
+> - 最早的 21 条用的是 **sound id**（音频文件号），对应 `https://static.inaturalist.org/sounds/<id>.<ext>`；
+> - 批 1 起（含批 2、批 3）统一改用 **observation id**（观测记录号），对应 `https://www.inaturalist.org/observations/<id>`，可直接打开页面看到物种鉴定、录制者、时间地点与授权，溯源性更强，**新增数据一律用 observation id**。
+> 两种编号都能回溯到素材，故不做历史数据回改（回改会大面积污染 git diff 且无实际收益）。
+
 ### 3.2 `audioLicense` 枚举
 
 | 值 | 含义 | 商用 | 改编 | 现有条数 |
 |----|------|:----:|:----:|:--------:|
-| `CC0` | 公共领域奉献 | ✅ | ✅ | 1 |
-| `CC BY` | 署名 | ✅ | ✅ | 2 |
-| `CC BY-NC` | 署名-非商业性使用 | ❌ | ✅ | 18 |
+| `CC0` | 公共领域奉献 | ✅ | ✅ | 3 |
+| `CC BY` | 署名 | ✅ | ✅ | 6 |
+| `CC BY-NC` | 署名-非商业性使用 | ❌ | ✅ | 32 |
 | `CC BY-NC-SA 4.0` | 署名-非商业-相同方式共享 | ❌ | ✅(需同协议) | 1 |
 
 **禁止**写入 `CC BY-SA`、`CC BY 4.0`、`ARR`、`未知`、空串等枚举外的值。新增物种若找不到明确的 CC 授权，**宁可不收录，也不得留空或臆造**。
@@ -147,7 +155,7 @@
 
 ### 4.4 `image` 字段与插画文件的关系（重要，勿误判为数据缺陷）
 
-**`image` 字段对全部 30 条恒有值**（派生自 `id`），但 **`public/assets/` 下的 webp 文件只对部分物种存在**。二者不是一回事：
+**`image` 字段对全部 42 条恒有值**（派生自 `id`），但 **`public/assets/` 下的 webp 文件只对部分物种存在**。二者不是一回事：
 
 - `image` = 「**约定的**图片路径」，由 `id` 推导，永远不为空
 - `src/data/species.ts` 的 **`ILLUSTRATED_IDS`** = 「**实际已配插画**的白名单」，是前端决定 NPC/首页展示哪些物种的**唯一依据**
@@ -162,7 +170,7 @@
 | `common-frog` | 黑斑侧褶蛙 | `npc-common-frog.webp` ✅ |
 | `weaver-katydid` | 纺织娘 | `npc-weaver-katydid.webp` ✅ |
 
-**其余 25 条无插画是当前的既定状态，不是数据缺陷。** 前端不会引用它们的 `image`（因为不在 `ILLUSTRATED_IDS` 里），因此**不会产生 404**。
+**其余 37 条无插画是当前的既定状态，不是数据缺陷**（批 1/批 2 新增物种默认纯文字卡，前端由 `src/data/species.ts` 的鸟/蛙/虫三态 inline SVG 剪影兜底）**。** 前端不会引用它们的 `image`（因为不在 `ILLUSTRATED_IDS` 里），因此**不会产生 404**。
 
 校验器请按**三态**判断，不要一律报警告：
 
@@ -223,7 +231,7 @@ import recognitionMap from '../data/recognition-map.json'
 const speciesId: string | undefined = (recognitionMap as Record<string, string>)[sciName]
 ```
 
-- 共 **44 个键 → 30 个 speciesId**，30 条物种卡 **100% 覆盖**，无悬空映射。
+- 共 **60 个键 → 42 个 speciesId**，42 条物种卡 **100% 覆盖**，无悬空映射。
 - 一个 speciesId 允许被多个键指向（正名 + 同物异名 + 拼写变体）。
 - 文件中把**别名紧挨着正名**排列（用空行分组），便于人工审阅。
 
@@ -243,14 +251,16 @@ BirdNET V2.4（2023-06，eBird/Clements taxonomy）与本项目采用的中文�
 | `Turdus mandarinus`（乌鸫） | `Turdus mandarinus` ✅ 一致 | 另加 `Turdus merula` → `chinese-blackbird` | *Turdus merula*（欧乌鸫）同在标签表中，声音高度相似易误判，作为容错别名 |
 | `Pica serica`（喜鹊） | **`Pica pica`**（欧亚喜鹊，BirdNET V2.4 常用名）亦可能 `Pica serica` | 两个键都 → `eurasian-magpie` | BirdNET 常用 *pica* 合并东西方喜鹊；本卡片用 *serica*（东方喜鹊）。为兼容两种返回名，两键并列（自愈合，冗余无害） |
 
-⚠️ **`Parus monticolus`（绿背山雀）、`Cyanopica cooki`（伊比利亚灰喜鹊）、`Pycnonotus taivanus`（台湾鹎）、`Streptopelia orientalis`（山斑鸠）** 是**不同物种**，已刻意**不**加入映射，避免错标。
+⚠️ **`Parus monticolus`（绿背山雀）、`Cyanopica cooki`（伊比利亚灰喜鹊）、`Pycnonotus taivanus`（台湾鹎）** 是**不同物种**，已刻意**不**加入映射，避免错标。
+
+> 📌 **变更（批 2）**：`Streptopelia orientalis`（山斑鸠）原先因「不可并入珠颈斑鸠」而被排除；批 2 已为它**单独建卡** `oriental-turtle-dove`，故该键现已正式加入映射，指向自己的物种卡，**不再是错标风险**。
 
 ### 6.3 BirdNET 覆盖率（重要，影响识别链路设计）
 
 对 6522 类标签逐条比对结果：
 
-- ✅ **21 / 30 可被 BirdNET 识别**（除朱鹮外的全部 21 种鸟；本次扩展 +8 鸟，均 BirdNET 覆盖）
-- ❌ **9 / 30 BirdNET 完全无法识别**：
+- ✅ **33 / 42 可被 BirdNET 识别**（除朱鹮外的全部 33 种鸟；批 1 +8 鸟、批 2 +12 鸟，均在 6522 类标签内）
+- ❌ **9 / 42 BirdNET 完全无法识别**：
   - `crested-ibis` 朱鹮 *Nipponia nippon* —— **不在** 6522 类中（极危物种，训练数据不足）
   - 蛙类 4 种：黑斑侧褶蛙、中华蟾蜍、中国雨蛙、虎纹蛙
   - 昆虫 4 种：黑蚱蝉、蟪蛄、迷卡斗蟋、纺织娘
@@ -279,6 +289,9 @@ BirdNET V2.4（2023-06，eBird/Clements taxonomy）与本项目采用的中文�
 | `Cryptotympana pustulata` | `cicada` | 黑蚱蝉异名 |
 | `Gryllus micado` | `field-cricket` | 迷卡斗蟋基名 |
 | `Mecopoda nipponensis` | `weaver-katydid` | 纺织娘常见**拼写变体**（正确拼写为 *niponensis*，单 p） |
+| `Zosterops japonicus` | `swinhoe-white-eye` | 暗绿绣眼鸟 2019 年前并入*日菲绣眼鸟*，BirdNET V2.4 仍可能返回旧并合名 |
+| `Corvus japonensis` | `large-billed-crow` | 大嘴乌鸦东亚种群的拆分名（部分分类系统采用） |
+| `Parus venustulus` / `Periparus venustulus` | `yellow-bellied-tit` | 黄腹山雀旧属组合名（*Parus*）与 iNaturalist 现用属名（*Periparus*）；本卡片采用 *Pardaliparus* |
 
 ---
 
@@ -286,7 +299,7 @@ BirdNET V2.4（2023-06，eBird/Clements taxonomy）与本项目采用的中文�
 
 | 数据 | 来源 | 许可 |
 |---|---|---|
-| 物种叫声音频 | [iNaturalist](https://www.inaturalist.org/)（29 条）、[xeno-canto](https://xeno-canto.org/)（1 条） | 逐条记录于 `audioLicense`，均为 CC0 / CC BY / CC BY-NC / CC BY-NC-SA 4.0 |
+| 物种叫声音频 | [iNaturalist](https://www.inaturalist.org/)（41 条）、[xeno-canto](https://xeno-canto.org/)（1 条），全部已下载落地 `public/audio/` | 逐条记录于 `audioLicense`，均为 CC0 / CC BY / CC BY-NC / CC BY-NC-SA 4.0 |
 | 识别模型与标签表 | [BirdNET-Analyzer V2.4](https://github.com/birdnet-team/BirdNET-Analyzer)，Cornell Lab of Ornithology & Chemnitz University of Technology | CC BY-NC-SA 4.0 |
 | BirdNET 标签中文名参照 | BirdNET-Pi `model/l18n/labels_zh_CN.json` | 随 BirdNET 发布 |
 | 保护级别 | 《国家重点保护野生动物名录》（2021 年 2 月）、国家「三有」名录、IUCN 红色名录 | 公开发布 |
