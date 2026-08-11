@@ -1,8 +1,13 @@
 // 手绘绘本风占位美术系统（纯 CSS + 内联 SVG，零图片依赖）
 // —— 后续替换成真实插画时，只需改动本文件 ——
 // 真图命名规范见 README：public/assets/npc-<物种id>.webp、hall-bg.webp、icon-<功能>.webp（原始 .png 仍保留于 assets 目录）
-import { useState } from 'react'
+//
+// 插画三态（见 SpeciesAvatar）：白名单内有图 → 手绘 WebP；白名单内断图 → 类群剪影；
+// 不在白名单 → 类群剪影且不发请求。剪影本体在 ./SpeciesSilhouette。
+import { useMemo, useState } from 'react'
 import type { SpeciesGroup } from '../types/species'
+import { ILLUSTRATED_IDS } from '../data/species'
+import { SpeciesSilhouette } from './SpeciesSilhouette'
 
 /* ---------------------------------- 调色 ---------------------------------- */
 
@@ -15,76 +20,28 @@ export function colorOf(seed: string): string {
   return PALETTE[h % PALETTE.length]
 }
 
-/* ------------------------- 类群剪影（内联 SVG 水彩风） ------------------------- */
+/* ------------------------------- 类群剪影 -------------------------------- */
 
-function BirdGlyph({ color }: { color: string }) {
-  return (
-    <g>
-      <path
-        d="M30 62c-6-10-3-24 8-30 9-5 19-3 25 3l14-6-6 12c5 7 5 17-1 24-8 10-24 12-34 5-2-1-4-4-6-8z"
-        fill={color}
-        opacity="0.92"
-      />
-      <path d="M46 56c6-6 16-7 23-2-6 9-17 11-23 2z" fill="#fff" opacity="0.35" />
-      <path d="M77 41l12-4-9 10z" fill="#E8A87C" />
-      <circle cx="63" cy="45" r="2.6" fill="#3E342B" />
-      <path d="M40 76c4 8 12 12 20 11" stroke={color} strokeWidth="3.2" strokeLinecap="round" fill="none" opacity="0.65" />
-    </g>
-  )
-}
-
-function FrogGlyph({ color }: { color: string }) {
-  return (
-    <g>
-      <ellipse cx="60" cy="70" rx="30" ry="22" fill={color} opacity="0.92" />
-      <circle cx="47" cy="47" r="11" fill={color} />
-      <circle cx="73" cy="47" r="11" fill={color} />
-      <circle cx="47" cy="46" r="5.5" fill="#FBF7EE" />
-      <circle cx="73" cy="46" r="5.5" fill="#FBF7EE" />
-      <circle cx="48" cy="47" r="2.8" fill="#3E342B" />
-      <circle cx="74" cy="47" r="2.8" fill="#3E342B" />
-      <path d="M46 74q14 11 28 0" stroke="#3E342B" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.75" />
-      <ellipse cx="60" cy="62" rx="18" ry="8" fill="#fff" opacity="0.22" />
-    </g>
-  )
-}
-
-function InsectGlyph({ color }: { color: string }) {
-  return (
-    <g>
-      <ellipse cx="60" cy="64" rx="13" ry="27" fill={color} opacity="0.95" />
-      <ellipse cx="41" cy="58" rx="10" ry="24" fill="#6CA0C1" opacity="0.45" transform="rotate(-18 41 58)" />
-      <ellipse cx="79" cy="58" rx="10" ry="24" fill="#6CA0C1" opacity="0.45" transform="rotate(18 79 58)" />
-      <circle cx="60" cy="38" r="10" fill={color} />
-      <circle cx="56" cy="36" r="2.4" fill="#3E342B" />
-      <circle cx="64" cy="36" r="2.4" fill="#3E342B" />
-      <path d="M54 29l-7-9M66 29l7-9" stroke="#3E342B" strokeWidth="2.6" strokeLinecap="round" opacity="0.7" />
-    </g>
-  )
-}
-
-function LeafGlyph({ color }: { color: string }) {
-  return (
-    <g>
-      <path d="M60 30c22 10 30 30 22 48-18 6-38-4-44-22-4-14 6-24 22-26z" fill={color} opacity="0.9" />
-      <path d="M50 82c8-18 18-32 30-40" stroke="#FBF7EE" strokeWidth="3" fill="none" strokeLinecap="round" opacity="0.7" />
-    </g>
-  )
-}
-
-export function GroupGlyph({ group, color, className = '' }: { group: SpeciesGroup; color: string; className?: string }) {
-  return (
-    <svg viewBox="0 0 120 110" className={className} role="img" aria-hidden="true">
-      <ellipse cx="60" cy="94" rx="30" ry="6" fill="#3E342B" opacity="0.1" />
-      {group === '鸟类' && <BirdGlyph color={color} />}
-      {group === '蛙类' && <FrogGlyph color={color} />}
-      {group === '昆虫' && <InsectGlyph color={color} />}
-      {group === '其他' && <LeafGlyph color={color} />}
-    </svg>
-  )
+/**
+ * @deprecated 类群剪影已迁至 ./SpeciesSilhouette（统一色板、统一描边）。
+ * 此处保留同名导出以兼容旧调用点；`color` 参数不再生效——占位改用类群统一配色。
+ */
+export function GroupGlyph({ group, color, className = '' }: { group: SpeciesGroup; color?: string; className?: string }) {
+  return <SpeciesSilhouette group={group} className={className} />
 }
 
 /* ------------------------------ 物种头像（带兜底） ------------------------------ */
+
+/** 已配 bespoke 手绘插画的物种白名单（O(1) 查询） */
+const ILLUSTRATED = new Set(ILLUSTRATED_IDS)
+
+/**
+ * 该物种是否拥有 bespoke 手绘插画。
+ * 白名单是唯一依据：不在名单里就不发起任何图片请求（线上零 404）。
+ */
+export function hasBespokeIllustration(id: string): boolean {
+  return ILLUSTRATED.has(id)
+}
 
 interface AvatarProps {
   id: string
@@ -96,29 +53,37 @@ interface AvatarProps {
 }
 
 /**
- * 物种头像：多级兜底，绝不白屏。
- * 1) 数据里给的 image 路径
- * 2) 约定路径 /assets/npc-<id>.webp（优先 WebP；原始 .png 仍保留，自动回退）
- * 3) 彩色圆形 + 手绘剪影 + 物种名首字
+ * 物种头像：三态渲染，绝不白屏、绝不 404。
+ *
+ *   ① 白名单内 + 图片加载成功 → bespoke 手绘 WebP（数据 image 路径优先，其次约定路径，再退 .png）
+ *   ② 白名单内 + 所有候选图都失败 → 类群剪影（防止「声明了却没图」时开天窗）
+ *   ③ 不在白名单内                → 直接类群剪影，一次网络请求都不发
+ *
+ * 白名单 = src/data/species.ts 的 ILLUSTRATED_IDS，美术补图后在那里追加 id 即可自动升级为 ①。
+ * 注意：本兜底在生产构建中同样生效（没有 import.meta.env.DEV 门禁），线上就是靠它占位。
  */
 export function SpeciesAvatar({ id, name, group, src, size = 96, className = '' }: AvatarProps) {
-  // 优先尝试 WebP（体积更小、加载更快）；若数据里仍是 .png 也自动转试 .webp；最后回退到 .png 与 SVG 剪影
-  const toCandidates = (s?: string): string[] => {
-    if (!s) return []
-    return /\.png$/i.test(s) ? [s.replace(/\.png$/i, '.webp'), s] : [s]
-  }
-  const candidates = Array.from(
-    new Set([...toCandidates(src), `/assets/npc-${id}.webp`, `/assets/npc-${id}.png`].filter(Boolean) as string[]),
-  )
-  const [attempt, setAttempt] = useState(0)
-  const color = colorOf(id)
+  // 仅白名单物种才组装候选图；其余物种候选列表为空 → 直接走剪影
+  const candidates = useMemo(() => {
+    if (!hasBespokeIllustration(id)) return []
+    // 优先 WebP（体积更小）；数据里若仍写 .png 则自动转试 .webp，最后回退 .png
+    const fromData = src ? (/\.png$/i.test(src) ? [src.replace(/\.png$/i, '.webp'), src] : [src]) : []
+    return Array.from(new Set([...fromData, `/assets/npc-${id}.webp`, `/assets/npc-${id}.png`]))
+  }, [id, src])
+
+  // 记录加载失败次数；随 id 变化自动归零（列表复用同一 DOM 位置时不会误判）
+  const [broken, setBroken] = useState<{ id: string; attempt: number }>({ id, attempt: 0 })
+  const attempt = broken.id === id ? broken.attempt : 0
   const currentSrc = candidates[attempt]
+
+  const color = colorOf(id)
 
   return (
     <div
       className={`relative shrink-0 rounded-full overflow-hidden paper-texture watercolor shadow-soft sketch-border ${className}`}
       style={{ width: size, height: size, background: `${color}2E` }}
       title={name}
+      data-illustration={currentSrc ? 'bespoke' : 'silhouette'}
     >
       {currentSrc ? (
         <img
@@ -126,11 +91,15 @@ export function SpeciesAvatar({ id, name, group, src, size = 96, className = '' 
           alt={name}
           loading="lazy"
           className="w-full h-full object-cover"
-          onError={() => setAttempt((a) => a + 1)}
+          onError={() => setBroken({ id, attempt: attempt + 1 })}
         />
       ) : (
         <>
-          <GroupGlyph group={group} color={color} className="absolute inset-0 w-full h-full p-1" />
+          <SpeciesSilhouette
+            group={group}
+            className="absolute inset-0 w-full h-full"
+            label={`${name}（${group}）· 插画待补，暂用剪影占位`}
+          />
           <span
             className="absolute right-1 bottom-1 grid place-items-center rounded-full bg-paper-light/90 font-bold text-ink shadow-soft"
             style={{ width: size * 0.34, height: size * 0.34, fontSize: size * 0.18 }}

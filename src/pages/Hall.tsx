@@ -179,6 +179,7 @@ export default function Hall() {
             <p className="text-xs text-ink-faint mb-1.5">
               场景住客 {npcs.length} 位
               {illustratedCount > 0 && ` · ${illustratedCount} 位已有手绘插画`}
+              {npcs.length > illustratedCount && `，其余为类群剪影占位`}
             </p>
             <div className="flex gap-1.5">
               {['鸟类', '蛙类', '昆虫'].map((g) => (
