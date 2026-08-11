@@ -101,7 +101,13 @@ app.add_middleware(
 # --------------------------------------------------------------------------- #
 
 
+# 三个路径都指向同一个探针：
+#   /healthz      标准路径（前端 probeService 默认探这个）
+#   /api/healthz  当 nginx 只反代 /api/ 前缀、且不剥离前缀时可用
+#   /health       习惯性写法，避免运维按经验写错导致探活失败
 @app.get("/healthz")
+@app.get("/api/healthz")
+@app.get("/health")
 async def healthz() -> dict:
     """存活探针。无论模型是否就绪都返回 200 + status ok，engine 字段体现模型状态。"""
     return {"status": "ok", **engine_status()}
@@ -128,7 +134,12 @@ def _err(status: int, message: str, code: str) -> JSONResponse:
     )
 
 
+# 两个路径都指向同一个识别处理：
+#   /api/recognize     标准路径（前端默认 POST 这个）
+#   /recognize         当 nginx 反代 /api/ 时误把前缀剥离掉了（proxy_pass 末尾带 /），
+#                      后端实际收到 /recognize，这个别名能兜底，避免 404。
 @app.post("/api/recognize")
+@app.post("/recognize")
 async def recognize(
     audio: UploadFile | None = File(default=None, description="音频文件，必填"),
     lat: str | None = Form(default=None, description="录制地纬度，可选"),

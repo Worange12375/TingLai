@@ -42,10 +42,14 @@ function resolveEndpoint(): string {
   const legacy = (env.VITE_BIRDNET_ENDPOINT ?? '').trim()
   if (legacy) return legacy.replace(/\/+$/, '')
 
-  // 2) / 3) base 类变量：优先 VITE_RECOGNIZE_API，其次 VITE_API_BASE_URL（对齐用户部署文档）
-  const raw = env.VITE_RECOGNIZE_API ?? env.VITE_API_BASE_URL
-  // 显式设成空串 = 强制同源相对路径
-  const base = (raw === undefined ? (IS_DEV ? 'http://localhost:8000' : '') : raw).trim()
+  // 2) / 3) base 类变量：优先 VITE_RECOGNIZE_API，其次 VITE_API_BASE_URL（对齐用户部署文档）。
+  //    取「第一个非空值」；显式写成空串（如 VITE_RECOGNIZE_API=""）视为「未设置」，
+  //    让位给 VITE_API_BASE_URL，避免空串把已配置的 base URL 静默覆盖。
+  const base = (
+    env.VITE_RECOGNIZE_API?.trim() ||
+    env.VITE_API_BASE_URL?.trim() ||
+    (IS_DEV ? 'http://localhost:8000' : '')
+  )
   // 去掉末尾多余的 /api/recognize 或 /api 以及其它多余斜杠，避免重复拼接出现双 /api
   const clean = base
     .replace(/\/api\/recognize\/?$/, '')
@@ -56,8 +60,21 @@ function resolveEndpoint(): string {
 
 const ENDPOINT = resolveEndpoint()
 
-/** 健康检查地址，由 endpoint 推导 */
-const HEALTH_URL = ENDPOINT.replace(/\/api\/recognize$/, '/healthz')
+/**
+ * 健康检查地址，由 endpoint 推导。
+ * 标准路径（以 /api/recognize 结尾）→ 直接换成 /healthz。
+ * 自定义 endpoint（VITE_BIRDNET_ENDPOINT 指向非标路径，如 /recognize）→ 取 origin + /healthz，
+ * 避免把 /recognize 当 healthz 导致 405 误报 offline。
+ */
+const HEALTH_URL = (() => {
+  const std = ENDPOINT.replace(/\/api\/recognize$/, '/healthz')
+  if (std.endsWith('/healthz')) return std
+  try {
+    return `${new URL(ENDPOINT).origin}/healthz`
+  } catch {
+    return '/healthz'
+  }
+})()
 
 const TIMEOUT_MS = Number(env.VITE_RECOGNIZE_TIMEOUT ?? 30000) || 30000
 
