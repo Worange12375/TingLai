@@ -9,7 +9,7 @@
     "distribution": "全国广布，从村落农田到城市高层小区都能见到。",
     "protectLevel": "国家三有保护动物",
     "funFact": "上世纪五十年代它曾被列入「四害」遭全国围剿，后因科学家指出其大量捕食害虫而被除名平反。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1595435.mp3",
+    "audioUrl": "/audio/eurasian-tree-sparrow.mp3",
     "audioSource": "iNaturalist 声音库 #1595435（录制者：Reed Lindwurm，2025-08-06，广东广州荔湾区）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-eurasian-tree-sparrow.webp"
@@ -24,7 +24,7 @@
     "distribution": "夏候鸟，繁殖于东北至华南的广大地区，秋季南迁越冬。",
     "protectLevel": "国家三有保护动物",
     "funFact": "杜甫「两个黄鹂鸣翠柳」写的就是它；金羽黑枕，古人称之为「仓庚」，视为报春之鸟。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1495427.mp3",
+    "audioUrl": "/audio/oriole.mp3",
     "audioSource": "iNaturalist 声音库 #1495427（录制者：sevenuca，2025-05-31，辽宁沈阳沈北新区）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-oriole.webp"
@@ -39,7 +39,7 @@
     "distribution": "华北以南全国广布，近年持续向北方城市扩散。",
     "protectLevel": "国家三有保护动物",
     "funFact": "颈侧那圈黑底白点像撒了一把珍珠，故名「珠颈」；亲鸟会用嗉囊分泌的「鸽乳」喂养雏鸟。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1770684.mp3",
+    "audioUrl": "/audio/spotted-dove.mp3",
     "audioSource": "iNaturalist 声音库 #1770684（录制者：xhttttttt，2026-02-18，江苏盐城东台溱东镇）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-spotted-dove.webp"
@@ -54,7 +54,7 @@
     "distribution": "华北至华南广布留鸟，是适应城市最成功的鸣禽之一。",
     "protectLevel": "国家三有保护动物",
     "funFact": "古人叫它「百舌」，因为它能把听来的声音一一学去，堪称城市里的口技演员。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1782986.mp3",
+    "audioUrl": "/audio/chinese-blackbird.mp3",
     "audioSource": "iNaturalist 声音库 #1782986（录制者：Biswas Sajib，2026-02-27，江苏南京玄武区）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-chinese-blackbird.webp"
@@ -69,7 +69,7 @@
     "distribution": "原产长江以南，近数十年随城市绿化一路北扩，如今华北城市已很常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "后脑那抹白羽让它得名「白头翁」，民间婚俗里常借它讨一个「白头到老」的彩头。",
-    "audioUrl": "https://static.inaturalist.org/sounds/2073920.mp3",
+    "audioUrl": "/audio/light-vented-bulbul.mp3",
     "audioSource": "iNaturalist 声音库 #2073920（录制者：grenous，2026-07-16，湖南衡阳）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-light-vented-bulbul.webp"
@@ -84,7 +84,7 @@
     "distribution": "全国大部分地区可见（东部部分种群现另划为远东山雀）。",
     "protectLevel": "国家三有保护动物",
     "funFact": "胸腹正中那道黑色「领带」越宽，雄鸟通常越强壮——这是山雀界公开张贴的求偶简历。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1750750.mp3",
+    "audioUrl": "/audio/cinereous-tit.mp3",
     "audioSource": "iNaturalist 声音库 #1750750（录制者：wresy，2026-01-15，福建福州）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-cinereous-tit.webp"
@@ -99,7 +99,7 @@
     "distribution": "东北、华北至长江流域，城市绿地中的常见留鸟。",
     "protectLevel": "国家三有保护动物",
     "funFact": "个头不大却极护家，成群「围攻」时连体型大它数倍的猛禽也只能悻悻飞走。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1603998.mp3",
+    "audioUrl": "/audio/azure-winged-magpie.mp3",
     "audioSource": "iNaturalist 声音库 #1603998（录制者：Reed Lindwurm，2025-08-14，陕西西安临潼区）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-azure-winged-magpie.webp"
@@ -114,7 +114,7 @@
     "distribution": "全国大部分地区可见，北方多为夏候鸟，南方常年留居。",
     "protectLevel": "国家三有保护动物",
     "funFact": "头顶那把能开能合的羽冠像一柄折扇；育雏期的雌鸟与雏鸟会分泌带恶臭的液体防身，乡下因此叫它「臭姑鸪」。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1427317.mp3",
+    "audioUrl": "/audio/hoopoe.mp3",
     "audioSource": "iNaturalist 声音库 #1427317（录制者：wresy，2025-04-24，北京）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-hoopoe.webp"
@@ -129,7 +129,7 @@
     "distribution": "夏候鸟，遍布全国，秋季长途迁徙至南亚与非洲越冬。",
     "protectLevel": "国家三有保护动物",
     "funFact": "喊「布谷」的其实只有雄鸟；雌鸟发出的是一串咯咯作响的水泡音，听上去完全不像同一种鸟。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1967464.mp3",
+    "audioUrl": "/audio/common-cuckoo.mp3",
     "audioSource": "iNaturalist 声音库 #1967464（录制者：fhvc，2026-05-21，山东青岛）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-common-cuckoo.webp"
@@ -144,7 +144,7 @@
     "distribution": "夏候鸟，广布于东北至华南的林地与丘陵。",
     "protectLevel": "国家三有保护动物",
     "funFact": "各地都给这四声配了词——江南听成「快快割麦」，北方听成「光棍好苦」，是最容易被误听成人话的鸟。",
-    "audioUrl": "https://static.inaturalist.org/sounds/2057784.mp3",
+    "audioUrl": "/audio/indian-cuckoo.mp3",
     "audioSource": "iNaturalist 声音库 #2057784（录制者：Jiao Sun (孙娇)，2026-07-05，山东潍坊）",
     "audioLicense": "CC BY",
     "image": "/assets/npc-indian-cuckoo.webp"
@@ -159,7 +159,7 @@
     "distribution": "长江流域及以南地区常见，部分北方湿地为夏候鸟。",
     "protectLevel": "国家三有保护动物",
     "funFact": "民间叫它「苦恶鸟」，旧时传说是含冤媳妇所化，于是整夜的叫声成了乡野故事的背景音。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1860866.mp3",
+    "audioUrl": "/audio/white-breasted-waterhen.mp3",
     "audioSource": "iNaturalist 声音库 #1860866（录制者：TANG YUEHENG，2026-04-15，广东广州花都区）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-white-breasted-waterhen.webp"
@@ -174,7 +174,7 @@
     "distribution": "长江流域及以南地区留鸟，西南山地尤为常见。",
     "protectLevel": "国家二级重点保护野生动物",
     "funFact": "眼后一道白色眉纹是它名字的由来；2021 年因笼养捕捉压力过大被升为国家二级保护，从此私自饲养一只也属违法。",
-    "audioUrl": "https://static.inaturalist.org/sounds/2015286.mp3",
+    "audioUrl": "/audio/chinese-hwamei.mp3",
     "audioSource": "iNaturalist 声音库 #2015286（录制者：Stargazer，2026-06-07，江西赣州会昌县）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-chinese-hwamei.webp"
@@ -189,7 +189,7 @@
     "distribution": "野外种群集中于陕西汉中洋县一带，并已在河南、浙江、陕西多地重引入野化。",
     "protectLevel": "国家一级重点保护野生动物",
     "funFact": "1981 年在陕西洋县仅发现 7 只野生个体，经四十余年抢救性保护，全球种群已恢复到上万只。",
-    "audioUrl": "https://xeno-canto.org/sounds/uploaded/YNFBVPUMSY/XC777570-2023-0128-%E6%9C%B1%E9%B9%AE%E5%8F%AB.mp3",
+    "audioUrl": "/audio/crested-ibis.mp3",
     "audioSource": "xeno-canto XC777570（录制者：何文进，2023-01-28，陕西汉中洋县）",
     "audioLicense": "CC BY-NC-SA 4.0",
     "image": "/assets/npc-crested-ibis.webp"
@@ -204,7 +204,7 @@
     "distribution": "繁殖于东北扎龙、三江等湿地，越冬于江苏盐城沿海一带。",
     "protectLevel": "国家一级重点保护野生动物",
     "funFact": "国画里的「松鹤延年」其实是个美丽的误会——丹顶鹤的脚趾无法抓握树枝，它从不站到松树上。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1346320.m4a",
+    "audioUrl": "/audio/red-crowned-crane.m4a",
     "audioSource": "iNaturalist 声音库 #1346320（录制者：Simone Littledale，2024-12-24，日本北海道鹤居村）",
     "audioLicense": "CC BY",
     "image": "/assets/npc-red-crowned-crane.webp"
@@ -219,7 +219,7 @@
     "distribution": "东北至华南的农田、池塘与湿地广泛分布。",
     "protectLevel": "国家三有保护动物（IUCN 近危 NT）",
     "funFact": "它是许多人童年记忆里「夏夜蛙声」的原声主角，却因农药使用与稻田改造，已被 IUCN 列为近危。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1987199.m4a",
+    "audioUrl": "/audio/common-frog.m4a",
     "audioSource": "iNaturalist 声音库 #1987199（录制者：Hugo Sun，2026-05-29，山东青岛太平山绿道）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-common-frog.webp"
@@ -234,7 +234,7 @@
     "distribution": "全国广布，从平原水塘到较高海拔的山地溪流均有记录。",
     "protectLevel": "国家三有保护动物",
     "funFact": "俗名「癞蛤蟆」，耳后腺分泌的蟾酥既是传统中药材，也是它对付天敌的一套化学武器。",
-    "audioUrl": "https://static.inaturalist.org/sounds/537003.wav",
+    "audioUrl": "/audio/asiatic-toad.wav",
     "audioSource": "iNaturalist 声音库 #537003（录制者：Amaël Borzée，2022-09-17，江苏苏州）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-asiatic-toad.webp"
@@ -249,7 +249,7 @@
     "distribution": "长江流域及以南的丘陵、稻田与竹林边缘。",
     "protectLevel": "国家三有保护动物",
     "funFact": "农谚说「雨蛙叫，大雨到」——湿度升高确实会让它们唱得更卖力，相当于一台会呼吸的湿度计。",
-    "audioUrl": "https://static.inaturalist.org/sounds/2055111.m4a",
+    "audioUrl": "/audio/chinese-tree-frog.m4a",
     "audioSource": "iNaturalist 声音库 #2055111（录制者：JIN Pin-Tsen，2026-07-04，浙江舟山）",
     "audioLicense": "CC0",
     "image": "/assets/npc-chinese-tree-frog.webp"
@@ -264,7 +264,7 @@
     "distribution": "长江以南各省的稻田、水沟与池塘。",
     "protectLevel": "国家二级重点保护野生动物（仅限野外种群）",
     "funFact": "因叫声似犬吠，民间称它「田鸡」；野外种群受法律严格保护，市面所售必须是持证人工繁育的个体。",
-    "audioUrl": "https://static.inaturalist.org/sounds/2029938.m4a",
+    "audioUrl": "/audio/chinese-bullfrog.m4a",
     "audioSource": "iNaturalist 声音库 #2029938（录制者：Dave Guo，2026-04-26，海南海口）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-chinese-bullfrog.webp"
@@ -279,7 +279,7 @@
     "distribution": "全国大部分地区的乔木林、公园与校园，盛夏时最喧闹。",
     "protectLevel": "未列入国家保护名录（常见广布种）",
     "funFact": "雄蝉靠腹部一对鼓膜发声，腹腔近乎中空充当共鸣箱；雌蝉根本不会叫，古人「寒蝉凄切」听的全是雄蝉。",
-    "audioUrl": "https://static.inaturalist.org/sounds/2109664.mp3",
+    "audioUrl": "/audio/cicada.mp3",
     "audioSource": "iNaturalist 声音库 #2109664（录制者：yyawc，2026-08-08，四川遂宁蓬溪县）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-cicada.webp"
@@ -294,7 +294,7 @@
     "distribution": "华北至华南广泛分布，五六月间即可听到它的叫声。",
     "protectLevel": "未列入国家保护名录（常见广布种）",
     "funFact": "《庄子·逍遥游》里「蟪蛄不知春秋」说的正是它——一季而终，它听不到四季完整的声音。",
-    "audioUrl": "https://static.inaturalist.org/sounds/2004703.mp3",
+    "audioUrl": "/audio/huigu-cicada.mp3",
     "audioSource": "iNaturalist 声音库 #2004703（录制者：yyawc，2026-06-06，四川成都）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-huigu-cicada.webp"
@@ -309,7 +309,7 @@
     "distribution": "华北至华南广布，城市老巷与乡村庭院都能听到。",
     "protectLevel": "未列入国家保护名录（常见广布种）",
     "funFact": "它就是古人所说的「促织」——《诗经》里「十月蟋蟀入我床下」，宋代以后更演成了斗蟋蟀的千年民俗。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1643899.mp3",
+    "audioUrl": "/audio/field-cricket.mp3",
     "audioSource": "iNaturalist 声音库 #1643899（录制者：marsblast，2025-09-21，山东青岛）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-field-cricket.webp"
@@ -324,7 +324,7 @@
     "distribution": "长江流域及以南地区常见，盛夏至初秋是它的鸣叫季。",
     "protectLevel": "未列入国家保护名录（常见广布种）",
     "funFact": "它的名字直接来自叫声——旧时江南人家把它养在小笼里挂上屋檐，听一夜「纺纱织布」入梦。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1657285.mp3",
+    "audioUrl": "/audio/weaver-katydid.mp3",
     "audioSource": "iNaturalist 声音库 #1657285（录制者：xhttttttt，2025-10-04，江苏盐城）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-weaver-katydid.webp"
@@ -339,7 +339,7 @@
     "distribution": "全国广布留鸟，从乡村到场镇绿地都能见到，北方冬季常成群活动。",
     "protectLevel": "国家三有保护动物",
     "funFact": "民间视其为「报喜鸟」，「喜鹊登枝」是传统吉祥图案；其实它机警护巢，常集体驱赶靠近的猛禽与猫。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1282472.m4a",
+    "audioUrl": "/audio/eurasian-magpie.m4a",
     "audioSource": "iNaturalist 声音库 #257905466（录制者：JIN Pin-Tsen，2025-01-09，浙江宁波）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-eurasian-magpie.webp"
@@ -354,7 +354,7 @@
     "distribution": "夏候鸟，繁殖于全国大部，秋季集群南迁至南亚与非洲越冬。",
     "protectLevel": "国家三有保护动物",
     "funFact": "古诗「旧时王谢堂前燕」说的就是它；它认巢极准，常年年返回同一屋檐下修补旧巢续住。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1493314.wav",
+    "audioUrl": "/audio/barn-swallow.wav",
     "audioSource": "iNaturalist 声音库 #285266265（录制者：choudbl，2025-05-30，上海）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-barn-swallow.webp"
@@ -369,7 +369,7 @@
     "distribution": "全国广泛分布，溪流、河岸、池塘与稻田沟渠皆可见，多为留鸟或局部漂鸟。",
     "protectLevel": "国家三有保护动物",
     "funFact": "羽毛的宝石蓝来自微观结构对光的折射而非色素，故在不同角度会变幻出深浅不一的蓝绿光泽。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1451658.m4a",
+    "audioUrl": "/audio/common-kingfisher.m4a",
     "audioSource": "iNaturalist 声音库 #279851639（录制者：维生素，2025-05-10，山东青岛）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-common-kingfisher.webp"
@@ -384,7 +384,7 @@
     "distribution": "全国广布，繁殖于北方、越冬于南方，部分为留鸟，喜近水开阔地。",
     "protectLevel": "国家三有保护动物",
     "funFact": "那永远在点的尾巴并非卖萌——据信有助驱赶身周小虫，或在群体中传递「我在此」的位置信号。",
-    "audioUrl": "https://static.inaturalist.org/sounds/368191.mp3",
+    "audioUrl": "/audio/white-wagtail.mp3",
     "audioSource": "iNaturalist 声音库 #108251108（录制者：J Smith，2022-03-09，广东深圳）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-white-wagtail.webp"
@@ -399,7 +399,7 @@
     "distribution": "长江以南常见留鸟，近数十年向北扩张，华北、华东城市亦常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "额前那簇竖起的羽冠是它名字的由来；它站在水牛背上，既捡食惊飞的虫，也借个「瞭望台」。",
-    "audioUrl": "https://static.inaturalist.org/sounds/584449.mp3",
+    "audioUrl": "/audio/crested-myna.mp3",
     "audioSource": "iNaturalist 声音库 #146510966（录制者：Stargazer，2023-01-14，江西赣州会昌县）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-crested-myna.webp"
@@ -414,7 +414,7 @@
     "distribution": "华北南部至西南、华南的山地与丘陵阔叶林，留鸟。",
     "protectLevel": "国家三有保护动物",
     "funFact": "那条拖得很长的尾羽约占身长一半，飞行时如一道蓝色缎带在林间甩动；古画里常把它绘入「喜上眉梢」一类的吉祥图。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1933142.mpga",
+    "audioUrl": "/audio/red-billed-blue-magpie.mp3",
     "audioSource": "iNaturalist 声音库 #359219119（录制者：管牧山，2026-05-07，北京海淀）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-red-billed-blue-magpie.webp"
@@ -429,7 +429,7 @@
     "distribution": "全国大部山地与平原林地可见的留鸟，性隐秘，多在树冠层活动。",
     "protectLevel": "国家三有保护动物",
     "funFact": "它藏橡子的「健忘」其实是森林的福气——许多被遗忘的橡子来年发芽成树，堪称无声的「造林员」。",
-    "audioUrl": "https://static.inaturalist.org/sounds/1734423.mp3",
+    "audioUrl": "/audio/eurasian-jay.mp3",
     "audioSource": "iNaturalist 声音库 #333747099（录制者：Nan Yang，2026-01-06，北京）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-eurasian-jay.webp"
@@ -444,7 +444,7 @@
     "distribution": "华北至华南广布夏候鸟（部分南方留居），山地与平原林地均可见。",
     "protectLevel": "国家二级重点保护野生动物",
     "funFact": "头顶那对竖起的「角」其实是耳羽簇，并非耳朵；它夜间鸣叫常被乡下听成「王刚哥—王刚哥」，故得诨名「棒槌鸟」。",
-    "audioUrl": "https://static.inaturalist.org/sounds/722136.mp3",
+    "audioUrl": "/audio/oriental-scops-owl.mp3",
     "audioSource": "iNaturalist 声音库 #165066286（录制者：Stargazer，2023-06-01，江西赣州会昌县）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-oriental-scops-owl.webp"
