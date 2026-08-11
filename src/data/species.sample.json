@@ -2,6 +2,7 @@
   {
     "id": "eurasian-tree-sparrow",
     "name": "麻雀",
+    "pinyin": "má què",
     "scientific": "Passer montanus",
     "group": "鸟类",
     "callFeature": "短促干脆的「唧—唧—」，三五只凑在一处便碎碎叠成一片，像有人在檐下抖落了一把小石子。",
@@ -17,6 +18,7 @@
   {
     "id": "oriole",
     "name": "黑枕黄鹂",
+    "pinyin": "hēi zhěn huáng lí",
     "scientific": "Oriolus chinensis",
     "group": "鸟类",
     "callFeature": "清亮圆润的「唧—啾—哩」三音短句，尾音微微上扬，像一支被风托着的短笛，能穿透整片树冠。",
@@ -32,6 +34,7 @@
   {
     "id": "spotted-dove",
     "name": "珠颈斑鸠",
+    "pinyin": "zhū jǐng bān jiū",
     "scientific": "Spilopelia chinensis",
     "group": "鸟类",
     "callFeature": "低沉浑厚的「咕咕—咕—咕」，尾音略略下坠，清晨隔着窗帘听，像楼下有人在小声念着什么。",
@@ -49,6 +52,7 @@
   {
     "id": "chinese-blackbird",
     "name": "乌鸫",
+    "pinyin": "wū dōng",
     "scientific": "Turdus mandarinus",
     "group": "鸟类",
     "callFeature": "婉转多变的长串鸣唱，忽而拔高忽而打旋，常在句子中间冷不丁插进别的鸟叫，甚至汽车防盗器的调子。",
@@ -66,6 +70,7 @@
   {
     "id": "light-vented-bulbul",
     "name": "白头鹎",
+    "pinyin": "bái tóu bēi",
     "scientific": "Pycnonotus sinensis",
     "group": "鸟类",
     "callFeature": "急促跳跃的「滴滴—啾啾」，节奏碎而欢快，像有人用指甲飞快地弹拨一根橡皮筋。",
@@ -83,6 +88,7 @@
   {
     "id": "cinereous-tit",
     "name": "大山雀",
+    "pinyin": "dà shān què",
     "scientific": "Parus cinereus",
     "group": "鸟类",
     "callFeature": "带金属质感的「吁—啼、吁—啼」两音反复，明亮而有弹性，像一把小锯子在清晨的空气里来回拉。",
@@ -100,6 +106,7 @@
   {
     "id": "azure-winged-magpie",
     "name": "灰喜鹊",
+    "pinyin": "huī xǐ què",
     "scientific": "Cyanopica cyanus",
     "group": "鸟类",
     "callFeature": "沙哑上扬的「嘎—啾」长音，一只起头，整群跟着此起彼伏，吵得像一场没有主持人的露天辩论。",
@@ -117,6 +124,7 @@
   {
     "id": "hoopoe",
     "name": "戴胜",
+    "pinyin": "dài shèng",
     "scientific": "Upupa epops",
     "group": "鸟类",
     "callFeature": "低沉柔和的「呼—布—布」三连音，一顿一顿地反复，远远听着像有人在闷声吹一只空瓶子。",
@@ -132,6 +140,7 @@
   {
     "id": "common-cuckoo",
     "name": "大杜鹃",
+    "pinyin": "dà dù juān",
     "scientific": "Cuculus canorus",
     "group": "鸟类",
     "callFeature": "标志性的「布—谷、布—谷」两音，间隔均匀、越叫越急，四五月的清晨能传出很远很远。",
@@ -149,6 +158,7 @@
   {
     "id": "indian-cuckoo",
     "name": "四声杜鹃",
+    "pinyin": "sì shēng dù juān",
     "scientific": "Cuculus micropterus",
     "group": "鸟类",
     "callFeature": "四音一句的「咕—咕—咕—咕」，第三音上挑、末音下沉，昼夜不歇，在山谷里能荡出层层回声。",
@@ -166,6 +176,7 @@
   {
     "id": "white-breasted-waterhen",
     "name": "白胸苦恶鸟",
+    "pinyin": "bái xiōng kǔ è niǎo",
     "scientific": "Amaurornis phoenicurus",
     "group": "鸟类",
     "callFeature": "单调执拗的「苦—哇、苦—哇」，一声接一声从苇丛深处传出，入夜后能连喊大半宿不停。",
@@ -183,6 +194,7 @@
   {
     "id": "chinese-hwamei",
     "name": "画眉",
+    "pinyin": "huà méi",
     "scientific": "Garrulax canorus",
     "group": "鸟类",
     "callFeature": "婉转悠长的多段式鸣唱，一句未落一句又起，中途还会揉进别的鸟声，被认为是华南林间最好的歌喉之一。",
@@ -200,6 +212,7 @@
   {
     "id": "crested-ibis",
     "name": "朱鹮",
+    "pinyin": "zhū huán",
     "scientific": "Nipponia nippon",
     "group": "鸟类",
     "callFeature": "低哑的「呱—呱」短促鸣叫，多在起飞与归巢时发出，声音并不动听，却是一段几乎从世界上消失过的声音。",
@@ -217,6 +230,7 @@
   {
     "id": "red-crowned-crane",
     "name": "丹顶鹤",
+    "pinyin": "dān dǐng hè",
     "scientific": "Grus japonensis",
     "group": "鸟类",
     "callFeature": "高亢嘹亮的「嘎—啊——」，繁殖期雌雄一唱一和形成整齐的「对鸣」，声浪能传出数公里。",
@@ -234,6 +248,7 @@
   {
     "id": "common-frog",
     "name": "黑斑侧褶蛙",
+    "pinyin": "hēi bān cè zhě wā",
     "scientific": "Pelophylax nigromaculatus",
     "group": "蛙类",
     "callFeature": "短促而有弹性的「咯—咯—咯」，一只带头，整片水田便像被点着了似的连成一张声网。",
@@ -249,6 +264,7 @@
   {
     "id": "asiatic-toad",
     "name": "中华蟾蜍",
+    "pinyin": "zhōng huá chán chú",
     "scientific": "Bufo gargarizans",
     "group": "蛙类",
     "callFeature": "低而闷的「咕噜—咕噜」颤音，不高不急，像有人在水边慢慢摇一只装了半瓶水的葫芦。",
@@ -266,6 +282,7 @@
   {
     "id": "chinese-tree-frog",
     "name": "中国雨蛙",
+    "pinyin": "zhōng guó yǔ wā",
     "scientific": "Hyla chinensis",
     "group": "蛙类",
     "callFeature": "响亮尖利的「呱啊—呱啊」，密集齐鸣连成一片，闷热的雨前傍晚叫得最凶。",
@@ -283,6 +300,7 @@
   {
     "id": "chinese-bullfrog",
     "name": "虎纹蛙",
+    "pinyin": "hǔ wén wā",
     "scientific": "Hoplobatrachus chinensis",
     "group": "蛙类",
     "callFeature": "粗哑低沉的「嘎—嘎」，一声声像小狗在远处吠，是夏夜稻田里嗓门最大的一位。",
@@ -300,6 +318,7 @@
   {
     "id": "cicada",
     "name": "黑蚱蝉",
+    "pinyin": "hēi zhà chán",
     "scientific": "Cryptotympana atrata",
     "group": "昆虫",
     "callFeature": "持续不断的「吱———」高频轰鸣，正午最盛，中途几乎不换气，像有人把整个夏天按在了一根弦上。",
@@ -315,6 +334,7 @@
   {
     "id": "huigu-cicada",
     "name": "蟪蛄",
+    "pinyin": "huì gū",
     "scientific": "Platypleura kaempferi",
     "group": "昆虫",
     "callFeature": "细密急促的「哧———」，音调比黑蚱蝉更尖更薄，像一根绷紧的丝线在不停地抖。",
@@ -332,6 +352,7 @@
   {
     "id": "field-cricket",
     "name": "迷卡斗蟋",
+    "pinyin": "mí kǎ dòu xī",
     "scientific": "Velarifictorus micado",
     "group": "昆虫",
     "callFeature": "「瞿—瞿—瞿」三声一顿，清脆而带金属尾音，入夜后从墙根、砖缝里一处处次第响起。",
@@ -349,6 +370,7 @@
   {
     "id": "weaver-katydid",
     "name": "纺织娘",
+    "pinyin": "fǎng zhī niáng",
     "scientific": "Mecopoda niponensis",
     "group": "昆虫",
     "callFeature": "先是一串「轧—轧—轧」的短音起拍，随后转为绵长的「织————」，活像一台老式纺车被慢慢摇了起来。",
@@ -366,6 +388,7 @@
   {
     "id": "eurasian-magpie",
     "name": "喜鹊",
+    "pinyin": "xǐ què",
     "scientific": "Pica serica",
     "group": "鸟类",
     "callFeature": "粗哑响亮的「喳—喳—喳」，一连串不歇，晨昏尤其起劲，像村口老槐树上装了台不知疲倦的喇叭。",
@@ -381,6 +404,7 @@
   {
     "id": "barn-swallow",
     "name": "家燕",
+    "pinyin": "jiā yàn",
     "scientific": "Hirundo rustica",
     "group": "鸟类",
     "callFeature": "飞行中不断吐出细碎柔和的「叽—叽—叽」，像一串被风扯散的小铃铛，边飞边叫。",
@@ -396,6 +420,7 @@
   {
     "id": "common-kingfisher",
     "name": "普通翠鸟",
+    "pinyin": "pǔ tōng cuì niǎo",
     "scientific": "Alcedo atthis",
     "group": "鸟类",
     "callFeature": "受惊或起飞时发出尖锐短促的「唧—唧」，像一粒小石子猛地弹过水面，转瞬没入对岸。",
@@ -413,6 +438,7 @@
   {
     "id": "white-wagtail",
     "name": "白鹡鸰",
+    "pinyin": "bái jí líng",
     "scientific": "Motacilla alba",
     "group": "鸟类",
     "callFeature": "飞行时反复发出细尖的「唧—令—令」，尾羽随步上下急点，叫声和动作一样清脆利落。",
@@ -430,6 +456,7 @@
   {
     "id": "crested-myna",
     "name": "八哥",
+    "pinyin": "bā gē",
     "scientific": "Acridotheres cristatellus",
     "group": "鸟类",
     "callFeature": "嘈杂多变的「嘎—嘎—叽」，善学舌仿声，笼养个体能把人话与其他鸟叫模仿得惟妙惟肖。",
@@ -447,6 +474,7 @@
   {
     "id": "red-billed-blue-magpie",
     "name": "红嘴蓝鹊",
+    "pinyin": "hóng zuǐ lán què",
     "scientific": "Urocissa erythroryncha",
     "group": "鸟类",
     "callFeature": "响亮粗嘎的「嘎—呷—嘎」，三两声一顿，群飞时此起彼伏，在山林里传得很远，听感颇有几分嚣张。",
@@ -464,6 +492,7 @@
   {
     "id": "eurasian-jay",
     "name": "松鸦",
+    "pinyin": "sōng yā",
     "scientific": "Garrulus glandarius",
     "group": "鸟类",
     "callFeature": "刺耳沙哑的「呀—呀—嘎」，猛地炸开似的，和它本身圆润漂亮的外表形成极大反差。",
@@ -481,6 +510,7 @@
   {
     "id": "oriental-scops-owl",
     "name": "红角鸮",
+    "pinyin": "hóng jiǎo xiāo",
     "scientific": "Otus sunia",
     "group": "鸟类",
     "callFeature": "繁殖期夜间反复发出三音节一组的「呜—咕—咕」，一声弱两声响，彻夜不停，是夏夜林间最典型的猫头鹰节律。",
@@ -498,6 +528,7 @@
   {
     "id": "long-tailed-shrike",
     "name": "棕背伯劳",
+    "pinyin": "zōng bèi bó láo",
     "scientific": "Lanius schach",
     "group": "鸟类",
     "callFeature": "常发出粗哑刺耳的「喳—喳—喳」，繁殖期又能连缀成一串婉转多变的长鸣，其间夹杂大量模仿其他鸟类的片段。",
@@ -515,6 +546,7 @@
   {
     "id": "daurian-redstart",
     "name": "北红尾鸲",
+    "pinyin": "běi hóng wěi qú",
     "scientific": "Phoenicurus auroreus",
     "group": "鸟类",
     "callFeature": "常发出短促清脆的「嘀—嘀」单音，紧张时接一串「嗒嗒嗒」似打火石摩擦的干涩声，边叫边上下摆动尾羽。",
@@ -532,6 +564,7 @@
   {
     "id": "swinhoe-white-eye",
     "name": "暗绿绣眼鸟",
+    "pinyin": "àn lǜ xiù yǎn niǎo",
     "scientific": "Zosterops simplex",
     "group": "鸟类",
     "callFeature": "细弱高频的「滋—滋—」连声，成群时汇成一片轻碎如耳语的絮响，繁殖期雄鸟能唱出婉转多变的短句。",
@@ -549,6 +582,7 @@
   {
     "id": "black-drongo",
     "name": "黑卷尾",
+    "pinyin": "hēi juǎn wěi",
     "scientific": "Dicrurus macrocercus",
     "group": "鸟类",
     "callFeature": "金属质感的「嘎—嘁」尖利叫声，急促而有穿透力，受惊时连成一串刺耳的骂叫，也善于模仿其他鸟鸣。",
@@ -566,6 +600,7 @@
   {
     "id": "oriental-turtle-dove",
     "name": "山斑鸠",
+    "pinyin": "shān bān jiū",
     "scientific": "Streptopelia orientalis",
     "group": "鸟类",
     "callFeature": "低沉浑厚的四音节「咕咕—咕—咕」，节律比珠颈斑鸠更沉更慢，清晨在林间可远传数百米。",
@@ -583,6 +618,7 @@
   {
     "id": "large-billed-crow",
     "name": "大嘴乌鸦",
+    "pinyin": "dà zuǐ wū yā",
     "scientific": "Corvus macrorhynchos",
     "group": "鸟类",
     "callFeature": "沙哑低沉的「呀—呀—」，一次多为二至三声，尾音略上扬，比小嘴乌鸦更粗重浑浊。",
@@ -600,6 +636,7 @@
   {
     "id": "black-faced-bunting",
     "name": "灰头鹀",
+    "pinyin": "huī tóu wú",
     "scientific": "Emberiza spodocephala",
     "group": "鸟类",
     "callFeature": "繁殖期雄鸟发出短促清亮的「唧—唧—啾唧」小段旋律并反复吟唱；越冬期多为单音的「嗞」声联络。",
@@ -617,6 +654,7 @@
   {
     "id": "yellow-bellied-tit",
     "name": "黄腹山雀",
+    "pinyin": "huáng fù shān què",
     "scientific": "Pardaliparus venustulus",
     "group": "鸟类",
     "callFeature": "高而细的「嗞—嗞—嘀」三音节，音色比大山雀更尖更急，常在树冠层边移动边不停鸣叫。",
@@ -634,6 +672,7 @@
   {
     "id": "black-throated-tit",
     "name": "红头长尾山雀",
+    "pinyin": "hóng tóu cháng wěi shān què",
     "scientific": "Aegithalos concinnus",
     "group": "鸟类",
     "callFeature": "极细碎的「嗞嗞—吱吱」高频连声，群体活动时此起彼伏，像一串被风吹动的细小铃铛。",
@@ -651,6 +690,7 @@
   {
     "id": "oriental-magpie-robin",
     "name": "鹊鸲",
+    "pinyin": "què qú",
     "scientific": "Copsychus saularis",
     "group": "鸟类",
     "callFeature": "清亮婉转的多段哨音，句式富于变化并大量夹杂模仿声，清晨天未亮即站上高处放声长鸣。",
@@ -668,6 +708,7 @@
   {
     "id": "common-moorhen",
     "name": "黑水鸡",
+    "pinyin": "hēi shuǐ jī",
     "scientific": "Gallinula chloropus",
     "group": "鸟类",
     "callFeature": "突兀而响亮的「咕噜—嘎」爆发声，短促沙哑，常在芦苇丛深处骤然响起，入夜后尤为频繁。",
@@ -685,6 +726,7 @@
   {
     "id": "red-whiskered-bulbul",
     "name": "红耳鹎",
+    "pinyin": "hóng ěr bēi",
     "scientific": "Pycnonotus jocosus",
     "group": "鸟类",
     "callFeature": "清脆响亮的「唧咕—唧咕—唧」多音节短句，节奏欢快跳跃，群鸟相互应和时格外热闹。",
@@ -702,6 +744,7 @@
   {
     "id": "ornate-pygmy-frog",
     "name": "饰纹姬蛙",
+    "pinyin": "shì wén jī wā",
     "scientific": "Microhyla fissipes",
     "group": "蛙类",
     "callFeature": "连续急促的「嘎—嘎—嘎」，音色扁而带鼻音，一只起头满塘应和，雨后夜里连成一片密不透风的声浪。",
@@ -719,6 +762,7 @@
   {
     "id": "paddy-frog",
     "name": "泽陆蛙",
+    "pinyin": "zé lù wā",
     "scientific": "Fejervarya multistriata",
     "group": "蛙类",
     "callFeature": "短而密的「叽—叽—叽」颤音，像用指甲快速刮过梳齿，常在稻田埂边此起彼伏地轮唱。",
@@ -736,6 +780,7 @@
   {
     "id": "spot-legged-tree-frog",
     "name": "斑腿泛树蛙",
+    "pinyin": "bān tuǐ fàn shù wā",
     "scientific": "Polypedates megacephalus",
     "group": "蛙类",
     "callFeature": "低沉短促的「嘎啦—嘎啦」，音质干涩略带弹舌感，雨夜里从树丛与竹林的高处传下来。",
@@ -753,6 +798,7 @@
   {
     "id": "boreal-digging-frog",
     "name": "北方狭口蛙",
+    "pinyin": "běi fāng xiá kǒu wā",
     "scientific": "Kaloula borealis",
     "group": "蛙类",
     "callFeature": "洪亮低沉的「哞—哞—」牛叫般长音，单调而极具穿透力，暴雨初歇的夜晚成群齐鸣可传出很远。",
@@ -770,6 +816,7 @@
   {
     "id": "zhenhai-brown-frog",
     "name": "镇海林蛙",
+    "pinyin": "zhèn hǎi lín wā",
     "scientific": "Rana zhenhaiensis",
     "group": "蛙类",
     "callFeature": "低而含蓄的「咕—咕—咕」连声，音量不大，多在早春尚带寒意的夜晚从水塘边草丛中传出。",
@@ -787,6 +834,7 @@
   {
     "id": "black-spectacled-toad",
     "name": "黑眶蟾蜍",
+    "pinyin": "hēi kuàng chán chú",
     "scientific": "Duttaphrynus melanostictus",
     "group": "蛙类",
     "callFeature": "快速连续的「咕噜咕噜咕噜」滚动颤音，节奏均匀不断，繁殖季夜晚水边可听到数十只齐声轰鸣。",
@@ -804,6 +852,7 @@
   {
     "id": "mongolian-cicada",
     "name": "蒙古寒蝉",
+    "pinyin": "měng gǔ hán chán",
     "scientific": "Meimuna mongolica",
     "group": "昆虫",
     "callFeature": "「唏—唏—唏」由缓渐急再收尾的段落式鸣唱，一段结束稍歇再起，比黑蚱蝉清亮且更富节奏感。",
@@ -821,6 +870,7 @@
   {
     "id": "robust-cicada",
     "name": "鸣鸣蝉",
+    "pinyin": "míng míng chán",
     "scientific": "Hyalessa maculaticollis",
     "group": "昆虫",
     "callFeature": "独特的「呜—哇—呜—哇」起伏鸣唱，中段拖长且音高上下摆动，像有人在远处缓缓拉动风箱。",
@@ -838,6 +888,7 @@
   {
     "id": "oriental-mole-cricket",
     "name": "东方蝼蛄",
+    "pinyin": "dōng fāng lóu gū",
     "scientific": "Gryllotalpa orientalis",
     "group": "昆虫",
     "callFeature": "低沉单调的「嘟鲁鲁鲁——」持续颤音，自地下洞口闷闷传出，春夜田埂上可连响许久不停。",
@@ -855,6 +906,7 @@
   {
     "id": "emma-field-cricket",
     "name": "黄脸油葫芦",
+    "pinyin": "huáng liǎn yóu hú lu",
     "scientific": "Teleogryllus emma",
     "group": "昆虫",
     "callFeature": "圆润悦耳的「唧—唧—唧 啾」，前面数声短促、末尾拖一声长音，音色油亮饱满，秋夜墙根下最常听到。",
@@ -872,6 +924,7 @@
   {
     "id": "chinese-katydid",
     "name": "优雅蝈螽",
+    "pinyin": "yōu yǎ guō zhōng",
     "scientific": "Gampsocleis gratiosa",
     "group": "昆虫",
     "callFeature": "响亮而带金属质感的「唧—唧—唧」，一声一顿节奏鲜明，正午阳光最烈时叫得最凶。",

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { BannerArt, FeatureIcon, HallScene, SpeciesAvatar, type BannerVariant, type IconName } from '../components/PlaceholderArt'
 import { Badge, Card, SectionTitle } from '../components/ui'
+import { SpeciesName } from '../components/SpeciesName'
 import { pickSpecies, speciesList } from '../data/species'
 
 /* --------------------------------- 头图 --------------------------------- */
@@ -271,7 +272,9 @@ export default function Home() {
                     className="transition duration-300 group-hover:scale-105 group-hover:shadow-lift"
                   />
                 </div>
-                <p className="mt-2.5 text-sm font-semibold text-ink truncate">{s.name}</p>
+                <p className="mt-2.5 text-sm font-semibold text-ink">
+                  <SpeciesName species={s} stacked />
+                </p>
                 <p className="text-xs text-ink-faint truncate">{s.group}</p>
               </Link>
             ))}

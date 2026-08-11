@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Badge, Button, Card, EmptyState, SectionTitle } from '../components/ui'
 import { GroupBadge, NoticeBar, PlayCallButton } from '../components/SpeciesCard'
 import { SpeciesAvatar } from '../components/PlaceholderArt'
+import { SpeciesName } from '../components/SpeciesName'
 import { speciesList } from '../data/species'
 import { useCallPlayer } from '../lib/useCallPlayer'
 import { getQuizStats, recordQuiz } from '../lib/storage'
@@ -163,7 +164,7 @@ export default function Quiz() {
                   <SpeciesAvatar id={q.answer.id} name={q.answer.name} group={q.answer.group} src={q.answer.image} size={48} />
                   <div className="min-w-0 flex-1">
                     <p className="font-semibold text-ink text-sm truncate">
-                      第 {i + 1} 题 · {q.answer.name}
+                      第 {i + 1} 题 · <SpeciesName species={q.answer} />
                     </p>
                     <p className="text-xs text-ink-soft truncate mt-0.5">{q.answer.callFeature}</p>
                   </div>

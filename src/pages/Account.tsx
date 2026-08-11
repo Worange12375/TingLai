@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Badge, Button, Card, EmptyState, SectionTitle } from '../components/ui'
 import { SpeciesAvatar } from '../components/PlaceholderArt'
+import { SpeciesName } from '../components/SpeciesName'
 import { getSpeciesById } from '../data/species'
 import {
   clearHistory,
@@ -126,7 +127,9 @@ export default function Account() {
                   <div className="grid place-items-center">
                     <SpeciesAvatar id={s.id} name={s.name} group={s.group} src={s.image} size={68} />
                   </div>
-                  <p className="font-semibold text-ink text-sm mt-3 truncate">{s.name}</p>
+                  <p className="font-semibold text-ink text-sm mt-3">
+                    <SpeciesName species={s} stacked />
+                  </p>
                   <p className="text-xs text-ink-faint mt-0.5">{s.group}</p>
                 </Link>
                 <button

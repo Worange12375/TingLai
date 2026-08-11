@@ -8,6 +8,8 @@ export interface Species {
   id: string
   /** 中文名 */
   name: string
+  /** 中文名拼音，空格分隔音节（如「戴胜」→ dài shèng）；生僻字注音用，可能为空 */
+  pinyin?: string
   /** 拉丁学名 */
   scientific: string
   /** 类群：鸟类 / 蛙类 / 昆虫 */
@@ -46,6 +48,8 @@ export interface RawSpecies {
   id?: string
   // 契约版
   name?: string
+  /** 中文名拼音，空格分隔音节 */
+  pinyin?: string
   scientific?: string
   group?: string
   callFeature?: string

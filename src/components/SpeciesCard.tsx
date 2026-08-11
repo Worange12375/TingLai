@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom'
 import type { Species } from '../types/species'
 import { SpeciesAvatar, SoundWave, colorOf } from './PlaceholderArt'
+import { SpeciesName } from './SpeciesName'
 import { Badge, Button, Card } from './ui'
 
 /* ------------------------------- 类群标签色 ------------------------------- */
@@ -87,7 +88,10 @@ export function SpeciesCard({
         <SpeciesAvatar id={species.id} name={species.name} group={species.group} src={species.image} size={72} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="font-bold text-ink text-lg leading-tight truncate">{species.name}</h3>
+            {/* 拼音另起一行：卡片横向空间有限，避免长名（如「红头长尾山雀」）把注音挤掉 */}
+            <h3 className="font-bold text-ink text-lg leading-tight min-w-0">
+              <SpeciesName species={species} stacked />
+            </h3>
             <GroupBadge group={species.group} />
           </div>
           <p className="text-xs italic text-ink-faint mt-1 truncate">{species.scientific}</p>
@@ -220,7 +224,7 @@ export function SpeciesPopupCard({
           <SpeciesAvatar id={species.id} name={species.name} group={species.group} src={species.image} size={82} />
           <div className="min-w-0">
             <h3 id="species-popup-title" className="text-2xl font-bold text-ink leading-tight">
-              {species.name}
+              <SpeciesName species={species} size="sm" />
             </h3>
             <p className="text-sm italic text-ink-soft mt-1">{species.scientific}</p>
             <div className="mt-2">

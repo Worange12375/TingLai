@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button, Card, EmptyState } from '../components/ui'
 import { GroupBadge, NoticeBar, PlayCallButton, SpeciesInfoPanel } from '../components/SpeciesCard'
+import { SpeciesName } from '../components/SpeciesName'
 import { SpeciesAvatar, colorOf } from '../components/PlaceholderArt'
 import { getSpeciesById, speciesList } from '../data/species'
 import { useCallPlayer } from '../lib/useCallPlayer'
@@ -65,7 +66,9 @@ export default function LearnDetail() {
             />
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2.5 flex-wrap">
-                <h1 className="text-3xl sm:text-4xl font-bold text-ink leading-tight">{species.name}</h1>
+                <h1 className="text-3xl sm:text-4xl font-bold text-ink leading-tight">
+                  <SpeciesName species={species} size="sm" />
+                </h1>
                 <GroupBadge group={species.group} />
               </div>
               <p className="text-base italic text-ink-soft mt-2">{species.scientific}</p>
@@ -109,7 +112,9 @@ export default function LearnDetail() {
                   <div className="grid place-items-center">
                     <SpeciesAvatar id={s.id} name={s.name} group={s.group} src={s.image} size={72} />
                   </div>
-                  <p className="mt-3 font-semibold text-ink text-sm truncate">{s.name}</p>
+                  <p className="mt-3 font-semibold text-ink text-sm">
+                    <SpeciesName species={s} stacked />
+                  </p>
                   <p className="text-xs text-ink-faint mt-1 line-clamp-2 leading-relaxed">{s.callFeature}</p>
                 </Card>
               </Link>

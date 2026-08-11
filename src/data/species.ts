@@ -29,6 +29,8 @@ export function normalizeSpecies(raw: RawSpecies, index: number): Species {
   return {
     id,
     name: pick(raw.name, raw.name_zh, '未命名物种'),
+    // 中文名拼音（生僻字注音）：缺省为空串，渲染层判空后不显示
+    pinyin: pick(raw.pinyin),
     scientific: pick(raw.scientific, raw.name_en, '—'),
     group: inferGroup(raw),
     callFeature: pick(raw.callFeature, raw.call_desc, '叫声资料整理中'),

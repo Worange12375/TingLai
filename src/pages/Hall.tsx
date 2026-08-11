@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { HallScene, SpeciesAvatar } from '../components/PlaceholderArt'
 import { Modal, EmptyState, Button, Badge } from '../components/ui'
 import { NoticeBar, SpeciesPopupCard } from '../components/SpeciesCard'
+import { SpeciesName } from '../components/SpeciesName'
 import { ILLUSTRATED_IDS, speciesList } from '../data/species'
 import { useCallPlayer } from '../lib/useCallPlayer'
 import type { Species } from '../types/species'
@@ -153,7 +154,7 @@ export default function Hall() {
                     isHover || isPlaying ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 pointer-events-none'
                   }`}
                 >
-                  {s.name}
+                  <SpeciesName species={s} stacked className="text-center" />
                 </span>
               </span>
             </button>

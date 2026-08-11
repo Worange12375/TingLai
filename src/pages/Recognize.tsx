@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Badge, Button, Card, ConfidenceBar, SectionTitle } from '../components/ui'
 import { NoticeBar, GroupBadge, PlayCallButton } from '../components/SpeciesCard'
+import { SpeciesName } from '../components/SpeciesName'
 import { SpeciesAvatar } from '../components/PlaceholderArt'
 import {
   ACCEPTED_AUDIO,
@@ -496,7 +497,9 @@ export default function Recognize() {
 
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="font-bold text-ink text-lg leading-tight">{it.species.name}</h3>
+                        <h3 className="font-bold text-ink text-lg leading-tight">
+                          <SpeciesName species={it.species} />
+                        </h3>
                         {it.inLibrary && <GroupBadge group={it.species.group} />}
                         {i === 0 && <Badge tone="sunset">最可能</Badge>}
                         {!it.inLibrary && <Badge tone="wood">暂未收录</Badge>}
