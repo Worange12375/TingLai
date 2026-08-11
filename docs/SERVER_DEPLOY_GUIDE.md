@@ -153,6 +153,33 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ---
 
+### 5.1 识别服务在线自检（先确认 online 再测，否则结果都是"猜"）
+
+状态徽章显示「离线（走本地示例）」= 识别服务没连上，此时所有结果都是**本地兜底伪随机（不是真识别）**。
+推完服务器后，按下面顺序确认再测：
+
+1. **容器起来没**（服务器本机）：
+   ```bash
+   cd server && docker compose ps
+   # 状态应为 Up / healthy；若 Exit 或未列出 → docker compose up -d --build 重来
+   ```
+2. **引擎就绪没**：
+   ```bash
+   curl -s http://127.0.0.1:8000/healthz
+   # 期望 {"status":"ok","engine":"ready",...}；若 Connection refused → 容器没起
+   ```
+3. **nginx 反代通没通**（从外网域名探）：
+   ```bash
+   curl -s https://tinglai.dushiofcourses.cn/healthz
+   # 也应返回 engine:"ready"；若 404 → nginx 没有 /api/ 和 /healthz 反代块，回去配第 4 步并重载
+   ```
+4. **刷站点看徽章变 `online`**，再上传音频测试。
+
+> ⚠️ 重要认知：BirdNET **主要只认鸟类**。拿蛙/虫音频、或「对着音箱外放原音频再录一遍」（带房间混响）测试，
+> 即使 online 也常返回空 → 仍走兜底。最佳做法：用「上传音频」直接传**干净的鸟鸣原文件**，别二次录音。
+
+---
+
 ## 6. 排错速查
 
 | 现象 | 原因 | 处理 |
