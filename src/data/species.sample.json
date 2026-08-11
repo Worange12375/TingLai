@@ -204,7 +204,7 @@
     "distribution": "繁殖于东北扎龙、三江等湿地，越冬于江苏盐城沿海一带。",
     "protectLevel": "国家一级重点保护野生动物",
     "funFact": "国画里的「松鹤延年」其实是个美丽的误会——丹顶鹤的脚趾无法抓握树枝，它从不站到松树上。",
-    "audioUrl": "/audio/red-crowned-crane.m4a",
+    "audioUrl": "/audio/red-crowned-crane.mp3",
     "audioSource": "iNaturalist 声音库 #1346320（录制者：Simone Littledale，2024-12-24，日本北海道鹤居村）",
     "audioLicense": "CC BY",
     "image": "/assets/npc-red-crowned-crane.webp"
@@ -219,7 +219,7 @@
     "distribution": "东北至华南的农田、池塘与湿地广泛分布。",
     "protectLevel": "国家三有保护动物（IUCN 近危 NT）",
     "funFact": "它是许多人童年记忆里「夏夜蛙声」的原声主角，却因农药使用与稻田改造，已被 IUCN 列为近危。",
-    "audioUrl": "/audio/common-frog.m4a",
+    "audioUrl": "/audio/common-frog.mp3",
     "audioSource": "iNaturalist 声音库 #1987199（录制者：Hugo Sun，2026-05-29，山东青岛太平山绿道）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-common-frog.webp"
@@ -234,7 +234,7 @@
     "distribution": "全国广布，从平原水塘到较高海拔的山地溪流均有记录。",
     "protectLevel": "国家三有保护动物",
     "funFact": "俗名「癞蛤蟆」，耳后腺分泌的蟾酥既是传统中药材，也是它对付天敌的一套化学武器。",
-    "audioUrl": "/audio/asiatic-toad.wav",
+    "audioUrl": "/audio/asiatic-toad.mp3",
     "audioSource": "iNaturalist 声音库 #537003（录制者：Amaël Borzée，2022-09-17，江苏苏州）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-asiatic-toad.webp"
@@ -249,7 +249,7 @@
     "distribution": "长江流域及以南的丘陵、稻田与竹林边缘。",
     "protectLevel": "国家三有保护动物",
     "funFact": "农谚说「雨蛙叫，大雨到」——湿度升高确实会让它们唱得更卖力，相当于一台会呼吸的湿度计。",
-    "audioUrl": "/audio/chinese-tree-frog.m4a",
+    "audioUrl": "/audio/chinese-tree-frog.mp3",
     "audioSource": "iNaturalist 声音库 #2055111（录制者：JIN Pin-Tsen，2026-07-04，浙江舟山）",
     "audioLicense": "CC0",
     "image": "/assets/npc-chinese-tree-frog.webp"
@@ -264,7 +264,7 @@
     "distribution": "长江以南各省的稻田、水沟与池塘。",
     "protectLevel": "国家二级重点保护野生动物（仅限野外种群）",
     "funFact": "因叫声似犬吠，民间称它「田鸡」；野外种群受法律严格保护，市面所售必须是持证人工繁育的个体。",
-    "audioUrl": "/audio/chinese-bullfrog.m4a",
+    "audioUrl": "/audio/chinese-bullfrog.mp3",
     "audioSource": "iNaturalist 声音库 #2029938（录制者：Dave Guo，2026-04-26，海南海口）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-chinese-bullfrog.webp"
@@ -339,7 +339,7 @@
     "distribution": "全国广布留鸟，从乡村到场镇绿地都能见到，北方冬季常成群活动。",
     "protectLevel": "国家三有保护动物",
     "funFact": "民间视其为「报喜鸟」，「喜鹊登枝」是传统吉祥图案；其实它机警护巢，常集体驱赶靠近的猛禽与猫。",
-    "audioUrl": "/audio/eurasian-magpie.m4a",
+    "audioUrl": "/audio/eurasian-magpie.mp3",
     "audioSource": "iNaturalist 声音库 #257905466（录制者：JIN Pin-Tsen，2025-01-09，浙江宁波）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-eurasian-magpie.webp"
@@ -354,7 +354,7 @@
     "distribution": "夏候鸟，繁殖于全国大部，秋季集群南迁至南亚与非洲越冬。",
     "protectLevel": "国家三有保护动物",
     "funFact": "古诗「旧时王谢堂前燕」说的就是它；它认巢极准，常年年返回同一屋檐下修补旧巢续住。",
-    "audioUrl": "/audio/barn-swallow.wav",
+    "audioUrl": "/audio/barn-swallow.mp3",
     "audioSource": "iNaturalist 声音库 #285266265（录制者：choudbl，2025-05-30，上海）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-barn-swallow.webp"
@@ -369,7 +369,7 @@
     "distribution": "全国广泛分布，溪流、河岸、池塘与稻田沟渠皆可见，多为留鸟或局部漂鸟。",
     "protectLevel": "国家三有保护动物",
     "funFact": "羽毛的宝石蓝来自微观结构对光的折射而非色素，故在不同角度会变幻出深浅不一的蓝绿光泽。",
-    "audioUrl": "/audio/common-kingfisher.m4a",
+    "audioUrl": "/audio/common-kingfisher.mp3",
     "audioSource": "iNaturalist 声音库 #279851639（录制者：维生素，2025-05-10，山东青岛）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-common-kingfisher.webp"
@@ -459,7 +459,7 @@
     "distribution": "华北至华南、西南广布留鸟，长江以南尤为常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "它有「屠夫鸟」之称——把吃不完的猎物串在尖刺上风干储备，正是这个习性让整个伯劳科在英文里被叫作 butcherbird。",
-    "audioUrl": "/audio/long-tailed-shrike.m4a",
+    "audioUrl": "/audio/long-tailed-shrike.mp3",
     "audioSource": "iNaturalist 声音库 #262622164（录制者：JIN Pin-Tsen，2025-02-22，浙江宁波下应）",
     "audioLicense": "CC0",
     "image": "/assets/npc-long-tailed-shrike.webp"
@@ -474,7 +474,7 @@
     "distribution": "东北、华北繁殖，长江流域及以南越冬，全国大部可见的常见候鸟。",
     "protectLevel": "国家三有保护动物",
     "funFact": "雄鸟翅上一块醒目白斑是野外速辨特征，观鸟人称之为「白镜」；它冬季领域意识极强，会对着车窗玻璃里的「情敌」反复扑击。",
-    "audioUrl": "/audio/daurian-redstart.m4a",
+    "audioUrl": "/audio/daurian-redstart.mp3",
     "audioSource": "iNaturalist 声音库 #70729938（录制者：Zinogre，2021-03-07，河南郑州）",
     "audioLicense": "CC BY",
     "image": "/assets/npc-daurian-redstart.webp"
@@ -504,7 +504,7 @@
     "distribution": "华北至华南广布夏候鸟，南方部分种群留居，农田与村落边缘最常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "尾羽末端深深分叉并向外卷翘，形如剪刀，故俗称「铁炼甲」「剪刀鸡」；农人喜它在稻田上空捕虫，视作护田益鸟。",
-    "audioUrl": "/audio/black-drongo.m4a",
+    "audioUrl": "/audio/black-drongo.mp3",
     "audioSource": "iNaturalist 声音库 #85741424（录制者：Zinogre，2021-07-03，河南郑州）",
     "audioLicense": "CC BY",
     "image": "/assets/npc-black-drongo.webp"
@@ -519,7 +519,7 @@
     "distribution": "全国广布，北方种群冬季南迁，山地林缘与丘陵农田最常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "它与常见的珠颈斑鸠是两种鸟：山斑鸠颈侧为黑白相间的条状斑，珠颈斑鸠则是满布白点的「珍珠围巾」，看颈部即可分辨。",
-    "audioUrl": "/audio/oriental-turtle-dove.m4a",
+    "audioUrl": "/audio/oriental-turtle-dove.mp3",
     "audioSource": "iNaturalist 声音库 #183165230（录制者：TonyT，2023-09-14，西藏拉萨娘热乡）",
     "audioLicense": "CC BY",
     "image": "/assets/npc-oriental-turtle-dove.webp"
@@ -549,7 +549,7 @@
     "distribution": "东北与西南山地繁殖，长江流域及华南越冬，迁徙季全国大部可见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "雄鸟头部与喉部呈灰绿至墨绿色，英文名 Black-faced Bunting 由此而来；同属的黄胸鹀（禾花雀）因滥捕已升为国家一级保护。",
-    "audioUrl": "/audio/black-faced-bunting.m4a",
+    "audioUrl": "/audio/black-faced-bunting.mp3",
     "audioSource": "iNaturalist 声音库 #285123261（录制者：Amaël Borzée，2025-05-30，黑龙江佳木斯）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-black-faced-bunting.webp"
@@ -564,7 +564,7 @@
     "distribution": "中国特有种，华北至华南、西南的山地与丘陵林地广泛分布。",
     "protectLevel": "国家三有保护动物（中国特有种）",
     "funFact": "它是不折不扣的中国特有鸟种，全球分布不出国门；腹部一片明亮的柠檬黄，在灰褐色冬林里格外扎眼，故名黄腹山雀。",
-    "audioUrl": "/audio/yellow-bellied-tit.m4a",
+    "audioUrl": "/audio/yellow-bellied-tit.mp3",
     "audioSource": "iNaturalist 声音库 #293341475（录制者：JIN Pin-Tsen，2025-06-28，湖北黄冈英山桃花冲）",
     "audioLicense": "CC0",
     "image": "/assets/npc-yellow-bellied-tit.webp"
@@ -579,7 +579,7 @@
     "distribution": "长江流域及以南广布留鸟，西南山地尤为常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "栗红色头顶配黑色喉斑与围兜，像戴了顶小红帽，是观鸟圈公认的「颜值担当」；群里未配对的个体会主动帮邻居喂养雏鸟。",
-    "audioUrl": "/audio/black-throated-tit.m4a",
+    "audioUrl": "/audio/black-throated-tit.mp3",
     "audioSource": "iNaturalist 声音库 #284685255（录制者：Yi CHEN，2025-05-27，浙江湖州安吉县）",
     "audioLicense": "CC BY",
     "image": "/assets/npc-black-throated-tit.webp"
@@ -624,7 +624,7 @@
     "distribution": "华南、西南及长江以南地区广布留鸟，城市园林与郊野果园常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "眼后一撮鲜红的须状羽是它中英文名的共同由来；因鸣声悦耳被引种到美国夏威夷与佛罗里达，已在当地野化成群。",
-    "audioUrl": "/audio/red-whiskered-bulbul.m4a",
+    "audioUrl": "/audio/red-whiskered-bulbul.mp3",
     "audioSource": "iNaturalist 声音库 #330915905（录制者：ameliahsu，2025-12-16，福建厦门五缘湾）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-red-whiskered-bulbul.webp"
@@ -639,7 +639,7 @@
     "distribution": "秦岭以南广布，长江流域至华南的稻田、水沟与城市绿地积水处极常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "它是中国分布最广的蛙类之一，背上一对深色「∧」形套叠花纹是最好认的标志；三厘米的小身板却能发出盖过整片稻田的叫声。",
-    "audioUrl": "/audio/ornate-pygmy-frog.m4a",
+    "audioUrl": "/audio/ornate-pygmy-frog.mp3",
     "audioSource": "iNaturalist 声音库 #280214687（录制者：Dallin Kohler，2025-05-11，江苏南京）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-ornate-pygmy-frog.webp"
@@ -654,7 +654,7 @@
     "distribution": "秦岭淮河以南广布，是南方稻田最常见的蛙类之一。",
     "protectLevel": "国家三有保护动物",
     "funFact": "它是稻田里的义务除虫工，一只成蛙一夜能吃掉上百只飞虱与叶蝉；常被笼统叫作「小青蛙」，其实与黑斑侧褶蛙分属不同科。",
-    "audioUrl": "/audio/paddy-frog.m4a",
+    "audioUrl": "/audio/paddy-frog.mp3",
     "audioSource": "iNaturalist 声音库 #123222060（录制者：llareta，2022-06-24，江苏南京玄武门）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-paddy-frog.webp"
@@ -669,7 +669,7 @@
     "distribution": "长江以南广布，华南与西南的林地、竹林及村舍周边最常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "它把卵产在悬于水面的白色泡沫团里，蝌蚪孵出后径直掉进水中——这种「空中育婴房」是泛树蛙科的招牌繁殖策略。",
-    "audioUrl": "/audio/spot-legged-tree-frog.m4a",
+    "audioUrl": "/audio/spot-legged-tree-frog.mp3",
     "audioSource": "iNaturalist 声音库 #204282211（录制者：mitch_lam，2024-03-29，广东惠州惠城区）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-spot-legged-tree-frog.webp"
@@ -684,7 +684,7 @@
     "distribution": "东北、华北至华中广布，多见于平原丘陵的临时积水坑与庭院。",
     "protectLevel": "国家三有保护动物",
     "funFact": "一年中绝大部分时间它都躲在地下，只在雷雨后突然大批冒出，故有「气蛤蟆」之称；受惊时会猛吸空气把身体鼓成圆球吓退天敌。",
-    "audioUrl": "/audio/boreal-digging-frog.m4a",
+    "audioUrl": "/audio/boreal-digging-frog.mp3",
     "audioSource": "iNaturalist 声音库 #222620055（录制者：Amaël Borzée，2024-06-14，辽宁丹东）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-boreal-digging-frog.webp"
@@ -699,7 +699,7 @@
     "distribution": "中国特有种，分布于浙江、江苏、安徽、福建、江西等华东华中丘陵山地。",
     "protectLevel": "国家三有保护动物（中国特有种）",
     "funFact": "种名 zhenhaiensis 取自模式产地浙江镇海（今宁波镇海区），是中国特有的林蛙；它也是华东开嗓最早的蛙类之一，二月便在冷水塘边鸣叫。",
-    "audioUrl": "/audio/zhenhai-brown-frog.m4a",
+    "audioUrl": "/audio/zhenhai-brown-frog.mp3",
     "audioSource": "iNaturalist 声音库 #249351313（录制者：JIN Pin-Tsen，2024-10-28，浙江宁波九峰山）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-zhenhai-brown-frog.webp"
@@ -714,7 +714,7 @@
     "distribution": "华南、西南及东南沿海广布，城镇庭院、农田与林缘均常见。",
     "protectLevel": "国家三有保护动物",
     "funFact": "从吻端沿眼眶到鼓膜的一圈黑色骨质棱脊，像戴了副黑框眼镜，中文名由此而来；耳后腺分泌的浆液有毒，狗咬一口便会大量流涎。",
-    "audioUrl": "/audio/black-spectacled-toad.wav",
+    "audioUrl": "/audio/black-spectacled-toad.mp3",
     "audioSource": "iNaturalist 声音库 #120327690（录制者：Amaël Borzée，2022-06-05，福建福州）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-black-spectacled-toad.webp"
@@ -744,7 +744,7 @@
     "distribution": "东北、华北至长江流域广布，山地林木与城市园林均常见。",
     "protectLevel": "未列入国家保护名录（常见广布种）",
     "funFact": "日本称它ミンミンゼミ，因鸣声听来像不断重复「咪—嗯」；中文名「鸣鸣蝉」同样照着叫声起，中日两国不谋而合。",
-    "audioUrl": "/audio/robust-cicada.m4a",
+    "audioUrl": "/audio/robust-cicada.mp3",
     "audioSource": "iNaturalist 声音库 #90380311（录制者：Zinogre，2021-08-08，河南郑州中牟县）",
     "audioLicense": "CC BY",
     "image": "/assets/npc-robust-cicada.webp"
@@ -759,7 +759,7 @@
     "distribution": "全国广布，农田、菜地与苗圃的疏松湿土中最常见。",
     "protectLevel": "未列入国家保护名录（农业常见害虫）",
     "funFact": "它把洞口挖成喇叭形，等于给自己造了个天然扩音音箱，能把鸣声放大到数十米外；俗名「拉拉蛄」「土狗子」，《本草纲目》中已有记载。",
-    "audioUrl": "/audio/oriental-mole-cricket.m4a",
+    "audioUrl": "/audio/oriental-mole-cricket.mp3",
     "audioSource": "iNaturalist 声音库 #292329870（录制者：Amaël Borzée，2025-06-24，河南南阳）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-oriental-mole-cricket.webp"
@@ -774,7 +774,7 @@
     "distribution": "全国广布，华北、华东的农田、荒地与城市绿化带极常见。",
     "protectLevel": "未列入国家保护名录（常见广布种）",
     "funFact": "脸部一片淡黄如涂油，「油葫芦」既指这身油亮外壳，也形容它圆润如葫芦的体形；自古是传统鸣虫，讲究者以声音「油、圆、亮」为上品。",
-    "audioUrl": "/audio/emma-field-cricket.m4a",
+    "audioUrl": "/audio/emma-field-cricket.mp3",
     "audioSource": "iNaturalist 声音库 #238578047（录制者：JIN Pin-Tsen，2024-08-29，浙江舟山）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-emma-field-cricket.webp"
@@ -789,7 +789,7 @@
     "distribution": "华北、东北至华中广布，多见于灌丛、豆田与荒草坡。",
     "protectLevel": "未列入国家保护名录（传统鸣虫）",
     "funFact": "它就是家喻户晓的「蝈蝈」，自明清起便是宫廷与市井共爱的鸣虫；冬季揣在怀中的葫芦罐里养着听叫，形成独特的「冬蝈蝈」玩赏文化。",
-    "audioUrl": "/audio/chinese-katydid.m4a",
+    "audioUrl": "/audio/chinese-katydid.mp3",
     "audioSource": "iNaturalist 声音库 #243004678（录制者：teleo-cubo，2024-09-21，北京昌平）",
     "audioLicense": "CC BY-NC",
     "image": "/assets/npc-chinese-katydid.webp"
