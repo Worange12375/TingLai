@@ -70,13 +70,14 @@ npm run dev
 - 页面组件在 `src/App.tsx` 里由 `import.meta.env.DEV` 判断是否加载。生产构建时 Vite 把这个值静态替换成 `false`，打包器随即把整个分支连同 AdminTool 的代码一起删掉——`dist/` 里**不存在**这些代码。
 - 后端能力（读写文件、跑 ffmpeg）由 `vite-plugin-admin.ts` 提供，这个插件声明了 `apply: 'serve'`，**只在 `npm run dev` 时挂载**。`npm run build` 完全不会加载它，生产环境不存在任何 `/__admin` 接口。
 
-所以线上站点访问 `/#/dev` 只会落到 404 页面。**没有公开攻击面，不需要为它加鉴权。**
+所以线上站点（含 CloudStudio 静态部署）访问 `/#/dev` 不会渲染管理员工具——这里本来就**没有** `/__admin` 接口，所以会显示「连不上后端」或普通页面，**这是预期设计，不是不稳定或 bug**。所有数据维护（上传/规范化/改名/保存）都必须在**本地 `npm run dev`** 下进行。**没有公开攻击面，不需要为它加鉴权。**
 
 ### 打不开怎么办
 
 | 现象 | 原因 | 处理 |
 |------|------|------|
 | 页面显示「管理员工具连不上后端」 | 打开的是构建产物，不是 dev 服务器 | 确认是用 `npm run dev` 启动的，不是 `npm run preview`，也不是直接开 `dist/index.html` |
+| 在 CloudStudio / 线上静态站打开 `/#/dev` 闪退或「连不上后端」 | AdminTool **只在本地 `npm run dev` 时存在**；CloudStudio 是静态产物，没有 `/__admin` 接口，所以这里用不了（这是预期设计，不是 bug） | 管理工作请在本地 `npm run dev` 打开 `http://localhost:5173/#/dev` 做；CloudStudio 只是给评委/用户访问的成品站 |
 | 页面 404 | 地址少了 `#` | 用 `http://localhost:5173/#/dev` |
 | 端口不是 5173 | 5173 被占用，Vite 自动换了端口 | 看终端实际打印的端口号 |
 

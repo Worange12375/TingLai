@@ -429,6 +429,24 @@ async function hasFfmpeg(): Promise<boolean> {
 }
 
 /**
+ * 带超时的 fetch，避免远端音频源慢/挂掉时把 dev server 中间件（乃至整个 UI 请求）卡死。
+ * abort 后 fetch 抛 AbortError，调用方按下载失败处理。
+ */
+async function fetchWithTimeout(
+  url: string,
+  ms: number,
+  headers: Record<string, string> = {},
+): Promise<Response> {
+  const ctrl = new AbortController()
+  const timer = setTimeout(() => ctrl.abort(), ms)
+  try {
+    return await fetch(url, { headers, signal: ctrl.signal })
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+/**
  * 规范化滤镜链：
  *   highpass=f=120        砍掉 120Hz 以下的风噪/交流声
  *   loudnorm              EBU R128 响度归一，各条音量一致，听感不忽大忽小
@@ -459,11 +477,19 @@ async function transcode(input: string, output: string, normalize: boolean): Pro
   return { ok: true }
 }
 
-/** 把远端音频下载到临时文件 */
+/** 把远端音频下载到临时文件（30s 超时，避免慢源卡死中间件） */
 async function download(url: string): Promise<string> {
-  const res = await fetch(url, {
-    headers: { 'User-Agent': 'TingLai-SoundVerse-AdminTool/1.0 (contest project)' },
-  })
+  let res: Response
+  try {
+    res = await fetchWithTimeout(url, 30000, {
+      'User-Agent': 'TingLai-SoundVerse-AdminTool/1.0 (contest project)',
+    })
+  } catch (err) {
+    if ((err as { name?: string })?.name === 'AbortError') {
+      throw new Error('下载超时（30s）：源站响应太慢或不可达，请稍后重试或换用本地音频')
+    }
+    throw new Error(`下载失败：${err instanceof Error ? err.message : String(err)}`)
+  }
   if (!res.ok) throw new Error(`下载失败 HTTP ${res.status}`)
   const buf = Buffer.from(await res.arrayBuffer())
   if (buf.length < 1024) throw new Error('下载到的文件过小，可能是错误页')
@@ -879,9 +905,17 @@ export function adminToolPlugin(): Plugin {
               ext = path.extname(p) || '.mp3'
             } else {
               // 远端音频由 Node 代理下载，浏览器端 <a download> 对跨域链接无效
-              const r = await fetch(url, {
-                headers: { 'User-Agent': 'TingLai-SoundVerse-AdminTool/1.0 (contest project)' },
-              })
+              let r: Response
+              try {
+                r = await fetchWithTimeout(url, 30000, {
+                  'User-Agent': 'TingLai-SoundVerse-AdminTool/1.0 (contest project)',
+                })
+              } catch (err) {
+                if ((err as { name?: string })?.name === 'AbortError') {
+                  return send(res, 504, { ok: false, message: '下载超时（30s）：源站响应太慢或不可达' })
+                }
+                return send(res, 502, { ok: false, message: `下载失败：${err instanceof Error ? err.message : String(err)}` })
+              }
               if (!r.ok) return send(res, 502, { ok: false, message: `源站返回 ${r.status}` })
               buf = Buffer.from(await r.arrayBuffer())
               ext = path.extname(new URL(url).pathname) || '.mp3'
