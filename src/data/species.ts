@@ -81,8 +81,10 @@ export const ILLUSTRATED_IDS: string[] = [
   'hoopoe',                // 戴胜 · 折扇羽冠，最上镜
   'oriole',                // 黑枕黄鹂 · 「两个黄鹂鸣翠柳」古诗梗
   'eurasian-tree-sparrow', // 麻雀 · 国民度最高
+  'barn-swallow',          // 家燕 · 春归象征，极常见
+  'eurasian-magpie',       // 喜鹊 · 报喜鸟，黑白经典
   'common-frog',           // 黑斑侧褶蛙 · 夏夜蛙声代表
-  'weaver-katydid',        // 纺织娘 · 平衡昆虫类群
+  'cicada',                // 黑蚱蝉 · 夏日蝉鸣，国民昆虫
 ]
 
 /** 已配插画的物种实体；数据中查不到的 id 自动跳过，不会留空位 */
