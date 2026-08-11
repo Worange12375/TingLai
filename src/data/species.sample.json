@@ -42,7 +42,9 @@
     "audioUrl": "/audio/spotted-dove.mp3",
     "audioSource": "iNaturalist 声音库 #1770684（录制者：xhttttttt，2026-02-18，江苏盐城东台溱东镇）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-spotted-dove.webp"
+    "image": "/photos/spotted-dove.jpg",
+    "photoSource": "Wikimedia Commons · Spotted dove (Spilopelia chinensis) 01.jpg · 作者 Gannu03 · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Spotted_dove_(Spilopelia_chinensis)_01.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "chinese-blackbird",
@@ -57,7 +59,9 @@
     "audioUrl": "/audio/chinese-blackbird.mp3",
     "audioSource": "iNaturalist 声音库 #1782986（录制者：Biswas Sajib，2026-02-27，江苏南京玄武区）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-chinese-blackbird.webp"
+    "image": "/photos/chinese-blackbird.jpg",
+    "photoSource": "Wikimedia Commons · Turdus mandarinus.jpg · 作者 Sun Jiao (Interaccoonale) · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Turdus_mandarinus.jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "light-vented-bulbul",
@@ -72,7 +76,9 @@
     "audioUrl": "/audio/light-vented-bulbul.mp3",
     "audioSource": "iNaturalist 声音库 #2073920（录制者：grenous，2026-07-16，湖南衡阳）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-light-vented-bulbul.webp"
+    "image": "/photos/light-vented-bulbul.jpg",
+    "photoSource": "Wikimedia Commons · Light-vented bulbul (Pycnonotus sinensis formosae) Shuangyu.jpg · 作者 Charles J. Sharp · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Light-vented_bulbul_(Pycnonotus_sinensis_formosae)_Shuangyu.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "cinereous-tit",
@@ -87,7 +93,9 @@
     "audioUrl": "/audio/cinereous-tit.mp3",
     "audioSource": "iNaturalist 声音库 #1750750（录制者：wresy，2026-01-15，福建福州）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-cinereous-tit.webp"
+    "image": "/photos/cinereous-tit.jpg",
+    "photoSource": "Wikimedia Commons · Cinereous Tit (Parus cinereus) (15275201963).jpg · 作者 Imran Shah from Islamabad, Pakistan · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Cinereous_Tit_(Parus_cinereus)_(15275201963).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "azure-winged-magpie",
@@ -102,7 +110,9 @@
     "audioUrl": "/audio/azure-winged-magpie.mp3",
     "audioSource": "iNaturalist 声音库 #1603998（录制者：Reed Lindwurm，2025-08-14，陕西西安临潼区）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-azure-winged-magpie.webp"
+    "image": "/photos/azure-winged-magpie.jpg",
+    "photoSource": "Wikimedia Commons · Cyanopica cyanus 458637382.jpg · 作者 Zinogre · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Cyanopica_cyanus_458637382.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "hoopoe",
@@ -132,7 +142,9 @@
     "audioUrl": "/audio/common-cuckoo.mp3",
     "audioSource": "iNaturalist 声音库 #1967464（录制者：fhvc，2026-05-21，山东青岛）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-common-cuckoo.webp"
+    "image": "/photos/common-cuckoo.jpg",
+    "photoSource": "Wikimedia Commons · Kuckuck (Cuculus canorus) by Tim Peukert.jpg · 作者 Tim Peukert · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Kuckuck_(Cuculus_canorus)_by_Tim_Peukert.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "indian-cuckoo",
@@ -147,7 +159,9 @@
     "audioUrl": "/audio/indian-cuckoo.mp3",
     "audioSource": "iNaturalist 声音库 #2057784（录制者：Jiao Sun (孙娇)，2026-07-05，山东潍坊）",
     "audioLicense": "CC BY",
-    "image": "/assets/npc-indian-cuckoo.webp"
+    "image": "/photos/indian-cuckoo.jpg",
+    "photoSource": "Wikimedia Commons · Indian Cuckoo (Cuculus micropterus) (7472697996).jpg · 作者 Faisal Akram from Dhaka, Bangladesh · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Indian_Cuckoo_(Cuculus_micropterus)_(7472697996).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "white-breasted-waterhen",
@@ -162,7 +176,9 @@
     "audioUrl": "/audio/white-breasted-waterhen.mp3",
     "audioSource": "iNaturalist 声音库 #1860866（录制者：TANG YUEHENG，2026-04-15，广东广州花都区）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-white-breasted-waterhen.webp"
+    "image": "/photos/white-breasted-waterhen.jpg",
+    "photoSource": "Wikimedia Commons · White-breasted waterhen (Amaurornis phoenicurus) 2024 (2).jpg · 作者 Nirmal Dulal · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:White-breasted_waterhen_(Amaurornis_phoenicurus)_2024_(2).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "chinese-hwamei",
@@ -177,7 +193,9 @@
     "audioUrl": "/audio/chinese-hwamei.mp3",
     "audioSource": "iNaturalist 声音库 #2015286（录制者：Stargazer，2026-06-07，江西赣州会昌县）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-chinese-hwamei.webp"
+    "image": "/photos/chinese-hwamei.jpg",
+    "photoSource": "Wikimedia Commons · Garrulax canorus 01.jpg · 作者 Sun Jiao (Interaccoonale) · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Garrulax_canorus_01.jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "crested-ibis",
@@ -192,7 +210,9 @@
     "audioUrl": "/audio/crested-ibis.mp3",
     "audioSource": "xeno-canto XC777570（录制者：何文进，2023-01-28，陕西汉中洋县）",
     "audioLicense": "CC BY-NC-SA 4.0",
-    "image": "/assets/npc-crested-ibis.webp"
+    "image": "/photos/crested-ibis.jpg",
+    "photoSource": "Wikimedia Commons · Crested Ibis (Nipponia nippon), Nanzheng, Shaanxi, China, 2026.jpg · 作者 Bechology · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Crested_Ibis_(Nipponia_nippon),_Nanzheng,_Shaanxi,_China,_2026.jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "red-crowned-crane",
@@ -207,7 +227,9 @@
     "audioUrl": "/audio/red-crowned-crane.mp3",
     "audioSource": "iNaturalist 声音库 #1346320（录制者：Simone Littledale，2024-12-24，日本北海道鹤居村）",
     "audioLicense": "CC BY",
-    "image": "/assets/npc-red-crowned-crane.webp"
+    "image": "/photos/red-crowned-crane.jpg",
+    "photoSource": "Wikimedia Commons · Red Crowned Crane Grus Japonensis (141047777).jpeg · 作者 Christian Sanchez · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Red_Crowned_Crane_Grus_Japonensis_(141047777).jpeg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "common-frog",
@@ -237,7 +259,9 @@
     "audioUrl": "/audio/asiatic-toad.mp3",
     "audioSource": "iNaturalist 声音库 #537003（录制者：Amaël Borzée，2022-09-17，江苏苏州）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-asiatic-toad.webp"
+    "image": "/photos/asiatic-toad.jpg",
+    "photoSource": "Wikimedia Commons · Bufo gargarizans.jpg · 作者 DrewHeath · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Bufo_gargarizans.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "chinese-tree-frog",
@@ -252,7 +276,9 @@
     "audioUrl": "/audio/chinese-tree-frog.mp3",
     "audioSource": "iNaturalist 声音库 #2055111（录制者：JIN Pin-Tsen，2026-07-04，浙江舟山）",
     "audioLicense": "CC0",
-    "image": "/assets/npc-chinese-tree-frog.webp"
+    "image": "/photos/chinese-tree-frog.jpg",
+    "photoSource": "Wikimedia Commons · Hyla chinensis.jpg · 作者 Alan Yip Wah · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Hyla_chinensis.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "chinese-bullfrog",
@@ -267,7 +293,9 @@
     "audioUrl": "/audio/chinese-bullfrog.mp3",
     "audioSource": "iNaturalist 声音库 #2029938（录制者：Dave Guo，2026-04-26，海南海口）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-chinese-bullfrog.webp"
+    "image": "/photos/chinese-bullfrog.jpg",
+    "photoSource": "Wikimedia Commons · Grenouille taureau chinoise (Hoplobatrachus chinensis) Paksane Laos 08.04.25.jpg · 作者 C.Farquet · CC0 / Public Domain · 来源 https://commons.wikimedia.org/wiki/File:Grenouille_taureau_chinoise_(Hoplobatrachus_chinensis)_Paksane_Laos_08.04.25.jpg",
+    "photoLicense": "CC0 / Public Domain"
   },
   {
     "id": "cicada",
@@ -297,7 +325,9 @@
     "audioUrl": "/audio/huigu-cicada.mp3",
     "audioSource": "iNaturalist 声音库 #2004703（录制者：yyawc，2026-06-06，四川成都）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-huigu-cicada.webp"
+    "image": "/photos/huigu-cicada.jpg",
+    "photoSource": "Wikimedia Commons · Platypleura kaempferi 01.jpg · 作者 Σ64 · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Platypleura_kaempferi_01.jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "field-cricket",
@@ -312,7 +342,9 @@
     "audioUrl": "/audio/field-cricket.mp3",
     "audioSource": "iNaturalist 声音库 #1643899（录制者：marsblast，2025-09-21，山东青岛）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-field-cricket.webp"
+    "image": "/photos/field-cricket.jpg",
+    "photoSource": "Wikimedia Commons · Velarifictorus micado.jpg · 作者 USGS Native Bee Inventory and Monitoring Laboratory · CC0 / Public Domain · 来源 https://commons.wikimedia.org/wiki/File:Velarifictorus_micado.jpg",
+    "photoLicense": "CC0 / Public Domain"
   },
   {
     "id": "weaver-katydid",
@@ -327,7 +359,9 @@
     "audioUrl": "/audio/weaver-katydid.mp3",
     "audioSource": "iNaturalist 声音库 #1657285（录制者：xhttttttt，2025-10-04，江苏盐城）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-weaver-katydid.webp"
+    "image": "/photos/weaver-katydid.jpg",
+    "photoSource": "Wikimedia Commons · Mecopoda nipponensis.jpg · 作者 norio_nomura · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Mecopoda_nipponensis.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "eurasian-magpie",
@@ -372,7 +406,9 @@
     "audioUrl": "/audio/common-kingfisher.mp3",
     "audioSource": "iNaturalist 声音库 #279851639（录制者：维生素，2025-05-10，山东青岛）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-common-kingfisher.webp"
+    "image": "/photos/common-kingfisher.jpg",
+    "photoSource": "Wikimedia Commons · Back of common kingfisher (Alcedo atthis).jpg · 作者 Alexis Lours · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Back_of_common_kingfisher_(Alcedo_atthis).jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "white-wagtail",
@@ -387,7 +423,9 @@
     "audioUrl": "/audio/white-wagtail.mp3",
     "audioSource": "iNaturalist 声音库 #108251108（录制者：J Smith，2022-03-09，广东深圳）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-white-wagtail.webp"
+    "image": "/photos/white-wagtail.jpg",
+    "photoSource": "Wikimedia Commons · Bachstelze - Bergeronnette grise - White wagtail - Motacilla alba - 01.jpg · 作者 NorbertNagel · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Bachstelze_-_Bergeronnette_grise_-_White_wagtail_-_Motacilla_alba_-_01.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "crested-myna",
@@ -402,7 +440,9 @@
     "audioUrl": "/audio/crested-myna.mp3",
     "audioSource": "iNaturalist 声音库 #146510966（录制者：Stargazer，2023-01-14，江西赣州会昌县）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-crested-myna.webp"
+    "image": "/photos/crested-myna.jpg",
+    "photoSource": "Wikimedia Commons · Crested Myna (Acridotheres cristatellus) (7184490994).jpg · 作者 Noel Reynolds · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Crested_Myna_(Acridotheres_cristatellus)_(7184490994).jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "red-billed-blue-magpie",
@@ -417,7 +457,9 @@
     "audioUrl": "/audio/red-billed-blue-magpie.mp3",
     "audioSource": "iNaturalist 声音库 #359219119（录制者：管牧山，2026-05-07，北京海淀）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-red-billed-blue-magpie.webp"
+    "image": "/photos/red-billed-blue-magpie.jpg",
+    "photoSource": "Wikimedia Commons · Red-billed blue magpie (Urocissa erythroryncha) 01.jpg · 作者 Nrik kiran · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Red-billed_blue_magpie_(Urocissa_erythroryncha)_01.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "eurasian-jay",
@@ -432,7 +474,9 @@
     "audioUrl": "/audio/eurasian-jay.mp3",
     "audioSource": "iNaturalist 声音库 #333747099（录制者：Nan Yang，2026-01-06，北京）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-eurasian-jay.webp"
+    "image": "/photos/eurasian-jay.jpg",
+    "photoSource": "Wikimedia Commons · Garrulus glandarius - Eurasian Jay, Adana 2016-11-27 01-1.jpg · 作者 Zeynel Cebeci · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Garrulus_glandarius_-_Eurasian_Jay,_Adana_2016-11-27_01-1.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "oriental-scops-owl",
@@ -447,7 +491,9 @@
     "audioUrl": "/audio/oriental-scops-owl.mp3",
     "audioSource": "iNaturalist 声音库 #165066286（录制者：Stargazer，2023-06-01，江西赣州会昌县）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-oriental-scops-owl.webp"
+    "image": "/photos/oriental-scops-owl.jpg",
+    "photoSource": "Wikimedia Commons · Oriental scops owl. Otus sunia - Flickr - gailhampshire.jpg · 作者 gailhampshire from Cradley, Malvern, U.K · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Oriental_scops_owl._Otus_sunia_-_Flickr_-_gailhampshire.jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "long-tailed-shrike",
@@ -462,7 +508,9 @@
     "audioUrl": "/audio/long-tailed-shrike.mp3",
     "audioSource": "iNaturalist 声音库 #262622164（录制者：JIN Pin-Tsen，2025-02-22，浙江宁波下应）",
     "audioLicense": "CC0",
-    "image": "/assets/npc-long-tailed-shrike.webp"
+    "image": "/photos/long-tailed-shrike.jpg",
+    "photoSource": "Wikimedia Commons · Long-tailed Shrike Lanius schach Velavadar National Park, Gujarat, India DSCN7252.jpg · 作者 Rohitjahnavi · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Long-tailed_Shrike_Lanius_schach_Velavadar_National_Park,_Gujarat,_India_DSCN7252.jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "daurian-redstart",
@@ -477,7 +525,9 @@
     "audioUrl": "/audio/daurian-redstart.mp3",
     "audioSource": "iNaturalist 声音库 #70729938（录制者：Zinogre，2021-03-07，河南郑州）",
     "audioLicense": "CC BY",
-    "image": "/assets/npc-daurian-redstart.webp"
+    "image": "/photos/daurian-redstart.jpg",
+    "photoSource": "Wikimedia Commons · Daurian Redstart (Phoenicurus auroreus), female; Saw (and heard) quite a lot of these. (5222110226).jpg · 作者 Jerry Gunner from Lincoln, UK · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Daurian_Redstart_(Phoenicurus_auroreus),_female;_Saw_(and_heard)_quite_a_lot_of_these._(5222110226).jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "swinhoe-white-eye",
@@ -492,7 +542,9 @@
     "audioUrl": "/audio/swinhoe-white-eye.mp3",
     "audioSource": "iNaturalist 声音库 #318585291（录制者：wresy，2025-09-05，福建福州）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-swinhoe-white-eye.webp"
+    "image": "/photos/swinhoe-white-eye.jpg",
+    "photoSource": "Wikimedia Commons · Swinhoe's White-eye (Zosterops simplex).jpg · 作者 Herbertkikoy · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Swinhoe%27s_White-eye_(Zosterops_simplex).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "black-drongo",
@@ -507,7 +559,9 @@
     "audioUrl": "/audio/black-drongo.mp3",
     "audioSource": "iNaturalist 声音库 #85741424（录制者：Zinogre，2021-07-03，河南郑州）",
     "audioLicense": "CC BY",
-    "image": "/assets/npc-black-drongo.webp"
+    "image": "/photos/black-drongo.jpg",
+    "photoSource": "Wikimedia Commons · Black drongo (Dicrurus macrocercus) Prek Toal.jpg · 作者 Charles J. Sharp · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Black_drongo_(Dicrurus_macrocercus)_Prek_Toal.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "oriental-turtle-dove",
@@ -522,7 +576,9 @@
     "audioUrl": "/audio/oriental-turtle-dove.mp3",
     "audioSource": "iNaturalist 声音库 #183165230（录制者：TonyT，2023-09-14，西藏拉萨娘热乡）",
     "audioLicense": "CC BY",
-    "image": "/assets/npc-oriental-turtle-dove.webp"
+    "image": "/photos/oriental-turtle-dove.jpg",
+    "photoSource": "Wikimedia Commons · Oriental Turtle Dove (Streptopelia orientalis).jpg · 作者 gilgit2 · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Oriental_Turtle_Dove_(Streptopelia_orientalis).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "large-billed-crow",
@@ -537,7 +593,9 @@
     "audioUrl": "/audio/large-billed-crow.mp3",
     "audioSource": "iNaturalist 声音库 #364192395（录制者：xhttttttt，2026-05-23，浙江杭州西湖区午潮山）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-large-billed-crow.webp"
+    "image": "/photos/large-billed-crow.jpg",
+    "photoSource": "Wikimedia Commons · Corvus macrorhynchos, Kaziranga, Assam, India.jpg · 作者 Joydeep Chakraborty · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Corvus_macrorhynchos,_Kaziranga,_Assam,_India.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "black-faced-bunting",
@@ -552,7 +610,9 @@
     "audioUrl": "/audio/black-faced-bunting.mp3",
     "audioSource": "iNaturalist 声音库 #285123261（录制者：Amaël Borzée，2025-05-30，黑龙江佳木斯）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-black-faced-bunting.webp"
+    "image": "/photos/black-faced-bunting.jpg",
+    "photoSource": "Wikimedia Commons · Black-faced bunting (Emberiza spodocephala), Hangzhou, China.jpg · 作者 大家好64 · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Black-faced_bunting_(Emberiza_spodocephala),_Hangzhou,_China.jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "yellow-bellied-tit",
@@ -567,7 +627,9 @@
     "audioUrl": "/audio/yellow-bellied-tit.mp3",
     "audioSource": "iNaturalist 声音库 #293341475（录制者：JIN Pin-Tsen，2025-06-28，湖北黄冈英山桃花冲）",
     "audioLicense": "CC0",
-    "image": "/assets/npc-yellow-bellied-tit.webp"
+    "image": "/photos/yellow-bellied-tit.jpg",
+    "photoSource": "Wikimedia Commons · Yellow-bellied Tit (Pardaliparus venustulus) (8077149502).jpg · 作者 Ron Knight from Seaford, East Sussex, United Kingdom · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Yellow-bellied_Tit_(Pardaliparus_venustulus)_(8077149502).jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "black-throated-tit",
@@ -582,7 +644,9 @@
     "audioUrl": "/audio/black-throated-tit.mp3",
     "audioSource": "iNaturalist 声音库 #284685255（录制者：Yi CHEN，2025-05-27，浙江湖州安吉县）",
     "audioLicense": "CC BY",
-    "image": "/assets/npc-black-throated-tit.webp"
+    "image": "/photos/black-throated-tit.jpg",
+    "photoSource": "Wikimedia Commons · Black-throated Tit (Aegithalos concinnus) -on branch.jpg · 作者 Robert tdc · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Black-throated_Tit_(Aegithalos_concinnus)_-on_branch.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "oriental-magpie-robin",
@@ -597,7 +661,9 @@
     "audioUrl": "/audio/oriental-magpie-robin.mp3",
     "audioSource": "iNaturalist 声音库 #338272769（录制者：TANG YUEHENG，2026-02-12，广东广州越秀区）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-oriental-magpie-robin.webp"
+    "image": "/photos/oriental-magpie-robin.jpg",
+    "photoSource": "Wikimedia Commons · Oriental magpie-robin (Copsychus saularis).jpg · 作者 Nrik kiran · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Oriental_magpie-robin_(Copsychus_saularis).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "common-moorhen",
@@ -612,7 +678,9 @@
     "audioUrl": "/audio/common-moorhen.mp3",
     "audioSource": "iNaturalist 声音库 #217836694（录制者：Chengqian Zheng，2024-05-24，山东青岛）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-common-moorhen.webp"
+    "image": "/photos/common-moorhen.jpg",
+    "photoSource": "Wikimedia Commons · Common moorhen (Gallinula chloropus).jpg · 作者 Alexis Lours · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Common_moorhen_(Gallinula_chloropus).jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "red-whiskered-bulbul",
@@ -627,7 +695,9 @@
     "audioUrl": "/audio/red-whiskered-bulbul.mp3",
     "audioSource": "iNaturalist 声音库 #330915905（录制者：ameliahsu，2025-12-16，福建厦门五缘湾）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-red-whiskered-bulbul.webp"
+    "image": "/photos/red-whiskered-bulbul.jpg",
+    "photoSource": "Wikimedia Commons · Red whiskered Bulbul (Pycnonotus jocosus).jpg · 作者 Nrik kiran · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Red_whiskered_Bulbul_(Pycnonotus_jocosus).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "ornate-pygmy-frog",
@@ -642,7 +712,9 @@
     "audioUrl": "/audio/ornate-pygmy-frog.mp3",
     "audioSource": "iNaturalist 声音库 #280214687（录制者：Dallin Kohler，2025-05-11，江苏南京）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-ornate-pygmy-frog.webp"
+    "image": "/photos/ornate-pygmy-frog.jpg",
+    "photoSource": "Wikimedia Commons · Ornate Pygmy Frog (Microhyla fissipes).jpg · 作者 Thomas Brown · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Ornate_Pygmy_Frog_(Microhyla_fissipes).jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "paddy-frog",
@@ -657,7 +729,9 @@
     "audioUrl": "/audio/paddy-frog.mp3",
     "audioSource": "iNaturalist 声音库 #123222060（录制者：llareta，2022-06-24，江苏南京玄武门）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-paddy-frog.webp"
+    "image": "/photos/paddy-frog.jpg",
+    "photoSource": "Wikimedia Commons · Fejervarya limnocharis (30698324738).jpg · 作者 LiCheng Shih · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Fejervarya_limnocharis_(30698324738).jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "spot-legged-tree-frog",
@@ -672,7 +746,9 @@
     "audioUrl": "/audio/spot-legged-tree-frog.mp3",
     "audioSource": "iNaturalist 声音库 #204282211（录制者：mitch_lam，2024-03-29，广东惠州惠城区）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-spot-legged-tree-frog.webp"
+    "image": "/photos/spot-legged-tree-frog.jpg",
+    "photoSource": "Wikimedia Commons · Polypedates megacephalus (31935710308).jpg · 作者 LiCheng Shih · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Polypedates_megacephalus_(31935710308).jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "boreal-digging-frog",
@@ -687,7 +763,9 @@
     "audioUrl": "/audio/boreal-digging-frog.mp3",
     "audioSource": "iNaturalist 声音库 #222620055（录制者：Amaël Borzée，2024-06-14，辽宁丹东）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-boreal-digging-frog.webp"
+    "image": "/photos/boreal-digging-frog.jpg",
+    "photoSource": "Wikimedia Commons · Kaloula borealis01.jpeg · 作者 Pierre Fidenci · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Kaloula_borealis01.jpeg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "zhenhai-brown-frog",
@@ -702,7 +780,9 @@
     "audioUrl": "/audio/zhenhai-brown-frog.mp3",
     "audioSource": "iNaturalist 声音库 #249351313（录制者：JIN Pin-Tsen，2024-10-28，浙江宁波九峰山）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-zhenhai-brown-frog.webp"
+    "image": "/photos/zhenhai-brown-frog.jpg",
+    "photoSource": "Wikimedia Commons · Rana zhenhaiensis.jpg · 作者 江国彬 · CC0 / Public Domain · 来源 https://commons.wikimedia.org/wiki/File:Rana_zhenhaiensis.jpg",
+    "photoLicense": "CC0 / Public Domain"
   },
   {
     "id": "black-spectacled-toad",
@@ -717,7 +797,9 @@
     "audioUrl": "/audio/black-spectacled-toad.mp3",
     "audioSource": "iNaturalist 声音库 #120327690（录制者：Amaël Borzée，2022-06-05，福建福州）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-black-spectacled-toad.webp"
+    "image": "/photos/black-spectacled-toad.jpg",
+    "photoSource": "Wikimedia Commons · Asian common toad (Duttaphrynus melanostictus).jpg · 作者 Goutham K · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Asian_common_toad_(Duttaphrynus_melanostictus).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "mongolian-cicada",
@@ -732,7 +814,9 @@
     "audioUrl": "/audio/mongolian-cicada.mp3",
     "audioSource": "iNaturalist 声音库 #326964069（录制者：devillllller，2022-08-30，上海静安区）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-mongolian-cicada.webp"
+    "image": "/photos/mongolian-cicada.jpg",
+    "photoSource": "Wikimedia Commons · Meimuna mongolica.jpg · 作者 Kim, Hyun-tae · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Meimuna_mongolica.jpg",
+    "photoLicense": "CC BY"
   },
   {
     "id": "robust-cicada",
@@ -747,7 +831,9 @@
     "audioUrl": "/audio/robust-cicada.mp3",
     "audioSource": "iNaturalist 声音库 #90380311（录制者：Zinogre，2021-08-08，河南郑州中牟县）",
     "audioLicense": "CC BY",
-    "image": "/assets/npc-robust-cicada.webp"
+    "image": "/photos/robust-cicada.jpg",
+    "photoSource": "Wikimedia Commons · Hyalessa maculaticollis.JPG · 作者 Alpsdake · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Hyalessa_maculaticollis.JPG",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "oriental-mole-cricket",
@@ -762,7 +848,9 @@
     "audioUrl": "/audio/oriental-mole-cricket.mp3",
     "audioSource": "iNaturalist 声音库 #292329870（录制者：Amaël Borzée，2025-06-24，河南南阳）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-oriental-mole-cricket.webp"
+    "image": "/photos/oriental-mole-cricket.jpg",
+    "photoSource": "Wikimedia Commons · Oriental mole cricket Gryllotalpa orientalis JEG4473.jpg · 作者 PJeganathan · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Oriental_mole_cricket_Gryllotalpa_orientalis_JEG4473.jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "emma-field-cricket",
@@ -777,7 +865,9 @@
     "audioUrl": "/audio/emma-field-cricket.mp3",
     "audioSource": "iNaturalist 声音库 #238578047（录制者：JIN Pin-Tsen，2024-08-29，浙江舟山）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-emma-field-cricket.webp"
+    "image": "/photos/emma-field-cricket.jpg",
+    "photoSource": "Wikimedia Commons · Teleogryllus emma (エンマコオロギ) (15377584189).jpg · 作者 harum.koh from Kobe city, Japan · CC BY-SA · 来源 https://commons.wikimedia.org/wiki/File:Teleogryllus_emma_(%E3%82%A8%E3%83%B3%E3%83%9E%E3%82%B3%E3%82%AA%E3%83%AD%E3%82%AE)_(15377584189).jpg",
+    "photoLicense": "CC BY-SA"
   },
   {
     "id": "chinese-katydid",
@@ -792,6 +882,8 @@
     "audioUrl": "/audio/chinese-katydid.mp3",
     "audioSource": "iNaturalist 声音库 #243004678（录制者：teleo-cubo，2024-09-21，北京昌平）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-chinese-katydid.webp"
+    "image": "/photos/chinese-katydid.jpg",
+    "photoSource": "Wikimedia Commons · Grillo enjaulado (521245614).jpg · 作者 Enrique Dans from Madrid, Spain · CC BY · 来源 https://commons.wikimedia.org/wiki/File:Grillo_enjaulado_(521245614).jpg",
+    "photoLicense": "CC BY"
   }
 ]

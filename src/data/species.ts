@@ -41,6 +41,9 @@ export function normalizeSpecies(raw: RawSpecies, index: number): Species {
     // 逐条署名：透传，缺省为空串（Species 要求 string，渲染层已做空值兜底）
     audioSource: pick(raw.audioSource),
     audioLicense: pick(raw.audioLicense),
+    // 配图署名（林知声补给的自然照片）：缺省为空串
+    photoSource: pick(raw.photoSource),
+    photoLicense: pick(raw.photoLicense),
   }
 }
 

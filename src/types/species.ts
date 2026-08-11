@@ -30,6 +30,10 @@ export interface Species {
   audioSource: string
   /** 实际授权码：CC0 / CC BY / CC BY-NC / CC BY-NC-SA 4.0 */
   audioLicense: string
+  /** 科普配图来源（Wikimedia Commons 文件+作者+授权+链接），由林知声补给，非 NPC 物种才有 */
+  photoSource?: string
+  /** 配图授权（归一类名：CC0 / Public Domain、CC BY、CC BY-SA 等） */
+  photoLicense?: string
 }
 
 /**

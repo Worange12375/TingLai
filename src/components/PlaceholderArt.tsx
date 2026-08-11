@@ -63,12 +63,17 @@ interface AvatarProps {
  * 注意：本兜底在生产构建中同样生效（没有 import.meta.env.DEV 门禁），线上就是靠它占位。
  */
 export function SpeciesAvatar({ id, name, group, src, size = 96, className = '' }: AvatarProps) {
-  // 仅白名单物种才组装候选图；其余物种候选列表为空 → 直接走剪影
+  // 候选图组装：白名单(NPC 手绘)优先约定路径；非 NPC 物种仅当 image 指向真实照片(/photos/)才展示
   const candidates = useMemo(() => {
-    if (!hasBespokeIllustration(id)) return []
     // 优先 WebP（体积更小）；数据里若仍写 .png 则自动转试 .webp，最后回退 .png
     const fromData = src ? (/\.png$/i.test(src) ? [src.replace(/\.png$/i, '.webp'), src] : [src]) : []
-    return Array.from(new Set([...fromData, `/assets/npc-${id}.webp`, `/assets/npc-${id}.png`]))
+    if (hasBespokeIllustration(id)) {
+      // NPC 物种：优先数据 image（手绘 WebP），再退约定路径 .webp / .png
+      return Array.from(new Set([...fromData, `/assets/npc-${id}.webp`, `/assets/npc-${id}.png`]))
+    }
+    // 非 NPC 物种：仅当 image 指向真实摄影照片（/photos/ 路径）时才展示，否则走剪影占位
+    // —— 林知声补给的自然照片统一放在 public/photos/<id>.jpg，由 species.sample.json 的 image 字段引用 ——
+    return fromData.filter((u) => /^\/?photos\//i.test(u))
   }, [id, src])
 
   // 记录加载失败次数；随 id 变化自动归零（列表复用同一 DOM 位置时不会误判）
