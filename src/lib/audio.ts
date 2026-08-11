@@ -142,8 +142,12 @@ export function createRecorder(): RecorderHandle {
         throw new Error('当前浏览器不支持录音，请改用「上传音频文件」')
       }
       try {
+        // ⚠️ 产品硬性需求：录音不做任何降噪 / 回声消除 / 自动增益处理，必须保证用户原声纯净。
+        // 这三项统一为 false（echoCancellation 回声消除、noiseSuppression 降噪、autoGainControl 自动增益）。
+        // 任何一路被打开，都会由浏览器/系统悄悄改写音频信号，损失 BirdNET 识别所需的真实声学特征；
+        // 因此这里钉死三者全 false，后续改动也不得擅自打开，除非产品需求变更。
         stream = await navigator.mediaDevices.getUserMedia({
-          audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true },
+          audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false },
         })
       } catch (err) {
         const name = (err as { name?: string })?.name

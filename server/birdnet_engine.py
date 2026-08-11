@@ -268,6 +268,8 @@ def analyze_file(
 
     with _infer_lock:  # TFLite 解释器串行化
         try:
+            # 原样把音频路径交给 birdnetlib 解码分析，不做任何降噪/重采样/格式转换；
+            # 用户上传的就是最原始的录音信号（前端也已关闭 AGC/降噪/回声消除）。
             recording = Recording(analyzer, audio_path, **kwargs)
             recording.analyze()
             raw = list(recording.detections or [])

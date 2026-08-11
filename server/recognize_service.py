@@ -205,6 +205,10 @@ async def recognize(
         except (TypeError, ValueError):
             k = 5
 
+        # 音频原样交给 BirdNET 引擎分析，不做任何降噪/重采样/格式转换；
+        # 降噪会损失识别所需的真实声学特征，属产品禁止行为。
+        # 上传文件只落临时盘（上面的 fdopen 写出的是客户端字节流，未经任何处理），
+        # 随后直接把临时文件路径交给 analyze_file()，由 birdnetlib 自行解码，中间零改动。
         # 阻塞推理丢线程池
         detections = await run_in_threadpool(
             analyze_file,
