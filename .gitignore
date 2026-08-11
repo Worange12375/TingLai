@@ -23,3 +23,9 @@ vite.config.ts.timestamp-*
 *.bak.*
 #   音频原始外链存档，供「按源重抓」用，机器相关
 .audio-origins.json
+
+# 识别接口压测产物（scripts/probe_recognition.py 的输出与音频劣化样本），机器相关不入库
+.rectest/
+
+# 本地打包上传服务器用的压缩包（dist.zip / server.zip 等）
+*.zip
