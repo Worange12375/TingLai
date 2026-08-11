@@ -46,6 +46,40 @@ function getPosition(): Promise<{ lat: number; lon: number } | null> {
   })
 }
 
+/**
+ * 可信度分级标签：把 BirdNET 给出的置信度翻译成用户能懂的"把握程度"。
+ * 阈值（与主理人压测结论对齐）：
+ *   · >= 0.50     高可信
+ *   · 0.25 ~ 0.50 中等可信
+ *   · < 0.25      低可信 · 仅供参考（明显弱化展示，提示这很可能是误报/猜测）
+ * ⚠️ 本地兜底（离线示例）结果不展示该分级，避免用户误以为兜底也是模型输出。
+ */
+function CredibilityTag({ confidence }: { confidence: number }) {
+  const pct = Math.round(confidence * 100)
+  if (confidence >= 0.5) {
+    return (
+      <Badge tone="moss" title="BirdNET 对此结果有较高把握">
+        高可信 · {pct}%
+      </Badge>
+    )
+  }
+  if (confidence >= 0.25) {
+    return (
+      <Badge tone="blossom" title="BirdNET 有一定把握，但建议结合现场情况综合判断">
+        中等可信 · {pct}%
+      </Badge>
+    )
+  }
+  return (
+    <span
+      className="text-xs italic text-ink-faint"
+      title="模型把握度很低，这很可能是误报或猜测，仅供参考"
+    >
+      低可信 · 仅供参考（{pct}%）
+    </span>
+  )
+}
+
 export default function Recognize() {
   const [phase, setPhase] = useState<Phase>('idle')
   const [clip, setClip] = useState<{ blob: Blob; name: string; seconds: number } | null>(null)
@@ -310,6 +344,37 @@ export default function Recognize() {
               />
             </div>
 
+            {/* 录音 / 上传小贴士（低调、与现有 UI 调性一致） */}
+            <div className="rounded-2xl bg-wood-light/15 sketch-border px-5 py-4">
+              <p className="text-xs font-semibold text-ink-soft mb-2">录音小贴士</p>
+              <ul className="space-y-1.5 text-xs text-ink-soft leading-relaxed">
+                <li className="flex gap-2">
+                  <span className="text-leaf shrink-0">·</span>
+                  <span>尽量靠近鸣叫的鸟、减少环境噪声，识别会更准。</span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-sunset-dark shrink-0">·</span>
+                  <span>
+                    <b className="text-ink">不要对着音箱外放再录</b>
+                    ：二次录音会大幅降低识别置信度，可能直接认不出来。
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-leaf shrink-0">·</span>
+                  <span>
+                    直接上传<b className="text-ink">原始音频文件</b>效果最好。
+                  </span>
+                </li>
+                <li className="flex gap-2">
+                  <span className="text-leaf shrink-0">·</span>
+                  <span>
+                    BirdNET 引擎目前主要覆盖<b className="text-ink">鸟类</b>
+                    ；蛙类、昆虫暂不支持（会走本地科普库展示）。
+                  </span>
+                </li>
+              </ul>
+            </div>
+
             {phase === 'error' && errorMsg && (
               <div className="rounded-2xl bg-sunset/20 sketch-border px-5 py-4 flex items-start gap-3 animate-fadeUp" role="alert">
                 <span className="text-lg" aria-hidden="true">⚠️</span>
@@ -509,6 +574,13 @@ export default function Recognize() {
                       <div className="mt-3">
                         <ConfidenceBar value={it.confidence} delay={i * 120} />
                       </div>
+
+                      {/* 可信度分级：诚实展示模型把握度（本地兜底"离线示例"结果不显示） */}
+                      {it.source !== 'local-fallback' && (
+                        <div className="mt-1.5">
+                          <CredibilityTag confidence={it.confidence} />
+                        </div>
+                      )}
 
                       <p className="text-sm text-ink-soft mt-3 line-clamp-2 leading-relaxed">
                         {it.species.callFeature}

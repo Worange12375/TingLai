@@ -78,8 +78,13 @@ const HEALTH_URL = (() => {
 
 const TIMEOUT_MS = Number(env.VITE_RECOGNIZE_TIMEOUT ?? 30000) || 30000
 
-/** 默认置信度下限，与后端 birdnet_engine.DEFAULT_MIN_CONF 保持一致 */
-const DEFAULT_MIN_CONF = 0.25
+/**
+ * 默认置信度下限，与后端 birdnet_engine.DEFAULT_MIN_CONF 保持一致（均为 0.10）。
+ * 实测依据：同一段戴胜音频经二次录音劣化后，置信度会掉到 0.15~0.21，0.25 的阈值会把这些
+ * 仍然正确的识别结果一刀切掉（detections 空 → 前端误走本地瞎猜兜底）。改到 0.10 后由
+ * UI 按可信度分级（高≥0.50 / 中0.25~0.50 / 低<0.25）诚实展示，避免"AI 在瞎猜"的观感。
+ */
+const DEFAULT_MIN_CONF = 0.10
 
 /** 未收录物种但置信度高于此值时，明确提示用户"识别到 X（暂未收录）" */
 const NOTABLE_CONF = 0.5
@@ -222,7 +227,7 @@ export interface RecognizeMeta {
   lon?: number
   /** 录制日期 YYYY-MM-DD，默认取今天 */
   date?: string
-  /** 置信度下限，默认 0.25 */
+  /** 置信度下限，默认 0.10（与后端 birdnet_engine.DEFAULT_MIN_CONF 一致） */
   minConf?: number
   /** 最多返回几个候选，默认 3 */
   topK?: number

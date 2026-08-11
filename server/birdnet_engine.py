@@ -32,7 +32,15 @@ logger = logging.getLogger("tinglai.engine")
 # BirdNET 需要一个「无位置信息」的哨兵值：-1 表示不做地理过滤
 NO_GEO = -1.0
 
-DEFAULT_MIN_CONF = 0.25
+# 默认置信度下限（min_conf）。
+# 为何从 0.25 降到 0.10 —— 主理人对生产环境 /api/recognize 做压测，用 ffmpeg 模拟
+# "对着音箱外放再用手机录"的二次录音劣化（混响+降音量+限频响），同一段戴胜音频四档对比：
+#   原始 0.855 → 轻度 0.524 → 中度 0.211 → 重度 0.148
+# BirdNET 从头到尾都识别正确（均为 Upupa epops），只是置信度掉到阈值以下被一刀切掉，
+# 导致 detections 空 → 前端误走本地瞎猜兜底。0.25 会把 0.15~0.21 这些仍然正确的
+# 结果误杀；改到 0.10 后，配合前端的「可信度分级」把低置信但正确的结果诚实展示给用户，
+# 而不是丢弃。引擎本身在 min_conf=0.1 下对真实鸟鸣识别准确率很高（实测 7/7 正确）。
+DEFAULT_MIN_CONF = 0.10
 
 
 class EngineNotReady(RuntimeError):
