@@ -369,23 +369,19 @@ function validate(list: unknown): ValidationIssue[] {
     }
 
     // —— §1 字段 13：image ——
-    // 支持两种合法取值：
-    //   1) 由 id 派生的 AI 插画：/assets/npc-<id>.webp
-    //   2) 真实照片（林知声补图）：/photos/<id>.<ext>
-    // 其余视为非法。仅影响 AdminTool 本地校验，不改动任何生产数据。
+    // 后台是开发人员在用，校验只兜底“明显写错”（空值 / 非本地路径 / 落到了别的目录），
+    // 不强制固定文件名，给运营留灵活度。当前站点设计里 image 只会有两类合法来源：
+    //   1) AI 插画：/assets 目录下任意文件（约定 /assets/npc-<id>.webp）
+    //   2) 真实照片：/photos 目录（林知声补图，/photos/<id>.<ext>）
+    // 文件缺失只告警不拦截（插画/照片可能稍后补）。仅影响 AdminTool 本地校验，不改动任何生产数据。
     const image = typeof o.image === 'string' ? o.image.trim() : ''
-    const isDerived = id && image === derivedImage(id)
+    const isLocalAsset = /^\/?assets\//.test(image)
     const isPhoto = /^\/?photos\//.test(image)
-    if (id && image && !isDerived && !isPhoto) {
-      add('image', 'error', `必须是 ${derivedImage(id)}（AI 插画）或 /photos/ 下的真实照片路径`)
+    if (id && image && !isLocalAsset && !isPhoto) {
+      add('image', 'error', '必须是 /assets/（AI 插画）或 /photos/（真实照片）下的本地路径')
     }
-    if (id && isPhoto) {
-      const p = path.join(ROOT, 'public', image.replace(/^\//, ''))
-      if (!fs.existsSync(p)) add('image', 'warn', `真实照片文件不存在：public${image}`)
-    }
-    if (id && isDerived) {
-      const webp = path.join(ASSETS_DIR, `npc-${id}.webp`)
-      if (!fs.existsSync(webp)) add('image', 'warn', `插画未补齐：public/assets/npc-${id}.webp 不存在`)
+    if (id && image && !fs.existsSync(path.join(ROOT, 'public', image.replace(/^\//, '')))) {
+      add('image', 'warn', `图片文件不存在：public${image}（若稍后补图可忽略）`)
     }
   })
 
