@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { getNickname } from '../lib/storage'
-import { LogoMark } from './SoundVerseLogo'
 
 const navItems = [
   { to: '/', label: '首页', end: true },
@@ -12,11 +11,11 @@ const navItems = [
   { to: '/compose', label: '自然作曲' },
 ]
 
-/** 队徽：听籁矢量徽标（鸟栖放大镜 · 声波扩散） */
+/** 队徽：听籁品牌标识（用户设计稿 logo.png） */
 function BrandMark() {
   return (
-    <span className="grid place-items-center w-10 h-10 rounded-full bg-moss/20 sketch-border shrink-0">
-      <LogoMark className="w-7 h-7" />
+    <span className="grid place-items-center w-10 h-10 rounded-full bg-moss/20 sketch-border shrink-0 overflow-hidden">
+      <img src="/logo.png" alt="听籁 SoundVerse" className="w-full h-full object-contain p-1" />
     </span>
   )
 }
