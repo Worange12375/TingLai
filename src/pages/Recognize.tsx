@@ -863,11 +863,10 @@ export default function Recognize() {
       <Card className="p-6">
         <div className="flex items-center gap-2">
           <span className="text-xl" aria-hidden="true">🎧</span>
-          <h3 className="font-bold text-ink text-lg">评委测试音频 · 一键下载</h3>
+          <h3 className="font-bold text-ink text-lg">测试音频下载</h3>
         </div>
         <p className="text-sm text-ink-soft mt-2 leading-relaxed">
-          以下音频已实测可被准确识别（绿色越深越稳）。下载后回到本页点「上传音频文件」即可看到对应物种的识别结果，
-          方便评委快速验证识别能力。
+          为方便测试相应功能，这里提供了一些测试音频。点击下载后回到上侧，点击「上传音频文件」即可看到对应物种的识别结果。
         </p>
         <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
           {TEST_AUDIO.map((a) => (
@@ -881,7 +880,7 @@ export default function Recognize() {
                 <span className="block text-sm font-semibold text-ink truncate">{a.name}</span>
                 <span className="block text-xs text-leaf">识别率 {Math.round(a.conf * 100)}%</span>
               </span>
-              <span className="shrink-0 text-feather-dark text-lg" aria-hidden="true">⬇</span>
+              <span className="shrink-0 text-feather-dark text-lg" aria-hidden="true">⚬</span>
             </a>
           ))}
         </div>

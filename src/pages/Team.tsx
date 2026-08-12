@@ -41,11 +41,11 @@ export default function Team() {
           </div>
         </div>
         <p className="text-ink-soft leading-relaxed">
-          我们是一支来自清华大学笃实书院的小队。在城市里长大，我们却常叫不出窗外那只鸟的名字——
+          我们是一支来自清华大学笃实书院的小队。我们在城市里长大，却常常叫不出窗外那只鸟的名字——
           于是想做点什么：用 AI 把「听见」变成「认识」，把「认识」变成「在意」。
         </p>
         <p className="text-ink-soft leading-relaxed mt-3">
-          听籁是一款面向自然教育的声音识别小应用：录一段鸟鸣、蛙声或虫唱，AI 帮你认出它是谁，
+          听籁是一款面向自然教育的声音识别小工具：录一段鸟鸣、蛙声或虫唱，AI 帮你认出它是谁，
           再用一张中文科普卡讲清它的故事。我们相信，保护自然的第一步，是先知道它们是谁。
         </p>
         <div className="flex flex-wrap gap-2 mt-5">
@@ -65,7 +65,7 @@ export default function Team() {
           {MEMBERS.map((m) => (
             <Card key={m.name} className={`p-5 text-center ${m.lead ? 'ring-2 ring-moss/40' : ''}`} hoverable>
               <div className="mx-auto w-16 h-16 grid place-items-center rounded-full bg-paper-light shadow-soft text-2xl">
-                {m.lead ? '🦉' : '🐤'}
+                {m.lead ? '🦉' : '🦜'}
               </div>
               <p className="font-bold text-ink text-lg mt-3">{m.name}</p>
               <p className="mt-1">
