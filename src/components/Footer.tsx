@@ -66,9 +66,16 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-5 border-t border-wood/25 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-ink-faint">
-          <p>© 2026 智更鸟队 · 听籁 SoundVerse · 自然之声 AI 识别</p>
-          <p>叫声音频来源：iNaturalist（21 条）、xeno-canto（1 条），遵循 CC 系列授权（CC0 / CC BY / CC BY-NC / CC BY-NC-SA），仅用于非商业科普演示</p>
+        <div className="mt-8 pt-5 border-t border-wood/25 flex flex-col gap-2 text-xs text-ink-faint">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p>© 2026 智更鸟队 · 听籁 SoundVerse · 自然之声 AI 识别</p>
+            <p>叫声音频来源：iNaturalist（21 条）、xeno-canto（1 条），遵循 CC 系列授权（CC0 / CC BY / CC BY-NC / CC BY-NC-SA），仅用于非商业科普演示</p>
+          </div>
+          <p className="leading-relaxed">
+            未收录物种中文名数据：基于 IOC World Bird List + 鸟有记整理 + Wikidata（CC0），经 npm 包
+            <code className="px-1 rounded bg-wood/15">@niaoyouji/chinese-bird-name-bridge</code>
+            （data/ioc-species-db.json，IOC 15.1）打包，许可 CC BY-NC 4.0，仅用于非商业学术演示。
+          </p>
         </div>
       </div>
     </footer>
