@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { getNickname } from '../lib/storage'
+import { LogoMark } from './SoundVerseLogo'
 
 const navItems = [
   { to: '/', label: '首页', end: true },
@@ -11,15 +12,11 @@ const navItems = [
   { to: '/compose', label: '自然作曲' },
 ]
 
-/** 队徽：内联 SVG 手绘小鸟 */
+/** 队徽：听籁矢量徽标（鸟鸣化耳 · 负空间双关） */
 function BrandMark() {
   return (
     <span className="grid place-items-center w-10 h-10 rounded-full bg-moss/20 sketch-border shrink-0">
-      <svg viewBox="0 0 40 40" className="w-7 h-7" aria-hidden="true">
-        <path d="M9 23c-2-4-1-9 3-11 4-2 8-1 10 1l6-2-3 5c2 3 2 7-1 10-4 4-10 4-14 1-.6-.5-1-1.6-1-4z" fill="#4F6B4A" />
-        <circle cx="21" cy="17" r="1.4" fill="#FBF7EE" />
-        <path d="M28 15l5-2-4 4z" fill="#E8A87C" />
-      </svg>
+      <LogoMark className="w-7 h-7" />
     </span>
   )
 }

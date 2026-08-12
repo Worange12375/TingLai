@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <title>听籁 SoundVerse</title>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#7C9473" />
+  <!-- 声波 = 耳朵（米白描边，负空间双关） -->
+  <g fill="none" stroke="#FBF7EE" stroke-width="3" stroke-linecap="round">
+    <path d="M41 22 C53 19 59 31 54 43 C50 52 43 53 39 50" />
+    <path d="M45 26 C53 24 56 32 52 41 C49 47 45 48 42 46" />
+    <path d="M48 30 C52 31 53 36 50 39 C48 41 46 40 46 38" />
+  </g>
+  <!-- 鸣禽（米白填充） -->
+  <path fill="#FBF7EE" d="M16 41 C11 34 13 25 22 22 C27 20 32 21 34 25 L41 19 L36 27 C37 31 35 36 30 40 C25 43 19 44 16 41 Z" />
+  <!-- 眼睛（橘色点睛） -->
+  <circle cx="28" cy="27" r="1.8" fill="#E8A87C" />
+</svg>
