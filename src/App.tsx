@@ -10,6 +10,7 @@ import Quiz from './pages/Quiz'
 import Compose from './pages/Compose'
 import Hall from './pages/Hall'
 import Account from './pages/Account'
+import Team from './pages/Team'
 import { Button } from './components/ui'
 import { stopAudio } from './lib/audio'
 
@@ -76,6 +77,7 @@ export default function App() {
           <Route path="/compose" element={<Compose />} />
           <Route path="/hall" element={<Hall />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/team" element={<Team />} />
           {AdminTool && (
             <Route
               path="/dev"

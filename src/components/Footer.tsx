@@ -26,10 +26,41 @@ export default function Footer() {
             <div>
               <p className="font-semibold text-ink mb-2.5">关于</p>
               <ul className="space-y-1.5 text-ink-soft">
-                <li>智更鸟队</li>
-                <li>小有可为 2026</li>
-                <li>绿色发展赛道</li>
-                <li>AI 向善创新挑战赛</li>
+                <li>
+                  <Link to="/team" className="hover:text-leaf transition">
+                    智更鸟队
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="https://opc.aliyun.com/xiaoyoukewei?display_mode=3"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-leaf transition"
+                  >
+                    小有可为 2026
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://opc.aliyun.com/xiaoyoukewei/topic4?spm=5176.46288052.J_5H_vaebiZ_nmEXBJeSNFF.d_3_action_0.c5e952dco0Cacd&display_mode=3"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-leaf transition"
+                  >
+                    绿色发展赛道
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://page.aliyun.com/form/act2018624470/index.htm?spm=5176.46288052.J_EH4jTga-7kdox_HRccqIL.1.c5e952dco0Cacd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-leaf transition"
+                  >
+                    AI 向善创新挑战赛
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

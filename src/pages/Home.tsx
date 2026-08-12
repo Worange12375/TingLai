@@ -145,7 +145,7 @@ const features: {
     to: '/recognize',
     icon: 'recognize',
     title: '识籁',
-    desc: '上传或现场录一段声音，AI 给出 Top-3 候选物种与置信度',
+    desc: '上传或现场录一段声音，AI 给出最可能的物种与置信度',
     accent: 'from-moss/25 to-moss/5',
   },
   {
@@ -216,7 +216,7 @@ export default function Home() {
   const stats = [
     { num: speciesList.length, unit: '种', label: '中文科普卡' },
     { num: 3, unit: '类', label: '鸟 / 蛙 / 昆虫' },
-    { num: 'Top-3', unit: '', label: '识别候选结果' },
+    { num: 'BirdNET', unit: '', label: 'AI 识别引擎' },
   ]
 
   return (

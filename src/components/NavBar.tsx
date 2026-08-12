@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { getNickname } from '../lib/storage'
 
@@ -28,10 +28,13 @@ export default function NavBar() {
   const [open, setOpen] = useState(false)
   const [nick, setNick] = useState(getNickname())
   const location = useLocation()
+  const firstNav = useRef(true)
 
-  // 路由变化时收起移动端菜单 + 同步昵称
+  // 路由变化时：展开移动端导航菜单（方便用户在新页面继续跳转），并同步昵称。
+  // 首屏加载不自动展开，避免一进首页就弹出菜单。
   useEffect(() => {
-    setOpen(false)
+    if (!firstNav.current) setOpen(true)
+    firstNav.current = false
     setNick(getNickname())
   }, [location.pathname])
 

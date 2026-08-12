@@ -89,6 +89,107 @@ const DEFAULT_MIN_CONF = 0.10
 /** 未收录物种但置信度高于此值时，明确提示用户"识别到 X（暂未收录）" */
 const NOTABLE_CONF = 0.5
 
+/**
+ * 未收录物种的中文名兜底表。
+ * 当 BirdNET 识别出我们科普库里还没有的物种时，remote 只回英文俗名 + 学名，
+ * 用户"看不懂是谁"。这里维护一份常见中国鸟类 学名/英文名 → 中文名 的小词典，
+ * 命中就直接给中文名（方便用户认识），未命中则退化为英文名 + 学名（诚实不编造）。
+ * ⚠️ 只收"有把握"的常见种，避免张冠李戴给出错误中文名（那比不给更糟）。
+ * 新物种由林知声补进 species.sample.json 后，这里可逐步退役。
+ */
+const UNCATALOGED_CN: ReadonlyMap<string, string> = new Map(
+  [
+    // 学名 → 中文
+    ['pycnonotus jocosus', '红耳鹎'],
+    ['pycnonotus sinensis', '白头鹎'],
+    ['pycnonotus xanthorrhous', '黄臀鹎'],
+    ['turdus mandarinus', '乌鸫'],
+    ['turdus hortulorum', '灰背鸫'],
+    ['turdus merula', '欧乌鸫'],
+    ['turdus obscurus', '白眉鸫'],
+    ['spilopelia chinensis', '珠颈斑鸠'],
+    ['streptopelia orientalis', '山斑鸠'],
+    ['streptopelia tranquebarica', '火斑鸠'],
+    ['acridotheres cristatellus', '八哥'],
+    ['sturnus sericeus', '丝光椋鸟'],
+    ['spodiopsar cineraceus', '灰椋鸟'],
+    ['cyanopica cyanus', '灰喜鹊'],
+    ['corvus macrorhynchos', '大嘴乌鸦'],
+    ['corvus corone', '小嘴乌鸦'],
+    ['pica pica', '喜鹊'],
+    ['garrulus glandarius', '松鸦'],
+    ['urocissa erythroryncha', '红嘴蓝鹊'],
+    ['parus major', '大山雀'],
+    ['poecile venustulus', '黄腹山雀'],
+    ['zosterops japonicus', '暗绿绣眼鸟'],
+    ['egretta garzetta', '白鹭'],
+    ['egretta alba', '大白鹭'],
+    ['bubulcus ibis', '牛背鹭'],
+    ['ardeola bacchus', '池鹭'],
+    ['nycticorax nycticorax', '夜鹭'],
+    ['butorides striata', '绿鹭'],
+    ['ardea cinerea', '苍鹭'],
+    ['motacilla alba', '白鹡鸰'],
+    ['motacilla cinerea', '灰鹡鸰'],
+    ['lanius cristatus', '红尾伯劳'],
+    ['lanius schach', '棕背伯劳'],
+    ['dicrurus macrocercus', '黑卷尾'],
+    ['dicrurus leucophaeus', '灰卷尾'],
+    ['alcedo atthis', '普通翠鸟'],
+    ['halcyon smyrnensis', '白胸翡翠'],
+    ['upupa epops', '戴胜'],
+    ['cuculus canorus', '大杜鹃'],
+    ['cuculus saturatus', '中杜鹃'],
+    ['cuculus poliocephalus', '小杜鹃'],
+    ['tachybaptus ruficollis', '小䴙䴘'],
+    ['podiceps cristatus', '凤头䴙䴘'],
+    ['anas platyrhynchos', '绿头鸭'],
+    ['anas poecilorhyncha', '斑嘴鸭'],
+    ['gallinula chloropus', '黑水鸡'],
+    ['fulica atra', '白骨顶'],
+    ['columba livia', '原鸽'],
+    ['phalacrocorax carbo', '普通鸬鹚'],
+    ['phasianus colchicus', '环颈雉'],
+    ['bambusicola thoracicus', '灰胸竹鸡'],
+    ['troglodytes troglodytes', '鹪鹩'],
+    ['cinclus cinclus', '河乌'],
+    ['phoenicurus auroreus', '北红尾鸲'],
+    ['saxicola torquatus', '黑喉石鵖'],
+    ['copsychus saularis', '鹊鸲'],
+    ['monticola solitarius', '蓝矶鸫'],
+    ['garrulax sannio', '红头噪鹛'],
+    ['garrulax cineraceus', '灰翅噪鹛'],
+    ['leiothrix lutea', '红嘴相思鸟'],
+    ['paradoxornis webbianus', '棕头鸦雀'],
+    ['passer rutilans', '山麻雀'],
+    ['lonchura striata', '白腰文鸟'],
+    ['carduelis sinica', '金翅雀'],
+    ['eophona personata', '黑尾蜡嘴雀'],
+    ['cisticola juncidis', '棕扇尾莺'],
+    ['prinia inornata', '灰头鹪莺'],
+    ['rhipidura albicollis', '白喉扇尾鹟'],
+    ['ficedula narcissina', '黄眉姬鹟'],
+    ['apus apus', '普通楼燕'],
+    ['apus pacificus', '白腰雨燕'],
+    ['hirundo rustica', '家燕'],
+    ['alauda arvensis', '云雀'],
+    ['anthus hodgsoni', '树鹨'],
+    ['dendrocopos major', '大斑啄木鸟'],
+    ['sitta europaea', '普通䴓'],
+    ['sylvia communis', '灰莺'],
+    ['phylloscopus inornatus', '黄眉柳莺'],
+    ['phylloscopus proregulus', '黄腰柳莺'],
+    ['locustella certhiola', '斑纹蝗莺'],
+    ['myophonus caeruleus', '蓝短翅鸫'],
+    ['larvivora cyane', '蓝歌鸲'],
+  ].map(([k, v]) => [normKey(k), v] as [string, string]),
+)
+
+/** 用学名 / 英文名查未收录物种的中文名（命中返回中文，否则 undefined） */
+function resolveCn(scientificName: string, commonName: string): string | undefined {
+  return UNCATALOGED_CN.get(normKey(scientificName)) ?? UNCATALOGED_CN.get(normKey(commonName))
+}
+
 /** 是否配置了远端识别服务（同源相对路径也算已配置） */
 export function hasRemoteApi(): boolean {
   return Boolean(ENDPOINT)
@@ -408,9 +509,9 @@ async function localFallback(audio: Blob, topK: number): Promise<RecognitionResu
   }))
 }
 
-/** 未收录物种的占位科普卡 */
-function placeholderSpecies(hit: RemoteHit): Species {
-  const label = hit.commonName || hit.scientificName
+/** 未收录物种的占位科普卡；cn 为可解析出的中文名（命中词典则展示中文，否则退化为英文名） */
+function placeholderSpecies(hit: RemoteHit, cn?: string): Species {
+  const label = cn || hit.commonName || hit.scientificName
   return {
     id: `uncataloged-${normKey(hit.scientificName).replace(/[^a-z0-9]+/g, '-')}`,
     name: label,
@@ -472,13 +573,14 @@ export async function recognizeWithDiagnostics(
       .sort((a, b) => b.confidence - a.confidence)
       .slice(0, topK)
       .map((h) => {
+        const cn = resolveCn(h.scientificName, h.commonName)
         const local = matchSpecies(h.scientificName, h.commonName)
         const confidence = Math.max(0, Math.min(1, h.confidence))
         if (!local && confidence >= NOTABLE_CONF) {
-          uncataloged.push(h.commonName || h.scientificName)
+          uncataloged.push(cn ?? h.commonName ?? h.scientificName)
         }
         return {
-          species: local ?? placeholderSpecies(h),
+          species: local ?? placeholderSpecies(h, cn),
           confidence,
           source: 'birdnet' as const,
           inLibrary: Boolean(local),

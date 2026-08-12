@@ -88,6 +88,40 @@ const MODES: ReadonlyArray<{ key: 'auto' | 'bird' | 'frog' | 'insect'; label: st
   { key: 'insect', label: '虫类' },
 ]
 
+/** 识别进行中的趣味等待文案（进度条推进时轮流展示，缓解等待焦虑） */
+const WAITING_LINES = [
+  '耐心一下，听籁正在翻阅鸟类图鉴…',
+  '正在比对声纹，像在林子里侧耳倾听…',
+  '小助手正在查阅鸟类资料库…',
+  '捕捉每一段频率里的线索…',
+  '把你的声音和百万条鸟鸣做对照…',
+]
+
+/**
+ * 评委测试音频：实测可被准确识别的高成功率鸟类（id 对应 public/audio/<id>.mp3）。
+ * 由 scripts/rank_test_audio.py 对全部参考音频跑生产识别得出，仅保留「正确识别为自身」的高置信样本，
+ * 评委下载后到识籁页「上传音频文件」即可看到对应物种的识别结果。
+ */
+const TEST_AUDIO: ReadonlyArray<{ id: string; name: string; conf: number }> = [
+  { id: 'common-kingfisher', name: '普通翠鸟', conf: 0.996 },
+  { id: 'oriental-scops-owl', name: '红角鸮', conf: 0.987 },
+  { id: 'common-cuckoo', name: '大杜鹃', conf: 0.976 },
+  { id: 'barn-swallow', name: '家燕', conf: 0.975 },
+  { id: 'chinese-hwamei', name: '画眉', conf: 0.97 },
+  { id: 'spotted-dove', name: '珠颈斑鸠', conf: 0.967 },
+  { id: 'cinereous-tit', name: '大山雀', conf: 0.962 },
+  { id: 'white-breasted-waterhen', name: '白胸苦恶鸟', conf: 0.957 },
+  { id: 'swinhoe-white-eye', name: '暗绿绣眼鸟', conf: 0.954 },
+  { id: 'red-crowned-crane', name: '丹顶鹤', conf: 0.939 },
+  { id: 'indian-cuckoo', name: '四声杜鹃', conf: 0.876 },
+  { id: 'azure-winged-magpie', name: '灰喜鹊', conf: 0.869 },
+  { id: 'hoopoe', name: '戴胜', conf: 0.855 },
+  { id: 'black-throated-tit', name: '红头长尾山雀', conf: 0.842 },
+  { id: 'oriental-magpie-robin', name: '鹊鸲', conf: 0.82 },
+  { id: 'red-whiskered-bulbul', name: '红耳鹎', conf: 0.677 },
+  { id: 'black-faced-bunting', name: '灰头鹀', conf: 0.661 },
+]
+
 /**
  * 把识别失败的原因文案归并为「连接失败 / 没听到鸟叫 / 录音或文件问题 / 其它」四档，
  * 给失败反馈 UI 一个清晰、醒目、说清问题的标题与说明。
@@ -140,7 +174,7 @@ function FailureAlert({ message, onDismiss }: { message: string; onDismiss: () =
     >
       {/* 失败卡通图（主理人生成；加载失败自动退化到 emoji） */}
       <div
-        className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl grid place-items-center overflow-hidden border-2 animate-pulse ${
+        className={`relative shrink-0 w-24 h-24 sm:w-32 sm:h-32 rounded-3xl grid place-items-center overflow-hidden border-[3px] animate-pulse ${
           isRed ? 'border-red-400 bg-red-100' : 'border-amber-400 bg-amber-100'
         }`}
       >
@@ -186,6 +220,9 @@ export default function Recognize() {
   const [level, setLevel] = useState(0)
   const [useGeo, setUseGeo] = useState(false)
   const [health, setHealth] = useState<ServiceHealth>({ state: 'checking' })
+  /** 识别进行中的模拟进度（0~100）与趣味等待文案 */
+  const [progress, setProgress] = useState(0)
+  const [waitMsg, setWaitMsg] = useState('')
   /** 识别模式：自动 / 鸟类 / 蛙类 / 虫类，默认选中「鸟类」 */
   const [mode, setMode] = useState<'auto' | 'bird' | 'frog' | 'insect'>('bird')
   /** 蛙类 / 虫类 当前模型不支持，需要诚实告知 */
@@ -195,8 +232,10 @@ export default function Recognize() {
   const tickRef = useRef<number | null>(null)
   const clipUrlRef = useRef<string>('')
   const fileInputRef = useRef<HTMLInputElement>(null)
+  /** 待识别音频的原生 <audio> 元素：播放物种叫声前先暂停它，避免两段声音同时响 */
+  const clipAudioRef = useRef<HTMLAudioElement>(null)
 
-  const { playingId, notice, play } = useCallPlayer()
+  const { playingId, notice, play, stop } = useCallPlayer()
 
   /* ------------------------------ 清理 ------------------------------ */
 
@@ -309,6 +348,15 @@ export default function Recognize() {
     setPhase('analyzing')
     setFallbackReason('')
     setUncataloged([])
+    // 模拟进度条（真实网络调用通常 1~3s），配趣味等待文案，缓解等待焦虑
+    setProgress(0)
+    setWaitMsg(WAITING_LINES[0])
+    const startedAt = Date.now()
+    const tick = window.setInterval(() => {
+      const el = Date.now() - startedAt
+      setProgress(Math.min(96, (el / 2600) * 100))
+      setWaitMsg(WAITING_LINES[Math.min(WAITING_LINES.length - 1, Math.floor(el / 800))])
+    }, 120)
     // 声类提示：仅「鸟类」真实生效；「蛙类/虫类」作占位透传给后端，便于将来扩展
     const groupHint: '鸟类' | '蛙类' | '昆虫' | undefined =
       mode === 'bird' ? '鸟类' : mode === 'frog' ? '蛙类' : mode === 'insect' ? '昆虫' : undefined
@@ -322,6 +370,8 @@ export default function Recognize() {
         topK: 3,
         groupHint,
       })
+      window.clearInterval(tick)
+      setProgress(100)
       if (outcome.items.length === 0) {
         setErrorMsg('没有得到识别结果，可能是物种库为空或音频过短，请换一段再试')
         setPhase('error')
@@ -344,6 +394,7 @@ export default function Recognize() {
         })
       }
     } catch {
+      window.clearInterval(tick)
       setErrorMsg('识别过程出错了，请稍后重试')
       setPhase('error')
     }
@@ -354,6 +405,7 @@ export default function Recognize() {
       URL.revokeObjectURL(clipUrlRef.current)
       clipUrlRef.current = ''
     }
+    stop() // 切换 / 重置时停掉正在播放的物种叫声，不再干扰下一场景
     setClip(null)
     setItems([])
     setErrorMsg('')
@@ -388,6 +440,18 @@ export default function Recognize() {
           </Badge>
           <Badge tone="feather">支持 wav / mp3 / m4a / ogg / webm</Badge>
           <Badge tone="blossom">单段建议 5–30 秒</Badge>
+        </div>
+
+        {/* 醒目提示：当前模型主要覆盖鸟类 */}
+        <div className="rounded-2xl border-2 border-moss/40 bg-moss/10 px-5 py-4 flex items-start gap-3">
+          <span className="text-2xl shrink-0" aria-hidden="true">🐦</span>
+          <div>
+            <p className="font-bold text-ink text-base">请尽量上传鸟类音频</p>
+            <p className="text-sm text-ink-soft mt-1 leading-relaxed">
+              当前识别模型主要覆盖<strong className="text-ink">鸟类</strong>；蛙类 / 虫类暂不支持（会走本地科普库展示）。
+              录音请尽量靠近声源、直接传原始文件最佳，<strong className="text-ink">不要对着音箱外放再录</strong>。
+            </p>
+          </div>
         </div>
       </div>
 
@@ -589,7 +653,14 @@ export default function Recognize() {
             </div>
 
             {clipUrlRef.current && (
-              <audio src={clipUrlRef.current} controls className="w-full rounded-full" preload="metadata" />
+              <audio
+                ref={clipAudioRef}
+                src={clipUrlRef.current}
+                controls
+                className="w-full rounded-full"
+                preload="metadata"
+                onPlay={() => stop()}
+              />
             )}
 
             {/* 可选：带上定位。BirdNET 会按地理位置收窄候选物种，准确率明显提升 */}
@@ -628,12 +699,15 @@ export default function Recognize() {
               </svg>
             </div>
             <p className="font-bold text-ink text-lg">正在分辨这是谁的声音…</p>
-            <p className="text-sm text-ink-soft mt-2">正在提取声纹特征并比对物种库</p>
-            <div className="mt-6 max-w-xs mx-auto h-2 rounded-full bg-wood-light/45 overflow-hidden">
-              <div
-                className="h-full w-1/3 rounded-full bg-gradient-to-r from-moss to-sunset animate-shimmer"
-                style={{ backgroundSize: '400px 100%' }}
-              />
+            <p className="text-sm text-ink-soft mt-2">{waitMsg}</p>
+            <div className="mt-6 max-w-sm mx-auto">
+              <div className="h-3 rounded-full bg-wood-light/45 overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-moss to-sunset transition-[width] duration-150 ease-out"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <p className="text-xs text-ink-faint mt-2 tabular-nums">已分析 {Math.round(progress)}%</p>
             </div>
           </div>
         )}
@@ -642,7 +716,7 @@ export default function Recognize() {
         {phase === 'result' && (
           <div className="space-y-5">
             <div className="flex items-center justify-between gap-3 flex-wrap">
-              <p className="font-bold text-ink text-lg">识别完成 · Top-{items.length} 候选</p>
+              <p className="font-bold text-ink text-lg">识别完成 · {items.length} 个候选结果</p>
               <Button variant="soft" size="sm" onClick={reset}>
                 再识别一段
               </Button>
@@ -662,12 +736,24 @@ export default function Recognize() {
             )}
 
             {fallbackReason && (
-              <div className="rounded-2xl bg-feather/15 sketch-border px-5 py-3.5 flex items-start gap-3" role="status">
-                <span aria-hidden="true">ℹ️</span>
-                <p className="text-sm text-ink-soft leading-relaxed flex-1">
-                  {fallbackReason}。这是我们为演示稳定性设计的降级策略：识别服务不可用时，
-                  链路仍然完整可走通，结果仅作示例，不代表真实模型判断。
-                </p>
+              <div className="rounded-2xl border-2 border-amber-400 bg-amber-50 px-5 py-4 flex items-start gap-3 animate-fadeUp" role="status">
+                <img
+                  src="/assets/recognize-fail.webp"
+                  alt=""
+                  className="w-14 h-14 rounded-xl object-cover border-2 border-amber-300 shrink-0"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                  }}
+                />
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-amber-900 text-sm flex items-center gap-1.5">
+                    <span aria-hidden="true">⚠️</span> 识别未命中，已切换为演示示例
+                  </p>
+                  <p className="text-sm text-amber-800/90 mt-1.5 leading-relaxed">
+                    {fallbackReason}。这是为演示稳定性设计的降级策略：链路仍走通，但结果为示例，
+                    <b className="text-amber-900">不代表真实模型判断</b>。建议换一段更清晰、稍长的鸟类录音再试。
+                  </p>
+                </div>
               </div>
             )}
 
@@ -744,7 +830,11 @@ export default function Recognize() {
                         <div className="flex items-center gap-2 mt-4 flex-wrap">
                           <PlayCallButton
                             playing={playingId === it.species.id}
-                            onClick={() => play(it.species)}
+                            onClick={() => {
+                              // 每点一次先停掉全部正在播放的音频（含待识别音频），再播这一条
+                              clipAudioRef.current?.pause()
+                              play(it.species)
+                            }}
                             size="sm"
                             label="听叫声"
                           />
@@ -767,6 +857,34 @@ export default function Recognize() {
             </div>
           </div>
         )}
+      </Card>
+
+      {/* ============================ 评委测试音频 ============================ */}
+      <Card className="p-6">
+        <div className="flex items-center gap-2">
+          <span className="text-xl" aria-hidden="true">🎧</span>
+          <h3 className="font-bold text-ink text-lg">评委测试音频 · 一键下载</h3>
+        </div>
+        <p className="text-sm text-ink-soft mt-2 leading-relaxed">
+          以下音频已实测可被准确识别（绿色越深越稳）。下载后回到本页点「上传音频文件」即可看到对应物种的识别结果，
+          方便评委快速验证识别能力。
+        </p>
+        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-3">
+          {TEST_AUDIO.map((a) => (
+            <a
+              key={a.id}
+              href={`/audio/${a.id}.mp3`}
+              download
+              className="flex items-center justify-between gap-2 rounded-2xl bg-wood-light/25 sketch-border px-3.5 py-2.5 hover:bg-wood-light/50 hover:-translate-y-0.5 transition"
+            >
+              <span className="min-w-0">
+                <span className="block text-sm font-semibold text-ink truncate">{a.name}</span>
+                <span className="block text-xs text-leaf">识别率 {Math.round(a.conf * 100)}%</span>
+              </span>
+              <span className="shrink-0 text-feather-dark text-lg" aria-hidden="true">⬇</span>
+            </a>
+          ))}
+        </div>
       </Card>
 
       {/* 使用提示 */}

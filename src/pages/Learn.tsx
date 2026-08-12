@@ -1,7 +1,7 @@
 // 听籁：物种科普库列表（类群筛选 + 关键词搜索 + 卡片网格）
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Badge, Button, Card, EmptyState, SectionTitle } from '../components/ui'
+import { Badge, Button, Card, DevBanner, EmptyState, SectionTitle } from '../components/ui'
 import { NoticeBar, SpeciesCard } from '../components/SpeciesCard'
 import { availableGroups, filterSpecies, speciesList } from '../data/species'
 import { useCallPlayer } from '../lib/useCallPlayer'
@@ -30,6 +30,11 @@ export default function Learn() {
         title="听籁 · 物种科普库"
         sub={`团队原创整理的中文自然科普卡，目前收录 ${speciesList.length} 种`}
       />
+
+      <DevBanner title="科普库持续扩充中">
+        当前为初稿，收录多为常见鸟种，蛙类 / 昆虫的图文与高清图鉴仍在补录。
+        若某物种资料显示「整理中」，说明它已识别命中、科普卡正在撰写，敬请期待。
+      </DevBanner>
 
       {/* 筛选与搜索 */}
       <Card className="p-5">

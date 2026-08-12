@@ -1,7 +1,7 @@
 // 账号：纯 localStorage 模拟（昵称 / 收藏 / 识别记录 / Quiz 战绩），不接后端
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Badge, Button, Card, EmptyState, SectionTitle } from '../components/ui'
+import { Badge, Button, Card, DevBanner, EmptyState, SectionTitle } from '../components/ui'
 import { SpeciesAvatar } from '../components/PlaceholderArt'
 import { SpeciesName } from '../components/SpeciesName'
 import { getSpeciesById } from '../data/species'
@@ -50,6 +50,11 @@ export default function Account() {
   return (
     <div className="space-y-7">
       <SectionTitle title="我的账号" sub="收藏、识别记录与游戏战绩都保存在你自己的浏览器里" />
+
+      <DevBanner title="账号为纯本地体验">
+        当前不设服务器，不收集任何个人信息——以上数据仅存于本机浏览器，清除数据即消失。
+        云端同步与多端共享账号为规划中的能力，初稿阶段暂未实现。
+      </DevBanner>
 
       {/* 资料卡 */}
       <Card className="p-6 sm:p-8">

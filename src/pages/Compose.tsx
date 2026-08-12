@@ -2,7 +2,7 @@
 // 完整版（多轨叠加 / 导出音频 / AI 编曲）为赛后规划，此处标注"敬请期待"。
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Badge, Button, Card, EmptyState, SectionTitle } from '../components/ui'
+import { Badge, Button, Card, DevBanner, EmptyState, SectionTitle } from '../components/ui'
 import { SpeciesAvatar, SoundWave } from '../components/PlaceholderArt'
 import { playSynthCall, stopAudio, type PlayHandle } from '../lib/audio'
 import { speciesList } from '../data/species'
@@ -90,6 +90,10 @@ export default function Compose() {
           <Badge tone="sunset">体验版</Badge>
           <Badge tone="wood">多轨叠加 / 导出音频 · 敬请期待</Badge>
         </div>
+        <DevBanner title="自然作曲器为体验版">
+          为保证在任何网络环境下都能演示，当前用合成示意音按节拍循环播放两轮。
+          真实录音切片、多轨同时发声、导出音频与 AI 自动编曲为赛后规划，正在开发中。
+        </DevBanner>
       </div>
 
       {/* 编排区 */}

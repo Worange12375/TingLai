@@ -200,6 +200,33 @@ export function EmptyState({
   )
 }
 
+/* ------------------------------ DevBanner -------------------------------- */
+
+/**
+ * "建设中"提示条：初稿阶段，对尚未完整实现的功能做诚实标注。
+ * 用法：放在页面顶部 SectionTitle 下方，children 写"为什么还没做 / 当前能做到哪一步"。
+ */
+export function DevBanner({
+  children,
+  title = '本模块仍在开发中',
+}: {
+  children: ReactNode
+  title?: string
+}) {
+  return (
+    <div
+      className="flex items-start gap-2.5 rounded-2xl border-2 border-dashed border-amber-400/70 bg-amber-50/70 px-4 py-3 text-sm text-amber-900 animate-fadeUp"
+      role="status"
+    >
+      <span className="text-lg shrink-0 leading-none" aria-hidden="true">🚧</span>
+      <div className="min-w-0">
+        <p className="font-bold">{title}</p>
+        <p className="leading-relaxed text-amber-800/90 mt-0.5">{children}</p>
+      </div>
+    </div>
+  )
+}
+
 /* -------------------------------- Progress -------------------------------- */
 
 /** 置信度进度条 */

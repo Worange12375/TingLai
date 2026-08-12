@@ -1,7 +1,7 @@
 // 识声 Quiz：听一段叫声 → 从 4 个选项里选出物种 → 计分 + 展示科普卡
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Badge, Button, Card, EmptyState, SectionTitle } from '../components/ui'
+import { Badge, Button, Card, DevBanner, EmptyState, SectionTitle } from '../components/ui'
 import { GroupBadge, NoticeBar, PlayCallButton } from '../components/SpeciesCard'
 import { SpeciesAvatar } from '../components/PlaceholderArt'
 import { SpeciesName } from '../components/SpeciesName'
@@ -106,6 +106,11 @@ export default function Quiz() {
     return (
       <div className="space-y-7">
         <SectionTitle title="识声 Quiz" sub="听一段叫声，猜猜它的主人是谁——适合和孩子一起玩" />
+
+        <DevBanner title="识声 Quiz 为初版体验">
+          目前是「听声选物种」基础玩法：随机抽题 + 叫声辨认。更多题型、难度分级与连击计分正在开发，
+          词库也随科普库一起扩充中。
+        </DevBanner>
         <Card className="p-8 sm:p-12 text-center">
           <div className="mx-auto w-24 h-24 grid place-items-center rounded-full bg-blossom/30 text-5xl mb-6">
             🎧
