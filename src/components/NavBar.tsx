@@ -12,7 +12,7 @@ const navItems = [
   { to: '/compose', label: '自然作曲' },
 ]
 
-/** 队徽：听籁矢量徽标（鸟鸣化耳 · 负空间双关） */
+/** 队徽：听籁矢量徽标（鸟栖放大镜 · 声波扩散） */
 function BrandMark() {
   return (
     <span className="grid place-items-center w-10 h-10 rounded-full bg-moss/20 sketch-border shrink-0">
