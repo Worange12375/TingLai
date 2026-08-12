@@ -13,7 +13,9 @@
     "audioUrl": "/audio/eurasian-tree-sparrow.mp3",
     "audioSource": "iNaturalist 声音库 #1595435（录制者：Reed Lindwurm，2025-08-06，广东广州荔湾区）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-eurasian-tree-sparrow.webp"
+    "image": "/photos/eurasian-tree-sparrow.jpg",
+    "photoSource": "Wikimedia Commons · Eurasian-Tree-Sparrow.jpg · 作者 Mildeep · CC BY-SA 4.0 · 来源 https://commons.wikimedia.org/wiki/File:Eurasian-Tree-Sparrow.jpg",
+    "photoLicense": "CC BY-SA 4.0"
   },
   {
     "id": "oriole",
@@ -29,7 +31,9 @@
     "audioUrl": "/audio/oriole.mp3",
     "audioSource": "iNaturalist 声音库 #1495427（录制者：sevenuca，2025-05-31，辽宁沈阳沈北新区）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-oriole.webp"
+    "image": "/photos/oriole.jpg",
+    "photoSource": "Wikimedia Commons · Black-naped Oriole (Oriolus chinensis chinensis), Calapan, Oriental Mindoro, Philippines 4.jpg · 作者 pcjce_07 · CC BY 4.0 · 来源 https://commons.wikimedia.org/wiki/File:Black-naped_Oriole_(Oriolus_chinensis_chinensis),_Calapan,_Oriental_Mindoro,_Philippines_4.jpg",
+    "photoLicense": "CC BY 4.0"
   },
   {
     "id": "spotted-dove",
@@ -135,7 +139,9 @@
     "audioUrl": "/audio/hoopoe.mp3",
     "audioSource": "iNaturalist 声音库 #1427317（录制者：wresy，2025-04-24，北京）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-hoopoe.webp"
+    "image": "/photos/hoopoe.jpg",
+    "photoSource": "Wikimedia Commons · Common hoopoe - Upupa epops 05.jpg · 作者 Zeynel Cebeci · CC BY-SA 4.0 · 来源 https://commons.wikimedia.org/wiki/File:Common_hoopoe_-_Upupa_epops_05.jpg",
+    "photoLicense": "CC BY-SA 4.0"
   },
   {
     "id": "common-cuckoo",
@@ -259,7 +265,9 @@
     "audioUrl": "/audio/common-frog.mp3",
     "audioSource": "iNaturalist 声音库 #1987199（录制者：Hugo Sun，2026-05-29，山东青岛太平山绿道）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-common-frog.webp"
+    "image": "/photos/common-frog.jpg",
+    "photoSource": "Wikimedia Commons · Dark-spotted Frog (Pelophylax nigromaculatus).jpg · 作者 DrewHeath · CC BY-SA 4.0 · 来源 https://commons.wikimedia.org/wiki/File:Dark-spotted_Frog_(Pelophylax_nigromaculatus).jpg",
+    "photoLicense": "CC BY-SA 4.0"
   },
   {
     "id": "asiatic-toad",
@@ -329,7 +337,9 @@
     "audioUrl": "/audio/cicada.mp3",
     "audioSource": "iNaturalist 声音库 #2109664（录制者：yyawc，2026-08-08，四川遂宁蓬溪县）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-cicada.webp"
+    "image": "/photos/cicada.jpg",
+    "photoSource": "Wikimedia Commons · Cryptotympana atrata.jpg · 作者 Yi Chen · CC BY 4.0 · 来源 https://commons.wikimedia.org/wiki/File:Cryptotympana_atrata.jpg",
+    "photoLicense": "CC BY 4.0"
   },
   {
     "id": "huigu-cicada",
@@ -399,7 +409,9 @@
     "audioUrl": "/audio/eurasian-magpie.mp3",
     "audioSource": "iNaturalist 声音库 #257905466（录制者：JIN Pin-Tsen，2025-01-09，浙江宁波）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-eurasian-magpie.webp"
+    "image": "/photos/eurasian-magpie.jpg",
+    "photoSource": "Wikimedia Commons · Oriental Magpie on Longevity Hill, Beijing.jpg · 作者 Daniel Case · CC BY-SA 3.0 · 来源 https://commons.wikimedia.org/wiki/File:Oriental_Magpie_on_Longevity_Hill,_Beijing.jpg",
+    "photoLicense": "CC BY-SA 3.0"
   },
   {
     "id": "barn-swallow",
@@ -415,7 +427,9 @@
     "audioUrl": "/audio/barn-swallow.mp3",
     "audioSource": "iNaturalist 声音库 #285266265（录制者：choudbl，2025-05-30，上海）",
     "audioLicense": "CC BY-NC",
-    "image": "/assets/npc-barn-swallow.webp"
+    "image": "/photos/barn-swallow.jpg",
+    "photoSource": "Wikimedia Commons · Barn swallow (Hirundo rustica rustica).jpg · 作者 Charles J. Sharp · CC BY-SA 4.0 · 来源 https://commons.wikimedia.org/wiki/File:Barn_swallow_(Hirundo_rustica_rustica).jpg",
+    "photoLicense": "CC BY-SA 4.0"
   },
   {
     "id": "common-kingfisher",

@@ -50,31 +50,41 @@ interface AvatarProps {
   src?: string
   size?: number
   className?: string
+  /** 'hall' = 自然大厅 / 首页 hero，优先 AI 手绘 webp；'real' = 科普/详情/列表，只用 src 里的真实照片（默认） */
+  variant?: 'hall' | 'real'
 }
 
 /**
- * 物种头像：三态渲染，绝不白屏、绝不 404。
+ * 物种头像：三态渲染，绝不白屏、绝不 404。受 variant 控制：
  *
- *   ① 白名单内 + 图片加载成功 → bespoke 手绘 WebP（数据 image 路径优先，其次约定路径，再退 .png）
- *   ② 白名单内 + 所有候选图都失败 → 类群剪影（防止「声明了却没图」时开天窗）
- *   ③ 不在白名单内                → 直接类群剪影，一次网络请求都不发
+ *   · variant='hall'（自然大厅 / 首页 hero）：白名单内物种优先 AI 手绘 WebP，表现不变。
+ *   · variant='real'（默认，科普/详情/列表等）：无论是否在白名单，都只显示 src 里的真实照片（/photos/），
+ *     没有就走剪影占位——确保大厅之外的页面改用林知声即将补的真实照片。
+ *
+ * 三态明细：
+ *   ① 有候选图 + 加载成功 → 真实照片 / 手绘 WebP（按 variant 决定候选来源）
+ *   ② 有候选图但全部加载失败 → 类群剪影（防止「声明了却没图」时开天窗）
+ *   ③ 没有任何候选图         → 直接类群剪影，一次网络请求都不发
  *
  * 白名单 = src/data/species.ts 的 ILLUSTRATED_IDS，美术补图后在那里追加 id 即可自动升级为 ①。
  * 注意：本兜底在生产构建中同样生效（没有 import.meta.env.DEV 门禁），线上就是靠它占位。
  */
-export function SpeciesAvatar({ id, name, group, src, size = 96, className = '' }: AvatarProps) {
-  // 候选图组装：白名单(NPC 手绘)优先约定路径；非 NPC 物种仅当 image 指向真实照片(/photos/)才展示
+export function SpeciesAvatar({ id, name, group, src, size = 96, className = '', variant = 'real' }: AvatarProps) {
+  // 候选图组装：受 variant 控制来源
   const candidates = useMemo(() => {
     // 优先 WebP（体积更小）；数据里若仍写 .png 则自动转试 .webp，最后回退 .png
     const fromData = src ? (/\.png$/i.test(src) ? [src.replace(/\.png$/i, '.webp'), src] : [src]) : []
-    if (hasBespokeIllustration(id)) {
-      // NPC 物种：优先数据 image（手绘 WebP），再退约定路径 .webp / .png
+    // 大厅模式：仅当该物种确有 bespoke 手绘（白名单内）时，才强制塞入 AI 手绘 webp 作为候选，
+    // 让自然大厅 / 首页 hero 沿用既有 AI 插画，表现不变。
+    if (variant === 'hall' && hasBespokeIllustration(id)) {
       return Array.from(new Set([...fromData, `/assets/npc-${id}.webp`, `/assets/npc-${id}.png`]))
     }
-    // 非 NPC 物种：仅当 image 指向真实摄影照片（/photos/ 路径）时才展示，否则走剪影占位
-    // —— 林知声补给的自然照片统一放在 public/photos/<id>.jpg，由 species.sample.json 的 image 字段引用 ——
+    // 其余情况（real 模式 / 不在白名单）：只展示真实摄影照片（/photos/ 路径），否则走剪影占位。
+    // —— 关键修复：real 模式下即使物种在白名单，也不塞 AI webp，只认 src 里的真实照片，
+    //    这样那 7 只大厅动物在科普/详情页会改用林知声即将补的真实照片（缺图时退剪影）。 ——
+    // 林知声补给的自然照片统一放在 public/photos/<id>.jpg，由 species.sample.json 的 image 字段引用。
     return fromData.filter((u) => /^\/?photos\//i.test(u))
-  }, [id, src])
+  }, [id, src, variant])
 
   // 记录加载失败次数；随 id 变化自动归零（列表复用同一 DOM 位置时不会误判）
   const [broken, setBroken] = useState<{ id: string; attempt: number }>({ id, attempt: 0 })

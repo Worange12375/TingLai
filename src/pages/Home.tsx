@@ -104,7 +104,7 @@ function HallHero() {
               animationDelay: `${i * 0.6}s`,
             }}
           >
-            <SpeciesAvatar id={s.id} name={s.name} group={s.group} src={s.image} size={i % 2 === 0 ? 58 : 48} />
+            <SpeciesAvatar id={s.id} name={s.name} group={s.group} src={s.image} size={i % 2 === 0 ? 58 : 48} variant="hall" />
           </div>
         ))}
       </div>

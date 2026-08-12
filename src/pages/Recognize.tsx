@@ -80,6 +80,101 @@ function CredibilityTag({ confidence }: { confidence: number }) {
   )
 }
 
+/** 识别模式档位 */
+const MODES: ReadonlyArray<{ key: 'auto' | 'bird' | 'frog' | 'insect'; label: string }> = [
+  { key: 'auto', label: '自动' },
+  { key: 'bird', label: '鸟类' },
+  { key: 'frog', label: '蛙类' },
+  { key: 'insect', label: '虫类' },
+]
+
+/**
+ * 把识别失败的原因文案归并为「连接失败 / 没听到鸟叫 / 录音或文件问题 / 其它」四档，
+ * 给失败反馈 UI 一个清晰、醒目、说清问题的标题与说明。
+ */
+function classifyFailure(msg: string): { tone: 'red' | 'amber'; icon: string; title: string; detail: string } {
+  const m = msg || ''
+  // 录音 / 上传文件相关
+  if (/麦克风|不支持录音|没有检测到麦克风|没有录到声音|停止录音|录音启动|请选择音频|音频文件过大|音频文件太小|空文件/.test(m)) {
+    return { tone: 'amber', icon: '🎙️', title: '录音或文件没准备好', detail: m }
+  }
+  // 服务 / 网络 / 连接
+  if (/服务|连接|网络|不可达|未启动|超时|无响应|fetch|network|网关/i.test(m)) {
+    return {
+      tone: 'red',
+      icon: '📡',
+      title: '识别服务连接失败，请检查网络后重试',
+      detail: m || '识别服务暂时连不上，可能是网络波动或服务未启动。',
+    }
+  }
+  // 没找到可识别的叫声 / 过短
+  if (/没找到|没有可识别|过短|为空|没有得到识别结果|未找到|找不到/.test(m)) {
+    return {
+      tone: 'red',
+      icon: '🔍',
+      title: '没听到可识别的鸟叫声',
+      detail:
+        '这段音频里没找到可识别的鸟叫声（BirdNET 目前主要覆盖鸟类）。也可能是音频太短或环境太吵——换段清晰、稍长一点的录音再试。',
+    }
+  }
+  // 兜底
+  return { tone: 'amber', icon: '😣', title: '没能继续下去', detail: m || '出了点小状况，请稍后重试。' }
+}
+
+/**
+ * 极醒目的失败反馈：警示色大区块 + 加粗大标题 + 明显边框底色 + 轻微 pulse 动效，
+ * 配合主理人生成的「失败卡通图」（/assets/recognize-fail.webp，加载失败自动退化到 emoji，绝不崩）。
+ */
+function FailureAlert({ message, onDismiss }: { message: string; onDismiss: () => void }) {
+  const [imgOk, setImgOk] = useState(true)
+  const { tone, icon, title, detail } = classifyFailure(message)
+  const isRed = tone === 'red'
+  return (
+    <div
+      className={`rounded-3xl border-[3px] px-5 py-5 flex items-start gap-4 animate-fadeUp ${
+        isRed
+          ? 'bg-red-50 border-red-500 text-red-900 shadow-[0_10px_30px_-12px_rgba(220,38,38,0.45)]'
+          : 'bg-amber-50 border-amber-500 text-amber-900 shadow-[0_10px_30px_-12px_rgba(217,119,6,0.45)]'
+      }`}
+      role="alert"
+    >
+      {/* 失败卡通图（主理人生成；加载失败自动退化到 emoji） */}
+      <div
+        className={`relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-2xl grid place-items-center overflow-hidden border-2 animate-pulse ${
+          isRed ? 'border-red-400 bg-red-100' : 'border-amber-400 bg-amber-100'
+        }`}
+      >
+        {imgOk ? (
+          <img
+            src="/assets/recognize-fail.webp"
+            alt="识别失败"
+            className="w-full h-full object-cover"
+            onError={() => setImgOk(false)}
+          />
+        ) : (
+          <span className="text-3xl" aria-hidden="true">
+            {icon}
+          </span>
+        )}
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <p className={`font-extrabold text-lg sm:text-xl ${isRed ? 'text-red-700' : 'text-amber-800'}`}>{title}</p>
+        <p className={`text-sm mt-1.5 leading-relaxed ${isRed ? 'text-red-800/90' : 'text-amber-800/90'}`}>{detail}</p>
+      </div>
+
+      <Button
+        size="sm"
+        variant="ghost"
+        onClick={onDismiss}
+        className={isRed ? 'text-red-700 hover:bg-red-100' : 'text-amber-800 hover:bg-amber-100'}
+      >
+        知道了
+      </Button>
+    </div>
+  )
+}
+
 export default function Recognize() {
   const [phase, setPhase] = useState<Phase>('idle')
   const [clip, setClip] = useState<{ blob: Blob; name: string; seconds: number } | null>(null)
@@ -91,6 +186,10 @@ export default function Recognize() {
   const [level, setLevel] = useState(0)
   const [useGeo, setUseGeo] = useState(false)
   const [health, setHealth] = useState<ServiceHealth>({ state: 'checking' })
+  /** 识别模式：自动 / 鸟类 / 蛙类 / 虫类，默认选中「鸟类」 */
+  const [mode, setMode] = useState<'auto' | 'bird' | 'frog' | 'insect'>('bird')
+  /** 蛙类 / 虫类 当前模型不支持，需要诚实告知 */
+  const unsupportedMode = mode === 'frog' || mode === 'insect'
 
   const recorderRef = useRef<RecorderHandle | null>(null)
   const tickRef = useRef<number | null>(null)
@@ -210,6 +309,9 @@ export default function Recognize() {
     setPhase('analyzing')
     setFallbackReason('')
     setUncataloged([])
+    // 声类提示：仅「鸟类」真实生效；「蛙类/虫类」作占位透传给后端，便于将来扩展
+    const groupHint: '鸟类' | '蛙类' | '昆虫' | undefined =
+      mode === 'bird' ? '鸟类' : mode === 'frog' ? '蛙类' : mode === 'insect' ? '昆虫' : undefined
     try {
       // 用户勾选后才请求定位，不主动弹权限框
       const geo = useGeo ? await getPosition() : null
@@ -218,6 +320,7 @@ export default function Recognize() {
         lon: geo?.lon,
         date: new Date().toISOString().slice(0, 10),
         topK: 3,
+        groupHint,
       })
       if (outcome.items.length === 0) {
         setErrorMsg('没有得到识别结果，可能是物种库为空或音频过短，请换一段再试')
@@ -287,6 +390,46 @@ export default function Recognize() {
           <Badge tone="blossom">单段建议 5–30 秒</Badge>
         </div>
       </div>
+
+      {/* ============================ 识别模式 ============================ */}
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="text-sm font-semibold text-ink-soft mr-1">识别模式</span>
+        {MODES.map((m) => {
+          const active = mode === m.key
+          return (
+            <button
+              key={m.key}
+              type="button"
+              onClick={() => setMode(m.key)}
+              aria-pressed={active}
+              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition sketch-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-feather focus-visible:ring-offset-2 focus-visible:ring-offset-paper ${
+                active
+                  ? 'bg-ink text-paper-light shadow-soft'
+                  : 'bg-wood-light/50 text-ink-soft hover:bg-wood-light hover:text-ink'
+              }`}
+            >
+              {m.label}
+            </button>
+          )
+        })}
+      </div>
+
+      {/* 蛙类 / 虫类：当前模型只覆盖鸟类，诚实告知（仍允许点识别） */}
+      {unsupportedMode && (
+        <div
+          className="rounded-2xl border-2 border-amber-400 bg-amber-50 px-5 py-4 flex items-start gap-3 animate-fadeUp"
+          role="alert"
+        >
+          <span className="text-2xl" aria-hidden="true">⚠️</span>
+          <div className="flex-1">
+            <p className="font-bold text-amber-900 text-base">该模式暂不支持，结果仅供参考</p>
+            <p className="text-sm text-amber-800/90 mt-1 leading-relaxed">
+              当前识别模型主要覆盖<strong className="text-amber-900">鸟类</strong>
+              ，蛙类 / 虫类识别敬请期待。你仍可以点「开始识别」，但下方结果为鸟类引擎输出，不代表蛙类 / 虫类判别。
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* ============================ 输入区 ============================ */}
       <Card className="p-6 sm:p-8">
@@ -376,16 +519,7 @@ export default function Recognize() {
             </div>
 
             {phase === 'error' && errorMsg && (
-              <div className="rounded-2xl bg-sunset/20 sketch-border px-5 py-4 flex items-start gap-3 animate-fadeUp" role="alert">
-                <span className="text-lg" aria-hidden="true">⚠️</span>
-                <div className="flex-1">
-                  <p className="font-semibold text-ink text-sm">没能继续下去</p>
-                  <p className="text-sm text-ink-soft mt-1 leading-relaxed">{errorMsg}</p>
-                </div>
-                <Button size="sm" variant="ghost" onClick={() => { setErrorMsg(''); setPhase('idle') }}>
-                  知道了
-                </Button>
-              </div>
+              <FailureAlert message={errorMsg} onDismiss={() => { setErrorMsg(''); setPhase('idle') }} />
             )}
           </div>
         )}
@@ -513,6 +647,19 @@ export default function Recognize() {
                 再识别一段
               </Button>
             </div>
+
+            {/* 蛙类 / 虫类：模型暂不支持，结果区带明确免责说明 */}
+            {unsupportedMode && (
+              <div
+                className="rounded-2xl border-2 border-amber-400 bg-amber-50 px-5 py-3.5 flex items-start gap-3"
+                role="status"
+              >
+                <span className="text-lg" aria-hidden="true">ℹ️</span>
+                <p className="text-sm text-amber-900 leading-relaxed flex-1 font-semibold">
+                  （该模式模型暂不支持，以下为鸟类引擎结果，仅供参考）
+                </p>
+              </div>
+            )}
 
             {fallbackReason && (
               <div className="rounded-2xl bg-feather/15 sketch-border px-5 py-3.5 flex items-start gap-3" role="status">

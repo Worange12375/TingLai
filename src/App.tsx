@@ -11,6 +11,7 @@ import Compose from './pages/Compose'
 import Hall from './pages/Hall'
 import Account from './pages/Account'
 import { Button } from './components/ui'
+import { stopAudio } from './lib/audio'
 
 /**
  * 本地物种数据管理员工具（/dev）。
@@ -27,6 +28,15 @@ function ScrollToTop() {
   const { pathname } = useLocation()
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+  }, [pathname])
+  return null
+}
+
+/** 切场景时停掉后台叫声：用户从「听籁/识籁」切到别的场景，正在播放的物种叫声立刻停，不再干扰下一场景 */
+function RouteAudioCleanup() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    stopAudio()
   }, [pathname])
   return null
 }
@@ -53,6 +63,7 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col content-layer">
       <ScrollToTop />
+      <RouteAudioCleanup />
       <NavBar />
 
       <main className={immersive ? 'flex-1 w-full' : 'flex-1 w-full max-w-6xl mx-auto px-4 py-8 sm:py-10'}>

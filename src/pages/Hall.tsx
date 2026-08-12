@@ -146,6 +146,7 @@ export default function Hall() {
                   group={s.group}
                   src={s.image}
                   size={a.size}
+                  variant="hall"
                   className={isHover || isPlaying ? 'ring-4 ring-paper-light/85 shadow-lift' : ''}
                 />
                 {/* 悬停名牌 */}

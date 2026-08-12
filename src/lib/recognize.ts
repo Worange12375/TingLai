@@ -231,6 +231,8 @@ export interface RecognizeMeta {
   minConf?: number
   /** 最多返回几个候选，默认 3 */
   topK?: number
+  /** 声类提示（占位扩展）：'鸟类' 真实生效；'蛙类' / '昆虫' 暂作占位，便于将来扩展 */
+  groupHint?: '鸟类' | '蛙类' | '昆虫'
   /** 外部取消信号 */
   signal?: AbortSignal
 }
@@ -354,6 +356,8 @@ async function callRemote(
   form.append('date', meta.date ?? new Date().toISOString().slice(0, 10))
   form.append('min_conf', String(meta.minConf ?? DEFAULT_MIN_CONF))
   form.append('top_k', String(Math.max(1, meta.topK ?? 3)))
+  // 透传声类提示：当前仅 '鸟类' 真正生效（BirdNET 本就只覆盖鸟类），'蛙类'/'昆虫' 作占位便于将来扩展
+  if (meta.groupHint) form.append('group_hint', meta.groupHint)
 
   const res = await fetch(ENDPOINT, { method: 'POST', body: form, signal })
   if (!res.ok) throw new Error(await readErrorMessage(res))
