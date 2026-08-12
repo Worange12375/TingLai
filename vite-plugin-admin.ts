@@ -368,12 +368,22 @@ function validate(list: unknown): ValidationIssue[] {
       }
     }
 
-    // —— §1 字段 13：image 由 id 派生 ——
+    // —— §1 字段 13：image ——
+    // 支持两种合法取值：
+    //   1) 由 id 派生的 AI 插画：/assets/npc-<id>.webp
+    //   2) 真实照片（林知声补图）：/photos/<id>.<ext>
+    // 其余视为非法。仅影响 AdminTool 本地校验，不改动任何生产数据。
     const image = typeof o.image === 'string' ? o.image.trim() : ''
-    if (id && image && image !== derivedImage(id)) {
-      add('image', 'error', `必须为 ${derivedImage(id)}（由 id 派生，改 id 时联动）`)
+    const isDerived = id && image === derivedImage(id)
+    const isPhoto = /^\/?photos\//.test(image)
+    if (id && image && !isDerived && !isPhoto) {
+      add('image', 'error', `必须是 ${derivedImage(id)}（AI 插画）或 /photos/ 下的真实照片路径`)
     }
-    if (id) {
+    if (id && isPhoto) {
+      const p = path.join(ROOT, 'public', image.replace(/^\//, ''))
+      if (!fs.existsSync(p)) add('image', 'warn', `真实照片文件不存在：public${image}`)
+    }
+    if (id && isDerived) {
       const webp = path.join(ASSETS_DIR, `npc-${id}.webp`)
       if (!fs.existsSync(webp)) add('image', 'warn', `插画未补齐：public/assets/npc-${id}.webp 不存在`)
     }
