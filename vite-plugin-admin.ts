@@ -142,27 +142,37 @@ async function readJsonBody<T = Json>(req: IncomingMessage): Promise<T> {
  * 或 dev server 静态托管）的文件会报 EPERM；而「先删目录项 → rename 到
  * 不存在的路径」可以绕过这个限制。带几次重试，给占用方留出释放时间。
  */
-async function safeReplace(tmp: string, target: string): Promise<void> {
-  for (let attempt = 0; attempt < 5; attempt++) {
+/** 同步版安全替换（用于 transcode 等无需重试的场景） */
+function safeReplaceSync(tmp: string, target: string): void {
+  try { fs.rmSync(target, { force: true }) } catch { /* 忽略 */ }
+  fs.renameSync(tmp, target)
+}
+
+/**
+ * 上传音频落地：先尝试原地替换（删目录项 → rename 到不存在的路径，绕过共享读锁），
+ * 重试等待杀毒/云同步释放；若目标被**独占锁死**（仍 EPERM/EBUSY），则退而求其次
+ * 写成一个唯一文件名（<target>.up-<时间戳>），保证上传一定能成功，旧锁文件稍后手动清理。
+ * 返回最终落地的文件路径 + 是否走了兜底分支。
+ */
+async function writeAudioRobust(tmp: string, target: string, buf: Buffer): Promise<{ file: string; fallback: boolean }> {
+  for (let attempt = 0; attempt < 8; attempt++) {
     try { fs.rmSync(target, { force: true }) } catch { /* 目标可能不存在，忽略 */ }
     try {
       fs.renameSync(tmp, target)
-      return
+      return { file: target, fallback: false }
     } catch (err: unknown) {
       const code = (err as NodeJS.ErrnoException)?.code
-      if (attempt < 4 && (code === 'EPERM' || code === 'EBUSY')) {
-        await new Promise((r) => setTimeout(r, 250))
+      if (attempt < 7 && (code === 'EPERM' || code === 'EBUSY')) {
+        await new Promise((r) => setTimeout(r, 400))
         continue
       }
       throw err
     }
   }
-}
-
-/** 同步版安全替换（用于 transcode 等无需重试的场景） */
-function safeReplaceSync(tmp: string, target: string): void {
-  try { fs.rmSync(target, { force: true }) } catch { /* 忽略 */ }
-  fs.renameSync(tmp, target)
+  // 目标被系统独占锁死：写入唯一文件名兜底
+  const alt = `${target}.up-${Date.now()}`
+  fs.writeFileSync(alt, buf)
+  return { file: alt, fallback: true }
 }
 
 function stamp(): string {
@@ -683,14 +693,19 @@ export function adminToolPlugin(): Plugin {
               if (!r.ok) return send(res, 500, { ok: false, message: `转码失败：${r.error}` })
               note = normalize ? '已转码为 mp3 并做响度规范化' : '已转码为 mp3'
             } else if (srcExt === '.mp3') {
-              await safeReplace(tmp, target)
-              note = '未检测到 ffmpeg，源文件本身是 mp3，已直接改名存入'
+              const r = await writeAudioRobust(tmp, target, buf)
+              finalUrl = `/audio/${path.basename(r.file)}`
+              note = r.fallback
+                ? '目标文件被系统进程独占锁定（多半是杀毒软件 / 云同步 / 资源管理器预览窗格），已改存为唯一文件名兜底；请稍后解锁原文件再清理旧副本'
+                : '未检测到 ffmpeg，源文件本身是 mp3，已直接改名存入'
             } else {
               // 没有 ffmpeg 又不是 mp3：保留真实扩展名，不谎报成 .mp3
               const keep = path.join(AUDIO_DIR, `${id}${srcExt}`)
-              await safeReplace(tmp, keep)
-              finalUrl = `/audio/${id}${srcExt}`
-              note = `未检测到 ffmpeg，无法转码；已按原格式存为 ${id}${srcExt}。装上 ffmpeg 后可重新上传统一成 mp3`
+              const r = await writeAudioRobust(tmp, keep, buf)
+              finalUrl = `/audio/${path.basename(r.file)}`
+              note = r.fallback
+                ? '目标被系统独占锁定，已按原格式存为唯一文件名兜底'
+                : `未检测到 ffmpeg，无法转码；已按原格式存为 ${path.basename(r.file)}。装上 ffmpeg 后可重新上传统一成 mp3`
             }
 
             const size = fs.statSync(path.join(ROOT, 'public', finalUrl.replace(/^\//, ''))).size

@@ -142,6 +142,7 @@ export default function AdminTool() {
 
   const [normalizeOnUpload, setNormalizeOnUpload] = useState(true)
   const fileRef = useRef<HTMLInputElement>(null)
+  const audioRef = useRef<HTMLAudioElement>(null)
 
   const flash = useCallback((tone: 'ok' | 'err' | 'info', text: string) => {
     setToast({ tone, text })
@@ -277,6 +278,12 @@ export default function AdminTool() {
     if (!current) return
     const id = str(current, 'id')
     setBusy(`上传并处理 ${file.name}…`)
+    // 上传前先释放右侧 <audio> 对目标文件的句柄（若用户刚试听过该物种音频，
+    // 浏览器会一直握着 public/audio/<id>.mp3，导致后端 rename 报 EPERM）
+    try {
+      const a = audioRef.current
+      if (a) { a.pause(); a.removeAttribute('src'); a.load() }
+    } catch { /* 忽略 */ }
     try {
       const r = await uploadAudio(id, file, normalizeOnUpload)
       patch(id, 'audioUrl', r.audioUrl)
@@ -613,7 +620,7 @@ export default function AdminTool() {
                   <div>
                     <p className="text-[13px] font-semibold text-ink mb-1.5">当前音频</p>
                     {/* ⚠️ 不要给 audio 加 crossOrigin，会让所有外链音频静默失败 */}
-                    <audio key={audioUrl} src={audioUrl} controls preload="none" className="w-full" />
+                    <audio key={audioUrl} ref={audioRef} src={audioUrl} controls preload="none" className="w-full" />
                     <p className="text-[11px] text-ink-soft mt-1.5 break-all">{audioUrl || '（无）'}</p>
                     <div className="mt-2">
                       <a href={downloadUrl(curId)} download>
