@@ -101,25 +101,33 @@ const WAITING_LINES = [
  * 评委测试音频：实测可被准确识别的高成功率鸟类（id 对应 public/audio/<id>.mp3）。
  * 由 scripts/rank_test_audio.py 对全部参考音频跑生产识别得出，仅保留「正确识别为自身」的高置信样本，
  * 评委下载后到识籁页「上传音频文件」即可看到对应物种的识别结果。
+ * 更新时间：2026-08-13（新版剪辑音频重测）
  */
 const TEST_AUDIO: ReadonlyArray<{ id: string; name: string; conf: number }> = [
-  { id: 'common-kingfisher', name: '普通翠鸟', conf: 0.996 },
-  { id: 'oriental-scops-owl', name: '红角鸮', conf: 0.987 },
-  { id: 'common-cuckoo', name: '大杜鹃', conf: 0.976 },
-  { id: 'barn-swallow', name: '家燕', conf: 0.975 },
-  { id: 'chinese-hwamei', name: '画眉', conf: 0.97 },
-  { id: 'spotted-dove', name: '珠颈斑鸠', conf: 0.967 },
-  { id: 'cinereous-tit', name: '大山雀', conf: 0.962 },
-  { id: 'white-breasted-waterhen', name: '白胸苦恶鸟', conf: 0.957 },
-  { id: 'swinhoe-white-eye', name: '暗绿绣眼鸟', conf: 0.954 },
-  { id: 'red-crowned-crane', name: '丹顶鹤', conf: 0.939 },
-  { id: 'indian-cuckoo', name: '四声杜鹃', conf: 0.876 },
-  { id: 'azure-winged-magpie', name: '灰喜鹊', conf: 0.869 },
-  { id: 'hoopoe', name: '戴胜', conf: 0.855 },
-  { id: 'black-throated-tit', name: '红头长尾山雀', conf: 0.842 },
-  { id: 'oriental-magpie-robin', name: '鹊鸲', conf: 0.82 },
-  { id: 'red-whiskered-bulbul', name: '红耳鹎', conf: 0.677 },
-  { id: 'black-faced-bunting', name: '灰头鹀', conf: 0.661 },
+  { id: 'indian-cuckoo', name: '四声杜鹃', conf: 1.000 },
+  { id: 'white-breasted-waterhen', name: '白胸苦恶鸟', conf: 1.000 },
+  { id: 'spotted-dove', name: '珠颈斑鸠', conf: 0.999 },
+  { id: 'swinhoe-white-eye', name: '暗绿绣眼鸟', conf: 0.999 },
+  { id: 'common-kingfisher', name: '普通翠鸟', conf: 0.999 },
+  { id: 'oriental-scops-owl', name: '红角鸮', conf: 0.998 },
+  { id: 'barn-swallow', name: '家燕', conf: 0.997 },
+  { id: 'eurasian-jay', name: '松鸦', conf: 0.996 },
+  { id: 'eurasian-magpie', name: '喜鹊', conf: 0.994 },
+  { id: 'hoopoe', name: '戴胜', conf: 0.993 },
+  { id: 'black-faced-bunting', name: '灰头鹀', conf: 0.983 },
+  { id: 'light-vented-bulbul', name: '白头鹎', conf: 0.969 },
+  { id: 'cinereous-tit', name: '大山雀', conf: 0.968 },
+  { id: 'common-cuckoo', name: '大杜鹃', conf: 0.965 },
+  { id: 'red-crowned-crane', name: '丹顶鹤', conf: 0.964 },
+  { id: 'yellow-bellied-tit', name: '黄腹山雀', conf: 0.954 },
+  { id: 'red-billed-blue-magpie', name: '红嘴蓝鹊', conf: 0.892 },
+  { id: 'large-billed-crow', name: '大嘴乌鸦', conf: 0.829 },
+  { id: 'long-tailed-shrike', name: '棕背伯劳', conf: 0.820 },
+  { id: 'azure-winged-magpie', name: '灰喜鹊', conf: 0.794 },
+  { id: 'black-drongo', name: '黑卷尾', conf: 0.747 },
+  { id: 'oriental-turtle-dove', name: '山斑鸠', conf: 0.675 },
+  { id: 'white-wagtail', name: '白鹡鸰', conf: 0.624 },
+  { id: 'common-moorhen', name: '黑水鸡', conf: 0.610 },
 ]
 
 /**
