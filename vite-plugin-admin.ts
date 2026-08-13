@@ -136,6 +136,35 @@ async function readJsonBody<T = Json>(req: IncomingMessage): Promise<T> {
   return JSON.parse(buf.toString('utf8')) as T
 }
 
+/**
+ * 跨平台安全替换文件：先尽量删掉目标，再 rename 到「不存在的路径」。
+ * Windows 上直接 rename 覆盖一个正被占用（共享读锁，如浏览器正在播放、
+ * 或 dev server 静态托管）的文件会报 EPERM；而「先删目录项 → rename 到
+ * 不存在的路径」可以绕过这个限制。带几次重试，给占用方留出释放时间。
+ */
+async function safeReplace(tmp: string, target: string): Promise<void> {
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try { fs.rmSync(target, { force: true }) } catch { /* 目标可能不存在，忽略 */ }
+    try {
+      fs.renameSync(tmp, target)
+      return
+    } catch (err: unknown) {
+      const code = (err as NodeJS.ErrnoException)?.code
+      if (attempt < 4 && (code === 'EPERM' || code === 'EBUSY')) {
+        await new Promise((r) => setTimeout(r, 250))
+        continue
+      }
+      throw err
+    }
+  }
+}
+
+/** 同步版安全替换（用于 transcode 等无需重试的场景） */
+function safeReplaceSync(tmp: string, target: string): void {
+  try { fs.rmSync(target, { force: true }) } catch { /* 忽略 */ }
+  fs.renameSync(tmp, target)
+}
+
 function stamp(): string {
   const d = new Date()
   const p = (n: number) => String(n).padStart(2, '0')
@@ -479,7 +508,7 @@ async function transcode(input: string, output: string, normalize: boolean): Pro
     try { fs.existsSync(tmp) && fs.unlinkSync(tmp) } catch { /* ignore */ }
     return { ok: false, error: (stderr || 'ffmpeg 执行失败').slice(-400) }
   }
-  fs.renameSync(tmp, output)
+  safeReplaceSync(tmp, output)
   return { ok: true }
 }
 
@@ -654,12 +683,12 @@ export function adminToolPlugin(): Plugin {
               if (!r.ok) return send(res, 500, { ok: false, message: `转码失败：${r.error}` })
               note = normalize ? '已转码为 mp3 并做响度规范化' : '已转码为 mp3'
             } else if (srcExt === '.mp3') {
-              fs.renameSync(tmp, target)
+              await safeReplace(tmp, target)
               note = '未检测到 ffmpeg，源文件本身是 mp3，已直接改名存入'
             } else {
               // 没有 ffmpeg 又不是 mp3：保留真实扩展名，不谎报成 .mp3
               const keep = path.join(AUDIO_DIR, `${id}${srcExt}`)
-              fs.renameSync(tmp, keep)
+              await safeReplace(tmp, keep)
               finalUrl = `/audio/${id}${srcExt}`
               note = `未检测到 ffmpeg，无法转码；已按原格式存为 ${id}${srcExt}。装上 ffmpeg 后可重新上传统一成 mp3`
             }
