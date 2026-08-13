@@ -155,6 +155,7 @@ function safeReplaceSync(tmp: string, target: string): void {
  * 返回最终落地的文件路径 + 是否走了兜底分支。
  */
 async function writeAudioRobust(tmp: string, target: string, buf: Buffer): Promise<{ file: string; fallback: boolean }> {
+  // 先尝试原地替换（删目录项 → rename 到空路径，绕过共享读锁），重试等待锁释放
   for (let attempt = 0; attempt < 8; attempt++) {
     try { fs.rmSync(target, { force: true }) } catch { /* 目标可能不存在，忽略 */ }
     try {
@@ -162,16 +163,20 @@ async function writeAudioRobust(tmp: string, target: string, buf: Buffer): Promi
       return { file: target, fallback: false }
     } catch (err: unknown) {
       const code = (err as NodeJS.ErrnoException)?.code
-      if (attempt < 7 && (code === 'EPERM' || code === 'EBUSY')) {
-        await new Promise((r) => setTimeout(r, 400))
-        continue
+      if (code === 'EPERM' || code === 'EBUSY') {
+        if (attempt < 7) {
+          await new Promise((r) => setTimeout(r, 400))
+          continue
+        }
+        break // 重试用尽，仍被独占锁死 → 走兜底唯一文件名
       }
-      throw err
+      throw err // 非锁类错误（如磁盘满）直接抛出
     }
   }
-  // 目标被系统独占锁死：写入唯一文件名兜底
+  // 目标被系统独占锁死：写入唯一文件名兜底，保证上传一定成功
   const alt = `${target}.up-${Date.now()}`
   fs.writeFileSync(alt, buf)
+  try { fs.rmSync(tmp, { force: true }) } catch { /* 临时文件清理失败忽略 */ }
   return { file: alt, fallback: true }
 }
 
